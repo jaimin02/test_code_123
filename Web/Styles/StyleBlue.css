@@ -1,0 +1,686 @@
+﻿
+BODY {
+    scrollbar-face-color: #4682b4;
+    scrollbar-highlight-color: #4682b4;
+    scrollbar-shadow-color: #000000;
+    scrollbar-3dlight-color: #b0c0d4;
+    scrollbar-arrow-color: #ffffff;
+    scrollbar-track-color: #b0c0d4;
+    scrollbar-darkshadow-color: #ffffff;
+}
+
+.TABButton {
+    border-right: #1560A1 2px solid;
+    border-top: #1560A1 2px solid;
+    border-left: #1560A1 2px solid;
+    border-bottom: #1560A1 2px solid;
+    color: white;
+}
+/* Added By Khushbu For Tabing */
+
+.TABButtonKhaki {
+    color: black;
+}
+
+/* Added by Swati*/
+.ShowButton {
+    border-right: #1560A1 2px solid;
+    border-top: #1560A1 2px solid;
+    border-left: #1560A1 2px solid;
+    border-bottom: #1560A1 2px solid;
+    color: navy;
+}
+
+.SelectDropDown {
+    color: Navy;
+    border-bottom-color: Navy;
+    border-color: Navy;
+}
+/* Added by Swati*/
+.divdwr {
+    background-color: #FFFAF0;
+}
+
+.ShowPopup {
+    background-color: #FFFAF0;
+}
+
+.ShowPopup2 {
+    background-color: #FFFAF0;
+}
+
+.DIVSTYLE {
+    background-color: #FFFAF0;
+}
+
+.DIVSTYLE2 {
+    background-color: #C2EBFC;
+}
+
+.divStyleNoAbs {
+    background-color: #FFFAF0;
+}
+
+.divstl {
+    background-color: #F9FFFC;
+}
+
+.LogintextBox {
+    color: Navy;
+}
+
+
+.textBoxHome {
+    color: #FFFFFF;
+    background-color: transparent;
+}
+
+.Search {
+    color: #000000;
+}
+
+.button {
+    border-right: #1560A1 2px solid;
+    border-top: #1560A1 2px solid;
+    font-size: x-small;
+    background: White;
+    border-left: #1560A1 2px solid;
+    border-bottom: #1560A1 2px solid;
+    font-style: normal;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #284E98;
+    font-size: smaller;
+    /*width: 75px;*/
+    font-weight: bold;
+}
+
+}
+/*Add by shivnai pandya 14/8/2015*/
+.buttonCss {
+    border-top: #1560A1 2px solid;
+    border-right: #1560A1 2px solid;
+    border-left: #1560A1 2px solid;
+    border-bottom: #1560A1 2px solid;
+    color: #284E98;
+}
+
+.textBoxRead {
+    color: #000000;
+    background-color: #ffffcc;
+}
+
+.buttonDt {
+    color: black;
+    background-color: #ffffff;
+}
+
+.ErrorCode {
+    color: Red;
+}
+
+.TextClass {
+    color: Black;
+}
+
+.rowClass {
+    background-color: Blue;
+}
+
+.AlternateRowClass {
+    background-color: #0fad8a;
+}
+
+.OuterTable {
+    color: navy;
+}
+
+.modalPopup {
+    background-color: #e8eefa;
+    border-color: Gray;
+}
+
+.modalBackground {
+    background-color: Gray;
+}
+
+.OverLapedmodalBackground {
+    background-color: red;
+}
+
+.LoginTable {
+    color: navy;
+}
+
+
+.LoginInnerTable {
+    color: navy;
+}
+
+.TDBackColor {
+    background-color: #4682b4;
+}
+
+
+.TDMandatory /* for Red color font of TD */ {
+    color: #C00000;
+}
+
+.MslLabel /* for Red color font of TD */ {
+    color: Navy;
+}
+
+.LabelBold /* for bold label with RED Color*/ {
+    color: red;
+}
+
+.Label {
+    color: Navy;
+    color: Navy;
+    font-weight: bold;
+    font-family: Verdana;
+    font-size: 11px;
+    font-variant: small-caps;
+}
+
+
+.LabelPeru {
+    color: Peru;
+}
+
+
+
+.RadioButton {
+    color: Navy;
+}
+
+.InnerTable {
+    color: navy;
+    background-color: White;
+}
+
+.Div {
+    background-color: White;
+}
+
+.RptTable {
+    color: navy;
+}
+
+
+.checklist CheckBoxList:hover {
+    background: #777;
+    color: #fff;
+}
+
+.hr {
+    color: #088541;
+}
+
+.SortHeaderRowStyle {
+    background-color: #c00;
+    color: White;
+}
+
+.validatorCalloutHighlight {
+    background-color: lemonchiffon;
+}
+
+.collapsePanel {
+    background-color: white;
+}
+
+
+.collapsePanelHeader {
+    color: #FFF;
+}
+
+.demoheading {
+    color: #5377A9;
+}
+
+/*Drag Panel  */
+.dragMe {
+    background-color: #b0c0d4;
+    color: Navy;
+}
+
+/*For Only Search DropDown*/
+.dropDownListSearch {
+    color: Navy;
+    border-bottom-color: Navy;
+    border-color: Navy;
+}
+/*Added by Swati */
+.MyCalendar .ajax__calendar_container {
+    background-color: lemonchiffon;
+    color: red;
+}
+
+.MyCalendar .ajax__calendar_other .ajax__calendar_day, .MyCalendar .ajax__calendar_other .ajax__calendar_year {
+    color: black;
+}
+
+.MyCalendar .ajax__calendar_hover .ajax__calendar_day, .MyCalendar .ajax__calendar_hover .ajax__calendar_month, .MyCalendar .ajax__calendar_hover .ajax__calendar_year {
+    color: black;
+}
+
+.MyCalendar .ajax__calendar_active .ajax__calendar_day, .MyCalendar .ajax__calendar_active .ajax__calendar_month, .MyCalendar .ajax__calendar_active .ajax__calendar_year {
+    color: black;
+}
+
+.TABLEtitle {
+    color: navy;
+}
+
+.TDREPORT {
+    color: #102860;
+}
+
+.TDcolor1 {
+    background: #F4F4F4;
+    color: #000066;
+}
+
+.TDcolor2 {
+    background: #E4E8F3;
+    color: #000066;
+}
+
+
+/* AUTOCOMPLET TEXTBOX CSS CLASSES */
+
+.autocomplete_list {
+    background-color: White;
+    color: windowtext;
+}
+
+tocomplete_listitem {
+    background-color: #EBF7FF;
+    color: WindowText;
+}
+
+.autocomplete_highlighted_listitem {
+    background-color: #A4E4FF;
+    color: Black;
+    color: Black;
+}
+
+/* -------- AUTOCOMPLET TEXTBOX CSS CLASSES -------------------- */
+.popUpDivNoTop {
+    background-color: #C2EBFC;
+}
+
+.updateProgress {
+    border-color: #227199;
+    background-color: #ECF6FC;
+}
+
+.updateText {
+    color: #227199;
+}
+
+.LabelDisplay {
+    color: Navy;
+}
+
+/* Added by Chandresh Vanker 01/Feb/2010 */
+.buttonForTabActive {
+    color: #FFffff;
+    background-color: #F2B040;
+}
+
+.buttonForTabInActive {
+    color: #FFC300;
+    background-color: #F2B040;
+}
+
+.SetTableHeader {
+    background-color: #1560a1;
+    color: white;
+}
+
+.modalBackground {
+    background-color: Gray;
+}
+
+.SetTableData {
+    background-color: #cee3ed;
+}
+
+.setGoButton {
+    color: White;
+}
+
+.SetDivForCalendarCellHover {
+    background-color: GrayText;
+}
+
+/* MainMenu */
+.AspNet-Menu-Horizontal ul.AspNet-Menu {
+    font: bold 11px Verdana;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 201;
+}
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu a {
+        height: 20px;
+        padding: 2px 10px;
+        color: #000;
+        border-right: 2px solid black;
+        position: relative;
+        color: #000000;
+    }
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu li.AspNet-Menu-WithChildren a {
+        /*BACKGROUND: url(       "../../images/arrow_down.gif" ) no-repeat scroll right center transparent;*/
+        padding-right: 20px;
+        padding-right: 20px;
+        color: #000000;
+    }
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu li {
+        _width: 0;
+        white-space: nowrap;
+    }
+        /* For IE6*/
+        .AspNet-Menu-Horizontal ul.AspNet-Menu li:hover {
+            height: 100px;
+            background-color: #01c4e4;
+            /*border:2px solid black;*/
+            border-radius: 8px;
+            color: white;
+        }
+
+    /* SubMenu */
+    .AspNet-Menu-Horizontal ul.AspNet-Menu ul {
+        top: 100%;
+        left: 0;
+    }
+
+        .AspNet-Menu-Horizontal ul.AspNet-Menu ul a {
+            display: block;
+            margin: 0;
+            padding: 5px;
+            text-decoration: none;
+            border: none;
+        }
+
+        .AspNet-Menu-Horizontal ul.AspNet-Menu ul li {
+            background: #e0e0e0 !important;
+            color: #FFFFFF; /*font-weight: normal !important;*/
+            border-bottom: solid 1px #000;
+            width: 210px;
+            white-space: normal;
+        }
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu li.AspNet-Menu-WithChildren ul a {
+        background: none;
+    }
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu ul li.AspNet-Menu-Leaf a:hover {
+        background-color: #01c4e4;
+        color: white;
+    }
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu li.AspNet-Menu-WithChildren a:hover {
+        background-color: #01c4e4;
+        color: white;
+    }
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu li.AspNet-Menu-WithChildren ul li.AspNet-Menu-Leaf a:hover {
+        background-color: #01c4e4;
+        color: white;
+    }
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu li.AspNet-Menu-WithChildren ul li.AspNet-Menu-WithChildren a:hover {
+        background-color: #01c4e4 !important;
+        color: white;
+    }
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu li.AspNet-Menu-WithChildren ul li.AspNet-Menu-WithChildren ul li.AspNet-Menu-Leaf a:hover {
+        background-color: #01c4e4 !important;
+        color: white;
+    }
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu li.AspNet-Menu-WithChildren ul li.AspNet-Menu-Leaf a:hover {
+        background-color: #01c4e4;
+        color: white;
+    }
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu li.AspNet-Menu-WithChildren ul li.AspNet-Menu-WithChildren a {
+        background: url( "../../images/Rarrow.gif" ) no-repeat scroll right center transparent;
+    }
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu li ul li ul {
+        margin: -1.4em 0 0 210px;
+        top: 15px;
+    }
+
+    .AspNet-Menu-Horizontal ul.AspNet-Menu li.AspNet-Menu-WithChildren ul ul a {
+        background: none !important;
+    }
+
+.AspNet-TreeView-Collapse {
+    color: black !important;
+}
+
+.AspNet-TreeView-Expand {
+    color: black !important;
+}
+
+.AspNet-TreeView-Root li label:hover {
+    color: black !important;
+}
+
+.AspNet-TreeView-Root li label a:hover {
+    color: black !important;
+}
+
+.AspNet-TreeView-Root li label span.span:hover {
+    color: black !important;
+}
+
+h1.header {
+    background: #d0e4f7; /* Old browsers */
+    background: -moz-linear-gradient(top, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d0e4f7), color-stop(24%,#73b1e7), color-stop(50%,#0a77d5), color-stop(79%,#539fe1), color-stop(100%,#87bcea)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr= '#138DCC', endColorstr= '#87bcea',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* W3C */
+    color: #FFFFFF !important;
+}
+
+    h1.header span {
+        color: #FFFFFF !important;
+    }
+
+.footer {
+    background-color: #1560a1;
+}
+
+.centerModalPopup {
+    background-color: #FFFFFF !important;
+}
+
+table.dataTable tr.odd {
+    background-color: #fff;
+}
+
+table.dataTable tr.even {
+    background-color: #f3f3f3;
+}
+
+/*table.dataTable tr.odd td.sorting_1 {
+    background-color: #fff;
+}*/
+
+table.dataTable tr.odd td.sorting_2 {
+    background-color: #fff;
+}
+
+table.dataTable tr.odd td.sorting_3 {
+    background-color: #fff;
+}
+
+/*table.dataTable tr.even td.sorting_1 {
+    background-color: #f3f3f3;
+}*/
+
+table.dataTable tr.even td.sorting_2 {
+    background-color: #f3f3f3;
+}
+
+table.dataTable tr.even td.sorting_3 {
+    background-color: #f3f3f3;
+}
+
+/* Two button pagination - previous / next */
+.paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next {
+    color: #111!important;
+}
+
+.paginate_disabled_previous, .paginate_disabled_next {
+    color: #666 !important;
+}
+
+.paging_full_numbers a.paginate_button, .paging_full_numbers a.paginate_active {
+    color: #333!important;
+}
+
+.paging_full_numbers a.paginate_button {
+    background-color: #ddd;
+}
+
+    .paging_full_numbers a.paginate_button:hover {
+        background-color: #ccc;
+    }
+
+.paging_full_numbers a.paginate_active {
+    background-color: #99B3FF;
+}
+
+
+.dataTables_processing {
+    color: #999;
+    background-color: white;
+}
+
+
+.FixedHeader_Header {
+    color: White;
+}
+
+.divModalPopup {
+    background-color: #FFFFFF !important;
+}
+
+.LegendText {
+    color: Black;
+}
+
+.divModalBackGround {
+    background-color: gray;
+}
+
+.MenuTD {
+    background-color: #bfddf9;
+    color: black;
+    color: white;
+}
+
+.footer_Master {
+    background-color: #bfddf9;
+}
+
+.themeSelection {
+    background-color: #CDE5F9;
+}
+
+.ThemeLable {
+    border-color: rgba(0,0,0,.2);
+}
+
+.trHeader {
+    background-color: #1560A1;
+    color: white;
+}
+
+.trFooter {
+    background-color: #1560A1;
+    color: white;
+}
+
+.Labelheading {
+    color: #1560A1;
+}
+
+td {
+    color: #1560A1;
+}
+/* Anand Patel */
+.trHeader td {
+    background-color: rgb(206, 227, 237) !important;
+}
+
+.BorBotNavy {
+    border-bottom: solid 1px Navy;
+}
+
+.textbox {
+    border: 1px solid Navy;
+}
+
+.textboxFileUpload {
+    border-color: navy;
+    color: navy;
+}
+
+.dropDownList {
+    border: 1px solid navy;
+}
+
+.FieldSetBox {
+    border: navy 1px solid;
+}
+
+.MainPageImage1 {
+    content: url(../StyleBlue/BlueTheme/cen_pro_trk.jpg);
+}
+
+.MainPageImage2 {
+    content: url(../StyleBlue/BlueTheme/bio_sub_reg.jpg);
+}
+
+.MainPageImage3 {
+    content: url(../StyleBlue/BlueTheme/ele_med_scr.jpg);
+}
+
+.MainPageImage4 {
+    content: url(../StyleBlue/BlueTheme/ele_test_req.jpg);
+}
+
+.MainPageImage5 {
+    content: url(../StyleBlue/BlueTheme/clinical_lab_mgmt.jpg);
+}
+
+.MainPageImage6 {
+    content: url(../StyleBlue/BlueTheme/ele_data_cap.jpg);
+}
+
+.MainPageImage7 {
+    content: url(../StyleBlue/BlueTheme/eCRF.jpg);
+}
+
+.MainPageImage8 {
+    content: url(../StyleBlue/BlueTheme/doc_mgmt.jpg);
+}
+
+.MainPageImage9 {
+    content: url(../StyleBlue/BlueTheme/doc_mgmt.jpg);
+}

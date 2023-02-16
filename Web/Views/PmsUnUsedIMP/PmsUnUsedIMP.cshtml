@@ -1,0 +1,307 @@
+﻿@{
+    ViewBag.Title = "Unused IMP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{ 
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Unused IMP</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dropbox"></i>Products</a></li>
+                <li><a href="#">Unused IMP</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        <h3 class="box-title">Project No</h3>
+                                    </div>
+                                    <div class="col-lg-4 col-md-10 col-sm-10 col-xs-10">
+                                        <input type="text" id="ddlProjectNodashboard" placeholder="Project No.." data-provide="typeahead" class="form-control" autocomplete="off" />
+                                    </div>
+                                    <div class="col-lg-4 col-lg-offset-0 col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-10 resizepd btn-group">
+                                        <button type="button" class="btn bg-olive dropbtn dropdown-toggle btn-rounded  btn-ef btn btn-primary" id="divexport"
+                                            data-toggle="dropdown" aria-expanded="false" style="border-radius: 4px; display: none">
+                                            Export <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="../PmsUnusedIMP/ExportToExcel"><i class="fa fa-file-excel-o"></i>Excel </a></li>
+                                            <li><a href="../PmsUnusedIMP/ExportToPDF"><i class="fa fa-file-pdf-o"></i>PDF </a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-lg-2 col-lg-offset-0 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-10 resizepd">
+                                        <button type="button" id="btnAddUnusedIMP" class="btn bg-olive viewmode" data-toggle="modal" data-target="#UnusedIMPModel" title="Add Unused IMP">+ Add Unused IMP</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tblPmsUnUsedIMPData" class="table table-bordered table-striped">
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="modal fade" id="UnusedIMPModel" role="dialog">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <span class="operation-mode" id="titleMode"></span>
+                            <h4 class="modal-title modaltitle operation-name" id="title">Unused IMP</h4>
+                        </div>
+                        <div>
+                            <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Project No *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" placeholder="ProjectNo Here.." class="form-control" id="ddlProjectNo" data-provide="typeahead" style="height: 26px" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Product Indication *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlTransferIndi" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Product Indication</option>
+                                        <option value="P">Product</option>
+                                        <option value="K">Kit</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Product Type *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlProductType" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Product Type</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Unused Status *</label>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlUnUsedStatus" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="N">Please Select Unused Status</option>
+                                        <option value="B">Before/During Dispensing</option>
+                                        <option value="A">After Dispensing/Dosing</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group" id="divProductCategory" style="display: none;">
+                                <div class="col-sm-12">
+                                    <label>Product Category *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control headercontrol" id="ddlProductCategory" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Product Category</option>
+                                        <option value="L">With Label</option>
+                                        <option value="P">Without Label</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group hideproduct" style="display: none">
+                                <div class="col-sm-12">
+                                    <label>Product *</label>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlProduct" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Product</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group hideproduct" style="display: none">
+                                <div class="col-sm-12">
+                                    <label>Batch/Lot/Lot No *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlBatchLotNo" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Batch/Lot/Lot No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group hideproduct" style="display: none">
+                                <div class="col-sm-12">
+                                    <label>Unused Quantity *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBox("txtQuantity", "", new { @class = "form-control qtycontrol", @placeholder = "Unused Quantity", @style = " height:26px; ", @autocomplete = "off", @type = "number", @min = "1" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group" style="display: none" id="divUnit">
+                                <div class="col-sm-12">
+                                    <label>Unit *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control select2" id="ddlUnit" style="padding: 3px 12px; height: 26px">
+                                        <option value="0">Please Select Unit</option>
+                                        <option value="%">%</option>
+                                       @*<option value="Deg. F">Deg. F</option>*@
+                                       <option value="Nos.">Nos.</option>
+                                       @*<option value="ml">ml</option>*@
+                                       <option value="kg">kg</option>
+                                       <option value="gm">gm</option>
+                                       <option value="Tablet">Tablet</option>
+                                       <option value="Capsule">Capsule</option>
+                                       <option value="Bottle">Bottle</option>
+                                       @*<option value="Deg. Cel">Deg. Cel</option>
+                                       <option value="%RH">%RH</option>
+                                       <option value="RPM">RPM</option>
+                                       <option value="RCF">RCF</option>*@
+                                        <option value="PFS">PFS</option>
+                                       <option value="Syringe">Syringe</option>
+                                       <option value="vials">vials</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div style="display: none" class="hidekit">
+                                <div class="col-sm-4 form-group">
+                                    <div class="col-sm-12">
+                                        <label>Kit *</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <select class="form-control" id="ddlKitType" style="padding: 3px 12px; height: 26px">
+                                            <option value="0" selected>Please Select Kit Type</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 form-group">
+                                    <div class="col-sm-12">
+                                        <label>Kit *</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <select class="form-control" id="ddlKit" style="padding: 3px 12px; height: 26px" multiple="multiple">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group" style="display: none" id="divProductLabel">
+                                <div class="col-sm-12">
+                                    <label>Product Label *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control headercontrol" id="ddlProductLabel" style="padding: 3px 12px; height: 26px" multiple="multiple"></select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Subject No & Period No</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBox("txtSubjectNo", "", new { @class = "form-control", @placeholder = "SubjectNo", @style = " height:26px; ", @autocomplete = "off" })
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Storage Area *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlStorageArea" style="padding: 3px 12px; height: 26px" multiple="multiple">
+                                        @*<option selected="selected" value="0">Please Select Storage Area</option>*@
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>No Bin/Pallet/Crate/Locker/Container/Shelf/Box/Boxes/Rack *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBox("txtNoOfContainers", "", new { @class = "form-control qtycontrol", @placeholder = "No Bin/Pallet/Crate/Locker/Container/Shelf/Box/Boxes/Rack", @style = " height:26px;", @type = "number", @min = "0", @autocomplete = "off" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Remarks *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextArea("txtRemarks", "", new { @class = "form-control", @placeholder = "Remarks", required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group" style="display: none">
+                                <div class="col-sm-12">
+                                    <label>Storage Location</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlStorageLocation" style="padding: 3px 12px; height: 26px">
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        @*<button type="button" id="btnSavePmsUnusedIMP" class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="save">Save</button>
+                        <button type="button" id="btnClearPmsUnusedIMP" class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Clear" onclick="clearData()">Clear</button>
+                        <button type="button" id="btnExitPmsUnusedIMP" class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Exit">Exit</button>*@
+
+                        <a data-toggle="modal" id="btnSavePmsUnusedIMP" data-tooltip="tooltip" title="Save">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSaveQualityCheck">Save</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnClearPmsUnusedIMP" data-tooltip="tooltip" title="Clear" onclick="clearData()">
+                            <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnExitPmsUnusedIMP" data-tooltip="tooltip" title="Exit">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+
+
+                    </div>
+                </div>
+            </div>
+            <div id="loader" class="modal"></div>
+        </div>
+    </div>
+
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsUnUsedIMP.js"></script>
+    
+}

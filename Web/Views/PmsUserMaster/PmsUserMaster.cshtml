@@ -1,0 +1,386 @@
+﻿@{
+    ViewBag.Title = "User Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .ui-tooltip {
+        display: none !important;
+    }
+
+    a.social { /* or whatever your class */
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+</style>
+
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+@using (Html.BeginForm())
+{
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                User Master
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-tasks"></i>Master</a></li>
+                <li><a href="#">User</a></li>
+            </ol>
+
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <a id="btnAddUser" data-toggle="modal" data-target="#UserDetailsModel" data-options="splash-2 splash-ef-15"
+                               class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a pull-right"><i class="fa fa-plus"></i><span>Add</span></a>
+                            <br />
+                            <br />
+                        </div>
+                        <div class="box-body">
+                            <table id="tblUserDetailsData" class="table table-striped table-bordered" cellspacing="0" cellpadding="0" border="0" width="100%"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="modal splash fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="UserDetailsModel" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <span class="operation-mode" style="float: right" id="titleMode"></span>
+                        <h4 class="modal-title modaltitle operation-name text-left" id="title">User Master</h4>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <div class="mdfield" style="text-align: right">
+                        <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                    </div>
+                    <form name="form2" role="form" id="form2"></form>
+
+                    <form name="form1" role="form" id="form1" style="margin-top: 40px;">
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label>First Name: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtFirstName" id="txtFirstName" class="form-control" autocomplete="off"
+                                       placeholder="First Name Here..."
+                                       maxlength="20"
+                                       required>
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vFirstName" onclick="UserFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="First Name"></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Last Name: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtLastName" id="txtLastName" class="form-control" autocomplete="off"
+                                       placeholder="Last Name Here..."
+                                       maxlength="20"
+                                       required>
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vLastName" onclick="UserFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="Last Name"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label>User Name: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtUserName" id="txtUserName" class="form-control" autocomplete="off"
+                                       placeholder="User Name Here..."
+                                       maxlength="20"
+                                       required>
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vLoginName" onclick="UserFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="User Name"></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Scope: *</label>
+                            </div>
+                            <div class="col-sm-3 ">
+                                <select id="ddlScope" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="nScopeNo" onclick="UserFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="Scope Name"
+                                      masterfieldname="vScopeName" mastertablename="ScopeMst" vjoinvmasterfieldname="nScopeNo"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label>Email Id: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="email" name="txtEmailId" id="txtEmailId" class="form-control" autocomplete="off"
+                                       placeholder="Email Id Here..."
+                                       maxlength="100"
+                                       required>
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vEmailId" onclick="UserFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="Email Id"></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Phone Number: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtPhoneNo" id="txtPhoneNo" class="form-control" autocomplete="off"
+                                       placeholder="(XXX) XXXX XXX"
+                                       onkeypress="return isNumber(event)"
+                                       maxlength="20" />
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vPhoneNo" onclick="UserFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="Phone Number"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label>UserType: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <select id="ddlUserType" class="form-control" multiple></select>
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="nUserTypeNo" onclick="UserFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="UserType"
+                                      masterfieldname="vUserTypeName" mastertablename="UserTypeMst" ccommaseprate="Y" vjoinvmasterfieldname="vUserTypeCode"></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Ext Number: </label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtExtNo" id="txtExtNo" class="form-control"
+                                       placeholder="Ext Number Here..."
+                                       maxlength="30">
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vExtNo" onclick="UserFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="Ext Number"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label>Department: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <select id="ddlDepartment" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vDeptCode" onclick="UserFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="Department Name"
+                                      masterfieldname="vDeptName" mastertablename="DeptMst" ccommaseprate="Y" vjoinvmasterfieldname="nDeptNo"></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Location: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <select id="ddlLocation" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="nLocationNo" onclick="UserFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="Location Name"
+                                      masterfieldname="vLocationName" mastertablename="LocationMst" ccommaseprate="Y" vjoinvmasterfieldname="vLocationCode"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label>MFA: </label>
+                                <input type="checkbox" name="chkIsMFA" id="chkIsMFA" />
+                                <label id="lblIsMFSEmail" >Email: </label>
+                                <input type="checkbox" name="chkIsMFSEmail" id="chkIsMFSEmail" />
+                                <label  id="lblIsMFASMS">SMS : </label>
+                                <input type="checkbox" name="chkIsMFASMS" id="chkIsMFASMS" />
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+
+                            <div class="col-sm-2 divRemarksUser" style="margin-right: 45px; display: none" id="divRemarklbl">
+                                <label style="margin-left: 46px">Remarks:</label>
+                            </div>
+                            <div class="col-sm-3" style="display: none" id="divRemarktxt">
+                                <input type="text" name="txtRemarks" id="txtRemarks" class="form-control divRemarksUser" autocomplete="off"
+                                       placeholder="Remarks Here..."
+                                       maxlength="500">
+                            </div>
+                            <div class="col-sm-1"></div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <div class="col-xs-12">
+                                    <button type="button" id="btnSaveUserDetails" class="btn btn-success btn-ef btn-ef-3 btn-ef-3c" value="save" data-tooltip="tooltip"
+                                            title="Save">
+                                        <i class="fa fa-arrow-right"></i>Save
+                                    </button>
+                                    <button type="button" id="btnClearUserDetails" value="Clear" class="btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" role="button" title="Clear">
+                                        <i class="fa fa-arrow-left"></i>Clear
+                                    </button>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal splash fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="divAuditTrial" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="PopupClose()">&times;</button>
+                    <h4 class="modal-title modaltitle text-center">Audit Trail</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body" style="overflow-y: auto; height: 430px">
+                        <table id="tblUserDetailsAuditTrial" class="table table-bordered table-striped"></table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal splash fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="divChangePassword" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title modaltitle text-center">Change Password</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body">
+                        <form name="formChangePassword" role="form" id="formChangePassword">
+                            <div class="row form-group col-sm-12">
+                                <div class="col-sm-3">
+                                    <label>New Password: </label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="text" name="txtNewPass" id="txtNewPass" class="form-control passwordtxt"
+                                           placeholder="Password"
+                                           data-parsley-trigger="change"
+                                           autocomplete="off"
+                                           maxlength="20"
+                                           required>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Confirm Password:</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="text" name="txtConfirmPass" id="txtConfirmPass" class="form-control passwordtxt"
+                                           placeholder="Password"
+                                           autocomplete="off"
+                                           data-parsley-trigger="change"
+                                           maxlength="20"
+                                           data-parsley-equalto="#txtNewPass"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 form-group text-center">
+                                    <div class="col-xs-12">
+                                        <input type="button" id="btnChangePass" class="btn bg-olive " value="Save" data-tooltip="tooltip"
+                                               disabled="disabled" title="Save" />
+                                        <input type="button" id="btnClearChangepass" value="Clear" class="btn bg-olive " role="button" title="Clear">
+                                        <input type="button" id="btnExitChangepass" value="Exit" class="btn bg-olive " role="button" title="Exit">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="UserMasterInctive" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Remarks</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.TextArea("txtReason", "", new { @class = "form-control", @placeholder = "Remarks", required = "required", @autocomplete = "off" })
+                </div>
+                <div class="modal-footer">
+                    <a data-toggle="modal" id="btnInActiveSave" data-tooltip="tooltip" title="Save">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave1">Save</span>
+                        </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog">
+    </div>
+
+
+
+
+    <script src="~/Scripts/PmsUserMaster.js"></script>
+
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('#form1').parsley().subscribe('parsley:field:validate', function () {
+                if ($('#form1').parsley().isValid()) {
+                    $('#btnSaveUserDetails').prop('disabled', false);
+                } else {
+                    $('#btnSaveUserDetails').prop('disabled', true);
+                }
+            });
+
+            $('#formChangePassword').parsley().subscribe('parsley:field:validate', function () {
+                if ($('#formChangePassword').parsley().isValid()) {
+                    $('#btnChangePass').prop('disabled', false);
+                } else {
+                    $('#btnChangePass').prop('disabled', true);
+                }
+            });
+
+            //$('#form1Submit').on('click', function () {
+            //    $('#form1').submit();
+            //});
+
+        });
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                //alert("Please enter only Numbers.");
+                ValidationAlertBox('Please enter only Numbers.', "txtPhoneNo", "User Master");
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
+}

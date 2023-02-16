@@ -1,0 +1,408 @@
+﻿@{
+    ViewBag.Title = "Kit Creation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Kit Creation</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-medkit"></i>Kit</a></li>
+                <li><a href="#">Kit Creation</a></li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <label>Protocol No *</label>
+                                </div>
+
+                                <div class="col-lg-4 col-md-10 col-sm-10 col-xs-10">
+                                    <input type="text" id="ddlProjectNo" placeholder="Protocol No" class="form-control" />
+                                </div>
+
+                                <div class="col-lg-4 col-lg-offset-0 col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-10 resizepd btn-group">
+                                    <button type="button" class="btn bg-olive dropbtn dropdown-toggle btn-rounded  btn-ef btn btn-primary" id="ExportButton"
+                                        data-toggle="dropdown" aria-expanded="false" style="border-radius: 4px; display: none">
+                                        Export<span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="../PmsKitCreation/ExportToExcel"><i class="fa fa-file-excel-o"></i>Excel </a></li>
+                                        <li><a href="../PmsKitCreation/ExportToPDF"><i class="fa fa-file-pdf-o"></i>PDF</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-lg-2 col-lg-offset-0 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-10 resizepd" style="display: none">
+                                    <button type="button" id="btnAddKitCreation" class="btn bg-olive" title="Add Kit" onclick="AddKitCreation()">+ Add Kit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tblPmsKitTypeDefineDtl" class="table table-bordered table-striped">
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="KitCreationModel" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <span class="operation-mode" id="titleMode"></span>
+                            <h4 class="modal-title modaltitle operation-name" id="title">Kit Creation</h4>
+                        </div>
+                        <div>
+                            <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Protocol No *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Protocol No" class="form-control" id="txtProjectNo" style="height: 26px" disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Kit Type*</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlKitType" style="padding: 3px 12px; height: 26px" disabled="disabled">
+                                </select>
+                            </div>
+                            <div class="col-sm-2" style="display: none">
+                                <span id="spnAddAnotherKit" class="glyphicon glyphicon-plus" style="color: #6BB9FF" title="Add Another Kit" onclick="AddAnotherKit();"></span>
+                            </div>
+                        </div>
+
+                        @* <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Qty / Kit *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Qty / Kit" class="form-control" id="txtQtyKit" style="height: 26px" disabled="disabled">
+                            </div>
+                        </div>*@
+
+                        <div class="col-sm-4 form-group" id="qtykit">
+                            <div class="col-sm-12">
+                                <label id="lblKit">Qty / Kit *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="number" placeholder="Qty / Kit" class="form-control" id="txtQtyKit" style="height: 26px" min="1">
+                                @*@Html.TextBox("txtQtyKit", "", new { @class = "form-control", @placeholder = "Qty / Kit ", @style = " height:26px;" , disabled="disabled;" , @onblur = "RecdQtyfunction()", @type = "number", @min = "0" })*@
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Product *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlProduct" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select Product</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Batch/Lot/Lot No *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlBatchLot" style="padding: 3px 12px; height: 26px">
+                                    <option selected value="0">Please Select Batch/Lot/Lot No</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        @*  <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>No of Kit *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextBox("txtNoOfKit", "", new { @class = "form-control qtycontrol", @placeholder = "No of Kit", required = "required", @style = " height:26px; ", @autocomplete = "off" ,@min=1 ,  @type = "number" })
+                            </div>
+                        </div>*@
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Storage Area</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlStorageArea" style="padding: 3px 12px; height: 26px" multiple="multiple">
+                                    <option selected="selected" value="0">Please Select Storage Area</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        @*<div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Applicable For Visit</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlApplicableForVisit" style="padding: 3px 12px; height: 26px" multiple="multiple">
+                                    <option selected="selected" value="0">Please Select Applicable Visit</option>
+                                </select>
+                            </div>
+                        </div>*@
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Remarks</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" cols="20" id="txtRemarks" name="txtRemarks" placeholder="Remarks"  rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <a id="btnAddTempKitCreation" title="Add" class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a bg-olive margin" onclick="AddTempData();"><i class="fa fa-plus"></i><span>Add</span></a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center" style="overflow: auto; height: 175px; display: none" id="divtblKitCreationTemp">
+                                <table id="tblKitCreationTemp" border="1" class="table table-bordered table-striped dataTable no-footer">
+                                    <thead>
+                                        <tr>
+                                            <th>Protocol No</th>
+                                            <th>Kit Type</th>
+                                            <th>Qty</th>
+                                            <th>Product</th>
+                                            <th>Batch/Lot No</th>
+                                            @*  <th>No Of Kit</th>*@
+                                            <th>Storage Area</th>
+                                            <th>Remarks</th>
+                                            <th class="trDelete">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyKitCreationTemp">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnSavePmsKitCreation" data-tooltip="tooltip" title="Save" style="display: none" onclick="NoOfKitPopUp()">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnKitCreation">Save</span></i>
+                        </a>
+                        <a data-toggle="modal" id="btnClearPmsKitCreation" data-tooltip="tooltip" title="Clear" onclick="clearData()">
+                            <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                        </a>
+                        <a data-toggle="modal" id="btnExitPmsKitCreation" data-tooltip="tooltip" title="Exit" onclick="ConfirmAlertBox(ModuleName);">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="KitCreationDetails" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name" style="margin-left: 40%">Kit Creation Details</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <table id="tblKitCreationDetails" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnExitPmsKitCreationDetails" data-tooltip="tooltip" title="Exit" onclick="ConfirmAlertBox(ModuleName);">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="KitSiteDetails" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name" style="margin-left: 40%">Site Wise Stock Details</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <span>
+                            <canvas id="myCanvas" width="12" height="12" class="hightlightUnblindedKit"></canvas>
+                        </span>
+                        <span class="InActive">Current Stock is Less Then Minimum Stock</span>
+                        <table id="tblSiteDetails" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnExitSiteDetails" data-tooltip="tooltip" title="Exit" onclick="ConfirmAlertBox(ModuleName);">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="AddAnotherKit" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name" style="margin-left: 40%">Add Another Kit</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Kit Type*</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="ddlAnotherKitType" style="padding: 3px 12px; height: 26px">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Qty Kit *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Qty Kit" class="form-control" id="txtAnotherKitTypeQty" style="height: 26px" disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Product *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlAnotherProduct" style="padding: 3px 12px; height: 26px" disabled="disabled">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Batch/Lot Number *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlAnotherBatch" style="padding: 3px 12px; height: 26px" disabled="disabled">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <a data-toggle="modal" id="btnAddAnotherKit" data-tooltip="tooltip" title="Add" onclick="AddAnotherKitTemp();">
+                                    <i class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a bg-olive margin">
+                                        <i class="fa fa-plus"></i><span>Add</span></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center" style="overflow: auto;">
+                                <table id="tblExtraKitAttach" border="1" class="table table-bordered table-striped dataTable no-footer" style="width: 80%; display: none; margin-left: 10%">
+                                    <thead>
+                                        <tr>
+                                            <th>Kit Type</th>
+                                            <th>Kit Qty</th>
+                                            <th>Product</th>
+                                            <th>Batch/Lot</th>
+                                            <th class="trDelete">Delete</th>
+                                            <th class="hidetd">nKitTypeNo</th>
+                                            <th class="hidetd">Product No</th>
+                                            <th class="hidetd">Batch/Lot</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyKitDefineTemp">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer footer-bottom text-center">
+                        <a data-toggle="modal" id="btnExitPmsAnotherKitCreation" data-tooltip="tooltip" title="Save" style="display: block" data-dismiss="modal">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnKitDefine">Save</span></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="NoOfKitDetails" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name" style="text-align: center;">Kit Details</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <label>No Of Kit *</label>
+                        @Html.TextBox("txtNoOfKit", "", new { @class = "form-control qtycontrol", @placeholder = "No of Kit", @style = " height:26px; ", @autocomplete = "off", @min = 1, @type = "number" })
+
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnSaveNoOfKit" data-tooltip="tooltip" title="Save">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnKitCreation">Save</span></i>
+                        </a>
+                        <a data-toggle="modal" id="btnClearNoOfKit" data-tooltip="tooltip" title="Clear">
+                            <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnExitPmsNoOfKitDetails" data-tooltip="tooltip" title="Exit" onclick="ConfirmAlertBox(ModuleName);">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsKitCreation.js"></script>
+}
+

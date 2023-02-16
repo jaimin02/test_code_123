@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Role Operation Matrix";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                Role Operation Matrix
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-tasks"></i>Master</a></li>
+                <li><a href="#">Role Operation Matrix</a></li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box">
+                        <div class="box-header">
+                        </div>
+                        <div class="box-body">
+                            <form name="form1" role="form" id="form1">
+                                <div class="row form-group col-sm-12">
+                                    <div class="col-sm-2">
+                                        <label>User Type:</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select class="form-control" id="ddlUserType" name="ddlUserType"
+                                                data-parsley-trigger="change">
+                                            @* <option value="0" selected="selected">Please Select Department</option>*@
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @*<input type="button" id="btnSaveDetails" class="btn bg-olive " value="Save" data-tooltip="tooltip"
+                                            disabled="disabled" title="Save" />*@
+
+                                        <button type="button" id="btnSaveDetails" class="btn btn-success btn-ef btn-ef-3 btn-ef-3c" value="save" data-tooltip="tooltip" disabled="disabled"
+                                                title="Save">
+                                            <i class="fa fa-arrow-right"></i>Save
+                                        </button>
+
+                                    </div>
+                                </div>
+                                <div class="row form-group col-sm-12">
+                                    <div id="treeview"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 form-group text-center">
+                                    </div>
+                                    <br />
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <script src="~/Scripts/tree.js"></script>
+    <script src="~/Scripts/RoleOperationMatrix.js"></script>
+    <script>
+        $(window).load(function () {
+            //$('#form1').parsley().subscribe('parsley:field:validate', function () {
+            //    if ($('#form1').parsley().isValid()) {
+            //        $('#btnSaveOperationDetails').prop('disabled', false);
+            //    } else {
+            //        $('#btnSaveOperationDetails').prop('disabled', true);
+            //    }
+            //});
+
+            $('#form1Submit').on('click', function () {
+                $('#form1').submit();
+            });
+
+        });
+    </script>
+}

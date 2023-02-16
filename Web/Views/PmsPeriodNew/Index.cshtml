@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "PMS Period Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+ <div class="content-wrapper">
+        <section class="content-header">
+            <h1>PMS Period List
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+                <li><a href="#">Tables</a></li>
+                <li class="active">Data tables</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">PMS Period List</h3>
+                            <button type="button" id="btnAddUser" class="btn bg-olive margin" data-toggle="modal" data-target="#myModal">+ Add Pms Period</button>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tblPmsPerriod" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>SrNo.</th>
+                                        <th>PmsPeriodName</th>
+                                        <th>PeriodStartDate</th>
+                                        <th>PeriodEndDate</th>
+                                        <th>PeriodEvaluationStartDate</th>
+                                        <th>PeriodEvaluationEndDate</th>
+                                        <th>ModifyOn</th>
+                                        <th>ModifyBy</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="TbodyPmsList">
+                                 
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>SrNo.</th>
+                                        <th>PmsPeriodName</th>
+                                        <th>PeriodStartDate</th>
+                                        <th>PeriodEndDate</th>
+                                        <th>PeriodEvaluationStartDate</th>
+                                        <th>PeriodEvaluationEndDate</th>
+                                        <th>ModifyOn</th>
+                                        <th>ModifyBy</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+  
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title modaltitle">Add Pms Period</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                    <form role="form" class="form-horizontal" method="POST" id="testForm" action="PmsPeriod/AddPmsPeriod">
+                         <div class="form-group" style="display:none;">
+                            <label for="exampleInputEmail1">PeriodId</label>
+                            <input class="form-control" id="nPeriodId" name="nPeriodId" type="text" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">PeriodName</label>
+                            <input class="form-control" id="vPmsPeriodName" name="vPmsPeriodName" required="required" type="text" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">PeriodStartDate</label>
+                            <input class="form-control datepicker" id="dPeriodStartDate" name="dPeriodStartDate" required="required" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">PeriodEndDate</label>
+                            <input class="form-control datepicker" id="dPeriodEndDate" name="dPeriodEndDate" required="required" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">PeriodEvaluationStartDate</label>
+                            <input class="form-control datepicker" id="dPeriodEvaluationStartDate" name="dPeriodEvaluationStartDate" required="required" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">PeriodEvaluationEndDate</label>
+                            <input class="form-control datepicker" id="dPeriodEvaluationEndDate" name="dPeriodEvaluationEndDate" required="required" type="text">
+                        </div>
+                    </form>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="btnaddPmsPeriod" class="btn bg-navy margin">Submit</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>

@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Change Password";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{ 
+  
+    <input type="hidden" value="@ViewBag.hdnusername" id="hdnusername" />
+    <input type="hidden" value="@ViewBag.hdnuserid" id="hdnuserid" />
+    <input type="hidden" value="@ViewBag.hdnlogintime" id="hdnlogintime" />
+    <input type="hidden" value="@ViewBag.hdnscopevalues" id="hdnscopevalues" />
+
+    <div class="content-wrapper">
+
+        <section class="content-header">
+            <h1>Change Password
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-tasks"></i>Utility</a></li>
+                <li><a href="#">Change Password</a></li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+
+                            <div>
+                                <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                            </div>
+
+                            <div class="col-sm-12 form-group">
+                                <div class="col-sm-12" style="text-align:center">
+                                    <label id="lblMessage" runat="server" width="328px" style="color:red"></label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-12 form-group" style="text-align: center">
+                                <div class="col-sm-3" style="text-align: right">
+                                    <label for="LblProjectNo">Old Password* :</label>
+                                </div>
+                                <div class="col-sm-5">
+                                    <input id="txtOldPassWord" type="password" maxlength="50" placeholder="Old Password" class="form-control" onkeypress="return RestrictSpace()" data-provide="typeahead" style="height: 26px">
+                                    
+                                </div>
+                                <div class="col-sm-2">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-12 form-group" style="text-align: center">
+                                <div class="col-sm-3" style="text-align: right">
+                                    <label for="LblProjectNo">New Password* :</label>
+                                </div>
+                                <div class="col-sm-5">
+                                    <input id="txtNewPassword" type="password" maxlength="50" placeholder="New Password" class="form-control" onkeypress="return RestrictSpace()" data-provide="typeahead" style="height: 26px">
+                                </div>
+                                <div class="col-sm-2">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-12 form-group" style="text-align: center">
+                                <div class="col-sm-3" style="text-align: right">
+                                    <label for="LblProjectNo">Confirm New Password* :</label>
+                                </div>
+                                <div class="col-sm-5">
+                                    <input id="txtNewConfPass" type="password" maxlength="50" placeholder="Confirm New Password" class="form-control" onkeypress="return RestrictSpace()" data-provide="typeahead" style="height: 26px">
+                                </div>
+                                <div class="col-sm-2">
+                                </div>
+
+                            </div>
+                            <div class="col-sm-3 form-group" style="text-align: center">
+                            </div>
+                            <div class="col-sm-9 form-group" style="text-align: left;color:red">
+                                <div class="col-sm-12" style="text-align: left">
+                                    Note : 1) Password must be minimum eight characters.
+                                </div>
+                                <div class="col-sm-12">
+                                    2) Password must contain at least 1 capital letter,1 small letter, 1 number and 1 special character.
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.Label(HttpUtility.HtmlEncode("3) For special characters you can pick one of these -,(,!,@,#,$,),%,") ,new { style = "    font-weight: 100;"})<,>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer footer-bottom" style="text-align:center">
+
+                                <a data-toggle="modal" id="BtnSubmit" data-tooltip="tooltip" title="Submit">
+                                    <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSubmit">Submit</span></i>
+                                </a>
+
+                                <a data-toggle="modal" id="btnCancel" data-tooltip="tooltip" title="Exit">
+                                    <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                        <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+    
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog">
+    </div>
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/Validation.js"></script>
+    <script src="~/Scripts/PmsChangePwd.js"></script>
+    
+}

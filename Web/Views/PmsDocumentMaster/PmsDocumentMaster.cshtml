@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "Document Upload Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Document Master
+       
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-tachometer"></i>Utilities</a></li>
+                <li><a href="#">Document Master</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="box-header">
+                                <span>
+                                    <canvas id="myCanvas" width="12" height="12" class="highlight"></canvas>
+                                </span>
+                                <span class="InActive">Inactive Entries</span>
+
+                                <h5><span style="font-size: 12px; float: right">Fields with * are Mandatory</span></h5>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Project No *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" placeholder="Project No Here.." style="height: 26px;" class="form-control" id="DDLProjectNo">
+                                </div>
+                                @*<div class="col-md-1">
+                                    <button type="button" id="btnGo" class="btn bg-olive" value="GO">GO</button>
+                                </div>*@
+
+                                @*for Export to Excel*@
+                                @*<div class="col-sm-4 col-xs-6 form-group">
+                                    <input type="button" id="btnGoPmsStudyProduct" value="GO" class="btn bg-olive" role="button" title="Go" data-tooltip="tooltip">
+                                    <div id="divexport" style="visibility: hidden; left: 22%; top: 7%; position: absolute" class="col-sm-3 form-group">
+                                        @Html.ActionLink("Export to Excel", "ExportToExcel", new { id = "hdnworkspaceid" }, new { @class = "btn bg-olive" })
+                                    </div>
+                                </div>*@
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Operation *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="DDLOperation" style="height: 26px; padding: 3px 12px;">
+                                        <option value="0" selected="selected">Please Select Operation Type</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Ref.No</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" placeholder="Description" style="height: 26px; padding: 3px 12px;" class="form-control" id="txtRefeNo" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>File *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="file" id="fileToUpload" name="file" multiple="multiple" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Description </label>
+                                </div>
+                                <div class="col-sm-12" id="divlableremarks1">
+                                    @Html.TextArea("txtDescription", "", new { @class = "form-control", @placeholder = "Description", @autocomplete="off" })
+                                </div>
+                            </div>
+
+                            @*<div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Remarks </label>
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextArea("txtRemarks", "", new { @class = "form-control", @placeholder = "Remark" })
+                                </div>
+                            </div>*@
+
+
+
+                            <div class="row">
+                                <div class="col-md-2 .col-md-offset-3 form-group"></div>
+                                <div class="col-md-3 .col-md-offset-3 form-group text-right"></div>
+                                <div class="col-md-3 .col-md-offset-3 form-group">
+                                    <table id="tblgallary">
+                                        <tbody id="tbodygallary"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 .col-md-offset-3 form-group"></div>
+                                <div class="col-md-2 .col-md-offset-3 form-group text-right"></div>
+
+                                <div class="col-md-3 .col-md-offset-3 form-group">
+                                    <a data-toggle="modal" id="btnSavePmsDocumentMaster" data-tooltip="tooltip" title="Upload" class="viewmode">
+                                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="fa fa-upload"></i><span id="spnbtnGO">Upload</span></i>
+                                    </a>
+
+                                    <a data-toggle="modal" id="btnClearPmsDocumentMaster" data-tooltip="tooltip" title="Clear">
+                                        <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                                    </a>
+
+                                    <a data-toggle="modal" id="btnExitPmsDocumentMaster" data-tooltip="tooltip" title="Exit">
+                                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="box-body clsPmsDocMasterData">
+                                <table id="tblPmsDocMasterData" class="table table-bordered table-striped">
+                                </table>
+                            </div>
+
+                        </div>
+                        <!-- /.box-header -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="modal fade" id="DocumentMasterInctive" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal" id="btnInActiveClose">&times;</button>
+                    <h4 class="modal-title">Remarks</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.TextArea("txtReason", "", new { @class = "form-control", @placeholder = "Remarks", required = "required", @autocomplete = "off" })
+                </div>
+                <div class="modal-footer">
+                    @*<button type="button" class="btn bg-olive" id="btnInActiveSave">Save</button>
+                    <button type="button" class="btn bg-olive" @*data-dismiss="modal" id="btnInActiveClose">Close</button>*@
+    
+                    <a data-toggle="modal" id="btnInActiveSave" data-tooltip="tooltip" title="Save">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave1">Save</span></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsDocumentMaster.js"></script>
+}

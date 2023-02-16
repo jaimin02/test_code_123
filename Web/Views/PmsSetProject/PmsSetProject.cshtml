@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Set Project";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{ 
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Set Project</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dropbox"></i>Products</a></li>
+                <li><a href="#">Set Project</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                             <div>
+                                <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <div class="col-sm-12">
+                                    <label>Project No *</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" id="ddlProjectNo" placeholder="Project No.." class="form-control" style="height: 28px" autocomplete="off"/>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="button" id="btnSetProject" class="btn bg-olive " value="SetProject">Set Project</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>   
+    
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script> 
+    <script src="../Scripts/PmsSetProject.js"></script>    
+}

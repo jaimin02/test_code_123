@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Retention Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+<link href="~/Content/themes/css/CustomStyle.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Retention Report</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-duplicate"></i>Reports</a></li>
+                <li><a href="#">Retention</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="fancy-collapse-panel">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Define Retention Report Detail
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <div class="box-header">
+                                              <div>
+                                            <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                                        </div>
+                                        </div>
+                                      
+                                        <div class="box-body" style="height: 400px">
+                                            <div class="row">
+                                                <div class="col-sm-4 form-group">
+                                                    <div class="col-sm-12">
+                                                        <label for="lblFromdate">Received From Date *</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="txtReceivedFromDate" class="form-control" placeholder="Received From Date"  onpaste="return false" onkeydown="return false" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <div class="col-sm-12">
+                                                        <label for="LblToDate">Received To Date *</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="txtReceivedToDate" class="form-control" placeholder="Received To Date"  onpaste="return false" onkeydown="return false" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-8 form-group text-center">
+                                                    <label for="lblFromdate">OR</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-4 form-group">
+                                                    <div class="col-sm-12">
+                                                        <label for="lblFromdate">Retention From Date*</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="txtRetentionFromDate" class="form-control" placeholder="Retention From Date" onpaste="return false" onkeydown="return false" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <div class="col-sm-12">
+                                                        <label for="LblToDate">Retention To Date*</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="txtRetentionToDate" class="form-control" placeholder="Retention To Date" onpaste="return false" onkeydown="return false" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4 form-group">
+                                                    <div class="col-sm-12">
+                                                        <label for="LblToDate">Project No</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="ddlProjectNodashboard" placeholder="Project No.." class="form-control" autocomplete="off"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <div class="col-sm-12">
+                                                        <label for="LblToDate">Storage Area</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <select id="ddlStorageArea" multiple="multiple">
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-sm-12 form-group">
+                                                <div class="col-sm-12 form-group text-center">
+                                                    @*<button type="button" id="btnGo" class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a " value="Go">GO</button>
+                                                    <button type="button" id="btnClear" class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a " value="Clear">Clear</button>
+                                                    <button type="button" id="btnExit" class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Exit">Exit</button>*@
+
+                                                    <a data-toggle="modal" id="btnGo" data-tooltip="tooltip" title="Go">
+                                                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnbtnGO">GO</span></i>
+                                                    </a>
+
+                                                    <a data-toggle="modal" id="btnClear" data-tooltip="tooltip" title="Clear">
+                                                        <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                        <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                                                    </a>
+
+                                                    <a data-toggle="modal" id="btnExit" data-tooltip="tooltip" title="Exit">
+                                                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                        <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Retention Report Details
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                        <div class="box-body" style="overflow-x: hidden">
+                                            <div class="row">
+                                                <div class="col-sm-12 form-group" id="StockReport">
+                                                    <table id="tblPmsRetentionReport" class="table table-bordered table-striped dataTable ">
+                                                    </table>
+                                                </div>
+                                                <div class="col-sm-12 form-group text-center resizepd btn-group " id="divexport" style="visibility: hidden; margin-left: 578px !important;">
+                                                    <button type="button" class="btn bg-olive dropbtn dropdown-toggle btn-rounded  btn-ef btn btn-primary"
+                                                        data-toggle="dropdown" aria-expanded="false" style="border-radius: 4px">
+                                                        Export <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="../PmsRetentionReport/ExportToExcel"><i class="fa fa-file-excel-o"></i>Excel </a></li>
+                                                        <li><a href="../PmsRetentionReport/ExportToPDF"><i class="fa fa-file-pdf-o"></i>PDF</a></li>
+                                                    </ul>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+}
+
+<script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+<script src="~/Scripts/PmsRetentionReport.js"></script>

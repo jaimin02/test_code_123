@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Imp Outer Label";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+<link href="~/Content/themes/css/CustomStyle.css" rel="stylesheet" />
+@*<style>
+    .form-group {
+        margin-bottom: 15px;
+    }
+</style>*@
+@using (Html.BeginForm())
+{ 
+    <input type="hidden" value="@ViewBag.hdnusername" id="hdnusername" />
+    <input type="hidden" value="@ViewBag.hdnuserid" id="hdnuserid" />
+    <input type="hidden" value="@ViewBag.hdnlogintime" id="hdnlogintime" />
+    <input type="hidden" value="@ViewBag.hdnscopevalues" id="hdnscopevalues" />
+    
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1 id="h1_id">IMP Outer Label</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dropbox"></i>Products</a></li>
+                <li><a href="#" id="titleid">IMP Outer Label</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div>
+                                <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                            </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>Project *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <input type="text" placeholder="Project No Here.." class="form-control" id="ddlProjectNodashboard" data-provide="typeahead" style="height: 26px" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>Product Type *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <select class="form-control headercontrol" id="ddlProductType" style="padding: 3px 12px; height: 26px">
+                                                <option selected="selected" value="0">Please Select Product Type</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>Product *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <select class="form-control" id="Product" style="padding: 3px 12px; height: 26px">
+                                                <option value="0">Please Select Product</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>Batch No / Lot / Lot No *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <select class="form-control select2" id="BatchLotNo" style="padding: 3px 12px; height: 26px">
+                                                <option value="0">Please Select Batch/Lot/Lot No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>No of Label * </label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            @Html.TextBox("txtNoOfLabels", "", new { @class = "form-control qtycontrol", @placeholder = "No of Label", @style = " height:26px;", @type = "number", @min = "0",@autocomplete = "off" })
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12 form-group text-center">
+                                            <a data-toggle="modal" data-tooltip="tooltip" title="Export To PDF" onclick="getValue();">
+                                                <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a" style="background-color: #6BB9FF !important">
+                                                    <i class="fa fa-file-pdf-o"></i><span style="font-style: normal;">Export To PDF</span></i>
+                                            </a>
+                                            <a data-toggle="modal" id="btnClearPmsProduct" data-tooltip="tooltip" title="Clear">
+                                                <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                                            </a>
+
+                                            <a data-toggle="modal" id="btnExitPmsProduct" data-tooltip="tooltip" title="Exit">
+                                                <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    <input id="hdnUserProfile" type="hidden" value="@System.Configuration.ConfigurationManager.AppSettings["UserProfile"].ToString()" />
+
+    <input type="hidden" id="hdnPassword" value="@ViewBag.vLoginPass"/>
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsImpOuterLabel.js"></script>
+}

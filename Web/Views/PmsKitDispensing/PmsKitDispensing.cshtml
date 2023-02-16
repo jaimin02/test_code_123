@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "Kit Allocation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Kit Allocation</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-medkit"></i>Kit</a></li>
+                <li><a href="#">Kit Allocation</a></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="box-header">
+                                <h5><span style="font-size: 12px; float: right">Fields with * are Mandatory</span></h5>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Project No *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" placeholder="Project No Here.." style="height: 26px;" class="form-control" id="ddlProjectNo">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Visit *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlPeriod" style="height: 26px; padding: 3px 12px;">
+                                        <option value="0" selected="selected">Please Select Visit</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 .col-md-offset-3 form-group"></div>
+                                <div class="col-md-2 .col-md-offset-3 form-group text-right"></div>
+
+                                <div class="col-md-3 .col-md-offset-3 form-group">
+                                    @*<a data-toggle="modal" id="btnGo" data-tooltip="tooltip" title="Upload">
+                                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="fa fa-upload"></i><span id="spnbtnGO">GO</span></i>
+                                    </a>
+
+                                    <a data-toggle="modal" id="btnClear" data-tooltip="tooltip" title="Clear" onclick="clearControl();">
+                                        <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                                    </a>
+                                    *@
+                                    @*<a data-toggle="modal" id="btnExitUploadRandomization" data-tooltip="tooltip" title="Exit">
+                                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                                    </a>*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tblPmsKitDispensing" class="table table-bordered table-striped">
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+     <div class="modal fade" id="KitDetails" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal" aria-hidden="true" id="btnClose2" title="Close">×</button>
+                    <h4 class="modal-title text-center" id="myModalLabel2">Kit Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="overflow: auto;">
+                        <table id="tblStudyProductKitDetails" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="ModalESignAuth" role="dialog">
+            <div class="modal-dialog" style="width:35%;margin:30px auto">
+                <div class="modal-content modal-content-AlertPromt">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal" id="btnCloseESign">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name" style="text-align:center" id="titleESign"> Signature Authentication </h4>
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="ESignData">
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-4">
+                                        <label>User</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="txtUserName" style="height: 26px" disabled="disabled">
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-4">
+                                        <label>Date & Time</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="txtDateTime" style="height: 26px" disabled="disabled">
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-4">
+                                        <label>Password *</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control" id="txtPassword" style="height: 26px" oncopy="return false" onpaste="return false" placeholder="Password" required="required">
+                                        @*<input class="login__input pass" id="txtpassword" name="vLoginPass" oncopy="return false" onpaste="return false" placeholder="Password" required="required" type="password">*@
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <div class="col-sm-12" style="text-align:center">
+                                        <label>I hereby confirm signing of this record electronically. </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer footer-bottom">
+                    <div class="row">
+                        <a data-toggle="modal" id="btnESingAuthOK" data-tooltip="tooltip" title="Save">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnESignAuthOK">OK</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnESingAuthExit" data-tooltip="tooltip" title="Exit"  onclick="ConfirmAlertBox(ModuleName);">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsKitDispensing.js"></script>
+}

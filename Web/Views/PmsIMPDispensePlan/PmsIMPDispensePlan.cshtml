@@ -1,0 +1,451 @@
+﻿@{
+    ViewBag.Title = "IMP Dispense Plan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{ 
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>IMP Dispense Plan</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-barcode"></i>Barcode</a></li>
+                <li><a href="#">IMP Dispense Plan</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="form-group">
+                                <div class="row">
+
+                                    <div class="col-sm-2">
+                                        <h3 class="box-title">Project No</h3>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" id="txtProjectNoDashboard" placeholder="Project No.." data-provide="typeahead" class="form-control" style="height: 26px" />
+                                    </div>
+
+                                    <div class="col-sm-1">
+                                        <h3 class="box-title">Period</h3>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" id="ddlPeriod" style="padding: 3px 12px; height: 26px">
+                                            <option selected="selected" value="0">Please Select Period</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <a data-toggle="modal" id="btnGo" data-tooltip="tooltip" title="Go">
+                                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnbtnGO">GO</span></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-sm-2 text-right">
+                                        @*<a data-toggle="modal" id="btnGenerateBarCode" data-tooltip="tooltip" title="Generate Bar Code">
+                                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnGenerateBarCode">Generate Bar Code</span></i>
+                                        </a>*@
+
+                                        <button type="button" id="btnGenerateBarCode" class="btn bg-olive margin viewmode" title="Generate Barcode"
+                                            data-backdrop="false" style="margin-right: 0px">
+                                            + Generate Barcode</button>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                         
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-12 text-right">
+                                    <a data-toggle="modal" id="btnIPlabelDelete" data-tooltip="tooltip" title="Delete" style="display: none" onclick="DeleteIPLabelConfirmation()">
+                                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="fa fa-trash-o"></i><span id="spnIPLableDelete">Delete</span></i>
+                                    </a>
+
+                                    @*<a data-toggle="modal" data-target="#ModalDeletedAuditTrail" id="btnIPDeletedAuditTrail" data-tooltip="tooltip" title="Deleted Audit Trail" onclick="DeletedAuditTrail()">
+                                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="fa fa-trash-o"></i><span>Deleted Audit Trail</span></i>
+                                    </a>*@
+
+                                    <a data-tooltip="tooltip" title="Deleted Audit Trail" style="cursor: pointer;" id="btnIPDeletedAuditTrail" onclick="DeletedAuditTrail()">
+                                        <i class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="fa fa-fw fa-file-text-o"></i><span>Deleted Audit Trail</span></i>
+                                    </a>
+
+                                    <a data-tooltip="tooltip" title="Edit Qty Audit Trail" style="cursor: pointer;" id="btnEditQtyAuditTrail" onclick="EditQtyAuditTrail()">
+                                        <i class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="fa fa-fw fa-file-text-o"></i><span>Edit Qty Audit Trail</span></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="tblGeneratedIPLabel" class="table table-bordered table-striped">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="ModalGenerateIPLabel" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <span class="operation-mode" id="titleMode">Mode:- Add</span>
+                            <h4 class="modal-title modaltitle operation-name" id="title">Generate IP Label</h4>
+                        </div>
+                        <div>
+                            <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                        </div>
+
+                    </div>
+                    <div class="modal-body">
+                        <!-- form start -->
+                        <div style="margin-left:85%">
+                            <img src="../Content/Images/IconIndication.png" width="30px" height="30px" onmouseover="$('#divColorIndication').slideDown(1000);" onmouseout="$('#divColorIndication').slideUp(1000);"  class="text-right"/>
+                            <div id="divColorIndication" style="padding: 0px; width: 100%; display: none;">
+                                <div>
+                                    <span>
+                                        <img src="../Content/Images/SingleDose.png" width="20px" height="20px" />
+                                    </span>
+                                    <span class="InActive">Single Dose</span>
+                                </div>
+                                <div>
+                                    <span>
+                                        <img src="../Content/Images/ReDespensing.png" width="18px" height="18px" />
+                                    </span>
+                                    <span class="InActive">Multiple Dose</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>From Subject *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" id="txtFromSubject" placeholder="From Subject"
+                                        class="form-control" style="height: 26px" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>To Subject *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" id="txtToSubject" placeholder="To Subject"
+                                        class="form-control" style="height: 26px" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Dose Allocation</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <i id="IconSingleDose" title="Single Dose" style="margin-left: 34px; font-size: 29px" onclick="DosingData('S');">
+                                        <img src="../Content/Images/SingleDose.png" width="25px" height="25px" />
+                                    </i>
+                                    <i id="IconMultiDose" title="Multi Dose"  style="margin-left: 34px; font-size: 29px" onclick="DosingData('M');">
+                                        <img src="../Content/Images/ReDespensing.png" width="25px" height="25px" />
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>No of Blank Label *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="number" id="txtNoofBlankLabel" placeholder="No of Blank Label" class="form-control qtycontrol" style="height: 26px" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 form-group text-center">
+                                <div class="col-xs-12">
+                                    <a id="btnAddTempIPLabel" class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a bg-olive" title="Add" onclick="TempIPLable();"><i class="fa fa-plus"></i><span>Add</span></a>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="col-sm-12" style="text-align: right; overflow: auto">
+                                <a data-toggle="modal" id="btnIPLabelEditQty" data-tooltip="tooltip" title="Edit Qty" style="display: none">
+                                    <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnIPLabelEditQty">Edit Qty</span></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-12" style="text-align: center; height: 200px; overflow: auto">
+                                <table id="tblTempGenerateIPLabel" border="1" class="table table-bordered table-striped dataTable no-footer">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject No</th>
+                                            <th>Treatment Type</th>
+                                            <th>Day</th>
+                                            <th>Dose</th>
+                                            <th>Quantity</th>
+                                            <th class="hidetd">ProductType Id</th>
+                                            <th>Remove</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbltbodytempGenerateIPLabel"></tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnSaveGenerateIPLabel" data-tooltip="tooltip" title="Save" style="display: none">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSaveGenerateIPLabel">Save</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnClearGenerateIPLabel" data-tooltip="tooltip" title="Clear">
+                            <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnExitGenerateIPLabel" data-tooltip="tooltip" title="Exit" data-dismiss="modal">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ModalIPLabelDetails" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name text-center">IP Lable Details</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <!-- form start -->
+                        <table id="tblIPLableDetails" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnExitIPLableDetails" data-tooltip="tooltip" title="Exit" data-dismiss="modal">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ModalDayDoseInfo" role="dialog">
+            <div class="modal-dialog" style="width: 35%; margin: 30px auto">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name" id="lblDosingQty"></h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <!-- form start -->
+                        <div class="row">
+                            <div class="col-sm-2 form-group"></div>
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>No of Days</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="number" id="txtNoofDays" placeholder="No of Days"
+                                        class="form-control DayDoseQty qtycontrol" style="height: 26px" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>No of Dose</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="number" id="txtNoofDose" placeholder="No of Dose"
+                                        class="form-control DayDoseQty qtycontrol" style="height: 26px" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2 form-group"></div>
+                        </div>
+
+                        <div class="row" id="divDayDoseInfo" style="display: none">
+                            <div class="col-sm-12 form-group text-center">
+                                <table id="tblDayDoseInfo" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Day</th>
+                                            <th>Dose</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyDayDoseInfo">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnOKDayDoseInfo" data-tooltip="tooltip" title="OK">
+                            <i class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span>OK</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnExitDayDoseInfo" data-dismiss="modal" data-tooltip="tooltip" title="Exit">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ModalQuantityModification" role="dialog">
+            <div class="modal-dialog">
+                @*style="width:35%;margin:30px auto"*@
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name text-center">Quantity Modification</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <!-- form start -->
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <table id="tblQuantityModification" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Treatment Type</th>
+                                            <th>Quantity</th>
+                                            <th>Updated Qty</th>
+                                            <th>Remarks</th>
+                                            <th class="hidetd">Treatment Type</th>
+                                            <th class="hidete">Product Type</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyQuantityModification"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnApplyQtyModification" data-tooltip="tooltip" title="Exit">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span>Apply</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnCloseQtyModification" data-tooltip="tooltip" title="Exit">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Close</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalRemarks" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Remarks</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.TextArea("txtRemark", "", new { @class = "form-control", @placeholder = "Remarks", required = "required", @autocomplete = "off" })
+                    </div>
+                    <div class="modal-footer">
+                        <a data-toggle="modal" id="btnRemarks" data-tooltip="tooltip" title="Save" onclick="return DeleteIPLabel();">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave1">Save</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ModalDeletedAuditTrail" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name text-center">Audit Trail</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <!-- form start -->
+                        <table id="tblAuditTrail" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnExitAuditTrail" data-tooltip="tooltip" title="Exit" data-dismiss="modal">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ModalEditQtyAuditTrail" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name text-center">Treatment Type Edit Quantity Audit Trail</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <!-- form start -->
+                        <table id="tblEditQtyAuditTrail" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnExitEditQtyAuditTrail" data-tooltip="tooltip" title="Exit" data-dismiss="modal">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+
+    </div>
+        
+    
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsIMPDispensePlan.js"></script>
+}

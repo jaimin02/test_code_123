@@ -1,0 +1,490 @@
+﻿@{
+    ViewBag.Title = "PmsLineClearanceAccountability";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+<link href="~/Content/themes/css/CustomStyle.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{ 
+    <input type="hidden" value="@ViewBag.hdnusername" id="hdnusername" />
+    <input type="hidden" value="@ViewBag.hdnuserid" id="hdnuserid" />
+    <input type="hidden" value="@ViewBag.hdnlogintime" id="hdnlogintime" />
+    <input type="hidden" value="@ViewBag.hdnscopevalues" id="hdnscopevalues" />
+    
+    
+  
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Accountability Line Clearance 
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dropbox"></i>Products</a></li>
+                <li><a href="#">Accountability Line Clearance</a></li>
+                @*<li class="active">Data tables</li>*@
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="fancy-collapse-panel">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div id="loader" class="modal"></div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse" aria-expanded="true" aria-controls="collapse">Define Line Clearance
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading">
+                                    <div class="panel-body">
+                                         <div class="box-header">
+                                            <div>
+                                                <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                                            </div>
+                                        </div>
+                                        <div class="box-body" style="overflow-x: hidden">
+                                            <div class="col-sm-4 form-group">
+                                                <div class="col-sm-12">
+                                                    <label>Project No *</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" placeholder="Project No Here.." style="padding: 3px 12px; height: 26px" class="form-control" id="DDLProjectNo" data-provide="typeahead" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 form-group">
+                                                <div class="col-sm-12">
+                                                    <label>Product Type *</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="DDLProductType" style="padding: 3px 12px; height: 26px">
+                                                        <option value="0">Please Select Product Type</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 form-group">
+                                                <div class="col-sm-12">
+                                                    <label>Product *</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="DDLProduct" style="padding: 3px 12px; height: 26px">
+                                                        <option value="0">Please Select Product</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 form-group">
+                                                <div class="col-sm-12">
+                                                    <label>Batch/Lot/Lot No *</label>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="ddlBatchLotNo" style="padding: 3px 12px; height: 26px">
+                                                        <option value="0">Please Select Batch/Lot/Lot No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 form-group">
+                                                <div class="col-sm-12">
+                                                    <label>Period *</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="DDLPeriod" style="padding: 3px 12px; height: 26px">
+                                                        <option value="0">Please Select Period</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 form-group">
+                                                <div class="col-sm-12">
+                                                    <label>Activity *</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="DDLActivity" style="padding: 3px 12px; height: 26px">
+                                                        <option value="0">Please Select Activity</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 form-group">
+                                                <div class="col-sm-12">
+                                                    <label>Dosing Day *</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="DDLDosingDay" style="padding: 3px 12px; height: 26px">
+                                                        <option value="0">Please Select Dosing Day</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 form-group">
+                                                <div class="col-sm-12">
+                                                    <label>Dosing No * </label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="DDLDosingNo" style="padding: 3px 12px; height: 26px">
+                                                        <option value="0">Please Select Dosing No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 form-group" style="display: none">
+                                                <div class="col-sm-12">
+                                                    <label>Dispense Qty/Subject:</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    @Html.TextBox("txtDispenseQty", "", new { @class = "form-control", @placeholder = "Dispense Qty", required = "required", @style = " height:26px;  ", @autocomplete = "off", @type = "number", @min = "0", @disabled = "disabled" })
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-sm-12 form-group">
+                                                <div class="col-sm-12 form-group text-center">
+                                                    @*<button type="button" id="btnGo" class="btn bg-olive " value="Go">GO</button>
+                                                    <button type="button" id="btnClear" class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a " value="Clear">Clear</button>
+                                                    <button type="button" id="btnExitPage" class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Exit">Exit</button>*@
+
+
+                                                    <a data-toggle="modal" id="btnGo" data-tooltip="tooltip" title="Go">
+                                                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnGo">Go</span></i>
+                                                    </a>
+
+                                                    <a data-toggle="modal" id="btnClear" data-tooltip="tooltip" title="Clear">
+                                                        <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                            <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                                                    </a>
+
+                                                    <a data-toggle="modal" id="btnExitPage" data-tooltip="tooltip" title="Exit">
+                                                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <input type="hidden" id="txtbarcode" />
+                                                <input type="hidden" id="txtprojectno" />
+                                                <input type="hidden" id="txtPeriod" />
+                                                <input type="hidden" id="txtSubjectNo" />
+                                                <input type="hidden" id="txtDoseNo" />
+                                                <input type="hidden" id="txtDayNo" />
+                                                <input type="hidden" id="hdnPassword" value="@ViewBag.vLoginPass"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Checklist for the Line Clearance before checking of accountability of Investigational Product:
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+
+                                        <div class="box-body" style="overflow-x: hidden">
+
+                                            <div class="row">
+                                                <div class="col-sm-12 form-group" id="LineClearance1" style="visibility: hidden">
+                                                    <table id="tblPmsLineClearance1" class="table table-bordered table-striped dataTable " style="visibility: hidden">
+                                                    </table>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12 form-group text-center">
+                                                            <div id="divexport" style="display: none">
+                                                                <a class="btn bg-olive" href="../PmsProductDispense/ExportToPDF/hdnworkspaceid">Export to PDF&nbsp&nbsp&nbsp<i class="fa fa-file-pdf-o"></i></a>
+                                                            </div>
+
+                                                            @if (!System.Configuration.ConfigurationManager.AppSettings["UserProfile"].Contains(ViewBag.hdnUserTypeCode))
+                                                            {
+                                                                <a data-toggle="modal" id="btnPmsSave1" data-tooltip="tooltip" title="Save" onclick="saveDetails();">
+                                                                    <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnPmsStudyProduct">Save</span></i>
+                                                                </a>
+
+                                                            }
+                                                            @if (System.Configuration.ConfigurationManager.AppSettings["UserProfile"].Contains(ViewBag.hdnUserTypeCode))
+                                                            {
+                                                                  
+                                                                <input type="button" id="btnQA1" class="btn bg-olive margin" value="QA Review" data-toggle="modal" onclick="pmsStudyViewAuthenticate(this);" />
+                                                            }
+@*<button type="button" id="btnQA1" class="btn bg-olive margin" value="save" data-target="#ViewAuthenticate">QA Review</button>*@
+
+                                                            @Html.Raw(ViewBag.htmlBarcode)
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row" id="Div_Barcode" style="display: none;">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Checklist for the Line Clearance after checking of accountability of Investigational Product:
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+
+                                        <div class="box-body" style="overflow-x: hidden">
+
+                                            <div class="row">
+                                                <div class="col-sm-12 form-group" id="LineClearance2" style="visibility: hidden">
+                                                    <table id="tblPmsLineClearance2" class="table table-bordered table-striped dataTable " style="visibility: hidden">
+                                                    </table>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12 form-group text-center">
+                                                            <div id="divexport2" style="display: none">
+                                                                <a class="btn bg-olive" href="../PmsProductDispense/ExportToPDF/hdnworkspaceid">Export to PDF&nbsp&nbsp&nbsp<i class="fa fa-file-pdf-o"></i></a>
+                                                            </div>
+                                                            @if (!System.Configuration.ConfigurationManager.AppSettings["UserProfile"].Contains(ViewBag.hdnUserTypeCode))
+                                                            {
+                                                                <a data-toggle="modal" id="btnPmsSave2" data-tooltip="tooltip" title="Save" onclick="saveDetails();">
+                                                                    <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnPmsStudyProduct">Save</span></i>
+                                                                </a>
+                                                            }
+                                                            @if (System.Configuration.ConfigurationManager.AppSettings["UserProfile"].Contains(ViewBag.hdnUserTypeCode))
+                                                            {
+                                                                 
+                                                                <button type="button" id="btnQA2" class="btn bg-olive margin" value="QA Review" data-toggle="modal" onclick="pmsStudyViewAuthenticate(this);">QA Review</button>
+                                                            }
+                                                            @Html.Raw(ViewBag.htmlBarcode)
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @* <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingThree">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Checklist for the Line Clearance after Dispensing of Investigational Product:
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">
+                                        
+                                        <div class="box-body" style="overflow-x: hidden">
+
+                                            <div class="row">
+                                                <div class="col-sm-12 form-group" id="LineClearance3" style="visibility: hidden">
+                                                    <table id="tblPmsLineClearance3" class="table table-bordered table-striped dataTable " style="visibility: hidden">
+                                                    </table>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12 form-group text-center">
+                                                            <div id="divexport3" style="display: none">
+                                                                <a class="btn bg-olive" href="../PmsProductDispense/ExportToPDF/hdnworkspaceid">Export to PDF&nbsp&nbsp&nbsp<i class="fa fa-file-pdf-o"></i></a>
+                                                            </div>
+                                                            @if (!System.Configuration.ConfigurationManager.AppSettings["UserProfile"].Contains(ViewBag.hdnUserTypeCode))
+                                                            {
+                                                                <a data-toggle="modal" id="btnPmsSave3" data-tooltip="tooltip" title="Save" onclick="saveDetails();">
+                                                                    <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnPmsStudyProduct">Save</span></i>
+                                                                </a>
+                                                            }
+                                                            @if (System.Configuration.ConfigurationManager.AppSettings["UserProfile"].Contains(ViewBag.hdnUserTypeCode))
+                                                            {
+                                                                 
+                                                                <button type="button" id="btnQA3" class="btn bg-olive margin" value="QA Review" data-toggle="modal" onclick="pmsStudyViewAuthenticate(this);">QA Review</button>
+                                                            }
+                                                            @Html.Raw(ViewBag.htmlBarcode)
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingFour">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Checklist for the Line Clearance after checking of accountability of Investigational Product:
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                    <div class="panel-body">
+
+                                        <div class="box-body" style="overflow-x: hidden">
+
+                                            <div class="row">
+                                                <div class="col-sm-12 form-group" id="LineClearance4" style="visibility: hidden">
+                                                    <table id="tblPmsLineClearance4" class="table table-bordered table-striped dataTable " style="visibility: hidden">
+                                                    </table>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12 form-group text-center">
+                                                            <div id="divexport4" style="display: none">
+                                                                <a class="btn bg-olive" href="../PmsProductDispense/ExportToPDF/hdnworkspaceid">Export to PDF&nbsp&nbsp&nbsp<i class="fa fa-file-pdf-o"></i></a>
+                                                            </div>
+                                                            @if (!System.Configuration.ConfigurationManager.AppSettings["UserProfile"].Contains(ViewBag.hdnUserTypeCode))
+                                                            {
+                                                                <a data-toggle="modal" id="btnPmsSave4" data-tooltip="tooltip" title="Save" onclick="saveDetails();">
+                                                                    <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnPmsStudyProduct">Save</span></i>
+                                                                </a>
+                                                            }
+
+                                                            @if (System.Configuration.ConfigurationManager.AppSettings["UserProfile"].Contains(ViewBag.hdnUserTypeCode))
+                                                            {
+
+                                                                <input type="button" id="btnQA4" class="btn bg-olive margin" value="QA Review" data-toggle="modal" onclick="pmsStudyViewAuthenticate(this);" />
+                                                            }
+                                                            @Html.Raw(ViewBag.htmlBarcode)
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- panel-group -->
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="modal fade" id="mdlAuditTrail" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal" aria-hidden="true" id="btnAuditTrail" title="Close" data-tooltip="tooltip">×</button>
+                    <h4 class="modal-title text-center">Audit Trail</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div role="tabpanel" aria-labelledby="pnlGrid">
+                            <div class="panel-body">
+                                <div class="box-body">
+                                    <table id="tblAuditTrail" class="table table-bordered table-striped dataTable">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <div class="col-sm-12 form-group text-center">
+                                <a data-toggle="modal" data-tooltip="tooltip" title="Close" data-dismiss="modal">
+                                    <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                        <i class="glyphicon glyphicon-floppy-remove"></i><span style="font-style: normal;">Close</span></i>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="ViewAuthenticate" role="dialog">
+        <div class="modal-dialog" style="width: 400px">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Authenticate</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12">
+                        <label>Remarks</label>
+                    </div>
+                    <div class="col-sm-12">
+                        @Html.TextArea("txtRemarks", "", new { @class = "form-control", @placeholder = "Remarks", required = "required", @autocomplete = "off" })
+                    </div>
+                    <div class="col-sm-12">
+                        <label>Password</label>
+                    </div>
+                    <div class="col-sm-12">
+                        @Html.Password("txtPassword", "", new { @class = "form-control", @placeholder = "Password", required = "required", @autocomplete = "off" })
+                    </div>
+
+                    <div class="col-sm-12">
+                        <hr style="margin-bottom: 10px" />
+                    </div>
+
+                    <div class="col-sm-12" style="margin-bottom: 20px">
+                        I hereby confirm signing of this record electronically. 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a" id="btnSaveRemarks">Save</button>
+                    <button type="button" class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a"  id="btnCloseRemarks">Close</button>*@
+                    <a data-toggle="modal" id="btnOk" data-tooltip="tooltip" title="Approve">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="fa fa-check"></i><span id="spnSaveRemarks">Approve</span></i>
+                    </a>
+
+                    <a data-toggle="modal" data-tooltip="tooltip" title="Reject" onclick="QaReviewReject()">
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="fa fa-ban"></i><span>Reject</span></i>
+                    </a>
+                    <a data-toggle="modal" id="btnCancel" data-tooltip="tooltip" title="Cancel" onclick="CloseAuthenticate();">
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Cancel</span></i>
+                    </a>
+
+
+                    @*  <a data-toggle="modal" id="btnOk" data-tooltip="tooltip" title="Ok">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSaveRemarks">Ok</span></i>
+                    </a>
+
+                    <a data-toggle="modal" id="btnCancel" data-tooltip="tooltip" title="Cancel" onclick="CloseAuthenticate();">
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Cancel</span></i>
+                    </a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    <input id="hdnUserProfile" type="hidden" value="@System.Configuration.ConfigurationManager.AppSettings["UserProfile"].ToString()" />
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script> 
+    <script src="~/Scripts/Validation.js"></script>
+    <script src="~/Scripts/PmsLineClearanceAccountability.js"></script>
+}

@@ -1,0 +1,410 @@
+﻿@{
+    ViewBag.Title = "Study Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+
+@using (Html.BeginForm("ExportToExcel", "StudyProduct", FormMethod.Post))
+{ 
+    <input type="hidden" value="@ViewBag.hdnscopevalues" id="hdnscopevalues" />
+    <input type="hidden"  value="@ViewBag.hdnworkspaceid" id="hdnworkspaceid" />
+    
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Study Product 
+       
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dropbox"></i>Products</a></li>
+                <li><a href="#">Study Product</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        <h3 class="box-title">Project No</h3>
+                                    </div>
+                                    <div class="col-lg-4 col-md-8 col-sm-8 col-xs-8">
+                                        <input type="text" placeholder="Project No Here.." class="form-control" id="DDLProjectNoList" data-provide="typeahead" autocomplete="off">
+                                    </div>
+
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 resizepd">
+                                        <a href="#"><span class="glyphicon glyphicon-shopping-cart" id="ProductTransferDetails" title="Product Transfer Detail" style="display: none; font-size: 30px; color: #6BB9FF"></span></a>
+                                    </div>
+
+                                    <div class="col-lg-3 col-lg-offset-0 col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-10 resizepd btn-group " id="divexport">
+                                        <button type="button" class="btn bg-olive dropbtn dropdown-toggle btn-rounded  btn-ef btn btn-primary"
+                                            data-toggle="dropdown" aria-expanded="false" style="border-radius: 4px">
+                                            Export <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="../PmsStudyProduct/ExportToExcel"><i class="fa fa-file-excel-o"></i>Excel </a></li>
+                                            <li><a href="../PmsStudyProduct/ExportToPDF"><i class="fa fa-file-pdf-o"></i>PDF</a></li>
+                                        </ul>
+                                    </div>
+                                    @if (!System.Configuration.ConfigurationManager.AppSettings["UserProfile"].Contains(ViewBag.hdnUserTypeCode))
+                                    {
+                                        <div class="col-lg-2 col-lg-offset-0 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-6 resizepd" style="float:right;">
+                                            <button type="button" id="btnAddStudyProductData" class="btn bg-olive" data-toggle="modal" data-target="#StudyProduct" title="Add Study Product">Add Study Product</button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tblPmsStudyProduct" class="table table-bordered table-striped" style="visibility: hidden;">
+                                <thead>
+                                    <tr>
+                                        <th>Product No</th>
+                                        <th>Project No</th>
+                                        <th>Product Type</th>
+                                        <th>Product Name</th>
+                                        <th>Product Indication</th>
+                                        <th>Product Form</th>
+                                        <th>Active Ingredient</th>
+                                        <th>Product Strength</th>
+                                        <th>Edit</th>
+                                        <th>Audit Trail</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="TbodyStudyProduct">
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="modal fade" id="StudyProduct" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <span class="operation-mode" id="titleMode"></span>
+                        <h4 class="modal-title modaltitle operation-name" id="title">Study Product</h4>
+                    </div>
+                    <div>
+                        <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <!-- form start -->
+                    <form role="form" class="form-horizontal" method="POST" id="testForm">
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="LblProjectNo">Project No *</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="Project No" class="form-control" id="DDLProjectNo" data-provide="typeahead" style="height: 26px">
+                            </div>
+                            <div class="col-sm-2">
+                                @*<span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail"  id="spn_vWorkSpaceId" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Project No" ></span>*@
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="lblPrdctKitIndication">Product Indication *</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="DDLPrdctKitIndi" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select Product </option>
+                                    <option value="P">Product</option>
+                                    <option value="K">Kit</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_cProductKitIndication" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Product Indication"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="LblPrdctKitName">Product Name *</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="Product Name" class="form-control" id="PrdctKitName" style="height: 26px" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vProductName" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Product Name"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="LblPrdctKitType">Product Type *</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="ddlProductType" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select Product Type</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vProductType" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Product Kit Type"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="LblprdctForm">Product Strength *</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder=" Product Strength" class="form-control" id="PrdctStrength" style="height: 26px" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vProductStrength" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Product Strength"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="LblPrdctfrom">Product Form *</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="Product Form" class="form-control" id="DDLPrdctForm" style="height: 26px">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vProductForm" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Product Form"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Storage Condition *</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="Storage Condition" class="form-control" id="txtStorageCondition" style="height: 26px" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vStorageCondition" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Storage Condition"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="LblActiveIngrdnt">Active Ingredient</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder=" Active Ingredient" class="form-control" id="ActiveIngrdient" style="height: 26px" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vActiveIngredient" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Active Ingredient"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="lblPrdctBrandName">Product Brand Name</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder=" Brand Name" class="form-control" id="PrdctBrandName" style="height: 26px" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vProductBrandName" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Product Brand Name"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="LblPrdctMinTemp">Min Temp</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder=" Min Temp" class="form-control" id="PrdctMinTemp" min="1" style="height: 26px" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vProductMinTemp" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Product MinTemp"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="LblMaxTemp">Max Temp</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder=" Max Temp" class="form-control" id="PrdctMaxTemp" min="1" style="height: 26px" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vProductMaxTemp" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Product MaxTemp"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="LblMinHumidity">Min Humidity</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="Min Humidity" class="form-control" id="PrdctMinHumidity" min="1" style="height: 26px" onkeypress="restrictMinus(event);" onpaste="return false" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vProductMinHumidity" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Product MinHumidity"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="LblMaxHumidity">Max Humidity</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="Max Humidity" class="form-control" id="PrdctMaxHumidity" min="1" style="height: 26px" onkeypress="restrictMinus(event);" onpaste="return false" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vProductMaxHumidity" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Product MaxHumidity"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="lblIECDate">IEC/IRB Approval Date</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" id="datepicker1" class="form-control" placeholder="IEC/IRB Approval Date" style="height: 26px" onpaste="return false" onkeydown="return false" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_dIECApprovalDate" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="IEC/IRB ApprovalDate"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label for="LblTlDate">TL/NOC Date</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" id="datepicker2" class="form-control" placeholder="TL/NOC Date" style="height: 26px" onpaste="return false" onkeydown="return false" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_dTlDate" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="TL/NOC Date"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Submission</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder=" Submission" class="form-control" id="Submission" style="height: 26px" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vSubmission" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Submission"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Supplier/Manufacturer Name</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="ddlSponsorName" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select Sponsor Name</option>
+                                </select>
+
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vClientName" onclick="AuditTrail(this)" data-toggle="modal" data-target="#StudyProductAudit" titlename="Sponsor Name"></span>
+                            </div>
+                        </div>
+                        <div style="display: none;" id="Div_ProductNo">
+                            <div class="col-sm-4 form-group hide">
+                                <div class="col-sm-3 form-group">
+                                    <label for="LblProductNo">ProductNo</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <input class="form-control" id="ProductNo" name="ProductNo" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label for="LblRemarks">Remarks *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextArea("txtRemarks", "", new { @class = "form-control", @placeholder = "Remarks", @maxlength = "500" ,@autocomplete = "off"})
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer footer-bottom">
+                    <input type="button" id="btnaddPmsSaveContinue" value="Save & Continue" class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a" role="button" title="Save & Continue" style="display: none">
+                    <a data-toggle="modal" id="btnaddPmsStudyProduct" data-tooltip="tooltip" title="Save">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnPmsStudyProduct">Save</span></i>
+                    </a>
+
+                    <a data-toggle="modal" id="btnClearPmsStudyProduct" data-tooltip="tooltip" title="Clear">
+                        <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                    </a>
+
+                    <a data-toggle="modal" id="btnExitPmsStudyProduct" data-tooltip="tooltip" title="Exit">
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="loader" class="modal"></div>
+    </div>
+    
+    <div class="modal fade" id="StudyProductAudit" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal" aria-hidden="true" id="btnClose1" title="Close">×</button>
+                    <h4 class="modal-title text-center" id="myModalLabel1">Audit Trail</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="overflow: auto;">
+                        <table id="tblStudyProductAuditTrail" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="StudyProductTransferDetail" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal" aria-hidden="true" id="btnClose2" title="Close">×</button>
+                    <span class="close" id="spanmode2"></span>
+                    <h4 class="modal-title text-center" id="myModalLabel2">Product Transfer Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="overflow: auto;">
+                        <table id="tblStudyProductTransferDetail" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    
+    <input id="hdnUserProfile" type="hidden" value="@System.Configuration.ConfigurationManager.AppSettings["UserProfile"].ToString()" />
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script> 
+    <script src="~/Scripts/PmsStudyProduct.js"></script>
+}

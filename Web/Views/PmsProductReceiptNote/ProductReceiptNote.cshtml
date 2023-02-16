@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "Product Receipt Note";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /*.ui-menu .ui-menu-item a.ui-corner-all:hover, .ui-menu .ui-menu-item a.ui-corner-all:focus, .ui-menu .ui-menu-item a.ui-corner-all:active {
+    background:#ff8a00!important;
+    color:#000;
+    border-radius:0;
+}*/
+</style>
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+<link href="~/Content/themes/css/CustomStyle.css" rel="stylesheet" />
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1 id="h1_id">Product Receipt Note</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dropbox"></i>Products</a></li>
+            <li><a href="#" id="titleid">Product Receipt Note</a></li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+
+                        <div>
+                            <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                        </div>
+                    </div>
+                    <div class="box-body" style="overflow-x: hidden">
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Project *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" placeholder="Project No Here.." class="form-control" id="ddlProjectNo" data-provide="typeahead" style="height: 26px" index="0" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Dispatch Reference No *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select id="ddlDocumentNo" class="form-control select2" style="padding: 3px 12px; height: 26px" index="1">
+                                        <option selected="selected">Please Select Dispatch Ref No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Product Indication *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select id="ddlTransferIndi" class="form-control select2" style="padding: 3px 12px; height: 26px" index="1">
+                                        <option selected="selected" value="0">Please Select Product Indication</option>
+                                        <option value="P">Product</option>
+                                        <option value="K">Kit</option>
+                                        <option value="L">Labeled Product</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Condition of Product Receipt *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select id="ddlConditionofProducts" class="form-control select2" style="padding: 3px 12px; height: 26px" index="1">
+                                        <option selected="selected" value="0">Please Select Condition of Product</option>
+                                        <option value="I">Intact</option>
+                                        <option value="D">Damage</option>
+                                        <option value="O">Any Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label for="lblFromdate">Actual Recd Date</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" id="dRecdDate" class="form-control headercontrol" placeholder="Actual Recd Date .." style="height: 26px" onpaste="return false" onkeydown="return false" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Minimum and Maximum temperature is within limit</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select id="ddlMinMax" class="form-control select2" style="padding: 3px 12px; height: 26px" index="1">
+                                        <option selected="selected" value="0">Please Select</option>
+                                        <option value="Y">Yes</option>
+                                        <option value="N">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group" id="remarks">
+                                @*style="display: none"*@
+                                <div class="col-sm-12">
+                                    <label>Remarks *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextArea("Remarks", "", new { @class = "form-control", @placeholder = "Remarks..", required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group" id="divDamageKit" style="display: none">
+                                <div class="col-sm-12">
+                                    <label>Kit/Label No *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select id="DdlDamageKit" multiple="multiple">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="tblPmsProductDispatchData" class="table table-bordered table-striped">
+                        </table>
+                        <div class="col-sm-12 form-group text-center">
+                            @*<button type="button" id="btnSavePmsProductReceiptNote" class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="save" style="display: none">Save</button>
+                            <button type="button" id="btnClearPmsProductReceiptNote" class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Clear">Clear</button>
+                            <button type="button" id="btnExitPmsProductReceiptNote" class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Exit">Exit</button>*@
+
+                            <a data-toggle="modal" id="btnSavePmsProductReceiptNote" data-tooltip="tooltip" title="Save" style="display: none" class="viewmode">
+                                <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                    <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSaveQualityCheck">Save</span></i>
+                            </a>
+
+                            <a data-toggle="modal" id="btnClearPmsProductReceiptNote" data-tooltip="tooltip" title="Clear">
+                                <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                    <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                            </a>
+
+                            <a data-toggle="modal" id="btnExitPmsProductReceiptNote" data-tooltip="tooltip" title="Exit">
+                                <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                    <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                            </a>
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+
+</div>
+@*<script src="~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js"></script>*@
+<script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+<script src="~/Scripts/PmsProductReceiptNote.js"></script>

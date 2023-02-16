@@ -1,0 +1,154 @@
+﻿@model BusinessDTO_LCS.DTOLabelPrint
+
+@{
+    ViewBag.Title = "Label Print";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{ 
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Label Print</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-barcode"></i>Barcode</a></li>
+                <li><a href="#">Label Print</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>Project *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <input type="text" placeholder="ProjectNo Here.." class="form-control" id="txtProjectNo" 
+                                              style="height: 26px">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>Study Type *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <input type="text" placeholder="Study Type" class="form-control" id="txtStudytype" 
+                                              style="height: 26px" disabled="disabled">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>Product/Kit Indication *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <select class="form-control headercontrol" id="ddlProductKitIndi" style="padding: 3px 12px; height: 26px">
+                                                <option selected="selected" value="0">Please Select Product/Kit Indication</option>
+                                                <option value="P">Product</option>
+                                                <option value="K">Kit</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>Product Type*</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <select class="form-control headercontrol" id="ddlProductType" style="padding: 3px 12px; height: 26px">
+                                                <option value="0" selected="selected">Please Select Product Type</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 form-group" id="divProductLabel" style="display:none">
+                                        <div class="col-sm-12">
+                                            <label>Product Label No *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <select class="form-control headercontrol" id="ddlProductLabel" style="padding: 3px 12px; height: 26px" multiple>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div id="divKitLabel" style="display:none">
+                                        <div class="col-sm-4 form-group">
+                                            <div class="col-sm-12">
+                                                <label>Kit Type *</label>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <select class="form-control headercontrol" id="ddlKitType" style="padding: 3px 12px; height: 26px">
+                                                    <option value="0" selected="selected">Please Select Kit Type</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4 form-group">
+                                            <div class="col-sm-12">
+                                                <label>Kit No *</label>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <select class="form-control headercontrol" id="ddlKitLabel" style="padding: 3px 12px; height: 26px" multiple>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-6">
+                                            <label>Type of Label *</label>
+                                        </div>
+                                        <div class="col-sm-6 text-right" style="padding-left:90px;">
+                                            <a style="display: table;"  onclick="LabelPreview();" id="alabelpreview"><b><U>Label Preview</U></b></a>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <select class="form-control headercontrol" id="ddltypeofLabel" style="padding: 3px 12px;height: 26px;">
+                                                <option value="0" selected="selected">Please Select Type of Label</option>
+                                                <option value="1">Label 1</option>
+                                                <option value="2">Label 2</option>
+                                                <option value="3">Label 3</option>
+                                                <option value="4">Label 4</option>
+                                                <option value="5">Label 5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <input type="submit" value="Print" class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5" title="Print" id="btnPrint" />
+
+                                        <a data-toggle="modal" id="btnClearProductLabel" data-tooltip="tooltip" title="Clear" onclick="ClearData();">
+                                            <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                                        </a>
+
+                                        <a data-toggle="modal" id="btnExitProductLabel" data-tooltip="tooltip" title="Exit" onclick="ExitModule();">
+                                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        @Html.HiddenFor(m=>m.vWorkSpaceID)
+        @Html.HiddenFor(m=>m.vLabelPrint)
+        @Html.HiddenFor(m=>m.vRandomizationNo)
+        <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    </div>
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsLabelPrint.js"></script>
+}

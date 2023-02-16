@@ -1,0 +1,264 @@
+﻿@{
+    ViewBag.Title = "Study Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Study Master
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-tasks"></i>Master</a></li>
+                <li><a href="#">Study Master</a></li>
+            </ol>
+
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <span>
+                                <canvas id="myCanvas" width="12" height="12" class="highlight"></canvas>
+                            </span>
+                            <span class="InActive">Inactive Entries</span>
+                            <div class="row">
+                                <a id="btnAddstudy" data-toggle="modal" data-target="#StudyDetailsModel" data-options="splash-2 splash-ef-15"
+                                    class="btn btn-primary btn-rounded btn-ef btn-ef-3 btn-ef-3a pull-right" style="margin-right: 34px;"><i class="fa fa-plus"></i><span>Add</span></a>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="tblStudyDetailsData" class="table table-striped table-bordered" cellspacing="0" cellpadding="0" border="0" width="100%">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="modal splash fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="StudyDetailsModel" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <span class="operation-mode" style="float: right" id="titleMode"></span>
+                        <h4 class="modal-title modaltitle operation-name text-left" id="title">Study Master</h4>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <div class="mdfield" style="text-align: right">
+                        <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                    </div>
+                    <form name="form2" role="form" id="form2">
+                    </form>
+                    <form name="form1" role="form" id="form1" style="margin-top: 40px;">
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label>Study Code: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtStudyCode" id="txtStudyCode" class="form-control"
+                                    placeholder="Study code Here..."
+                                    data-parsley-trigger="change"
+                                    maxlength="100" autocomplete="off">
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vStudyCode" onclick="StudyFieldWiseAuditTrail(this)"
+                                    data-toggle="modal" data-target="#divAuditTrial" titlename="Study Code"></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Study Name: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtStudyName" id="txtStudyName" class="form-control"
+                                    placeholder="Study Name Here..."
+                                    data-parsley-trigger="change"
+                                    maxlength="100" autocomplete="off">
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vStudyName" onclick="StudyFieldWiseAuditTrail(this)"
+                                    data-toggle="modal" data-target="#divAuditTrial" titlename="Study Name"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label>Client: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <select class="form-control" id="ddlClient" name="ddlClient" data-parsley-trigger="change" required>
+                                </select>
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="nClientno" onclick="StudyFieldWiseAuditTrail(this)"
+                                    data-toggle="modal" data-target="#divAuditTrial" titlename="Client Number"
+                                    masterfieldname="vClientName" mastertablename="ClientMst"></span>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label>Sponsor Name: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <select class="form-control" name="txtSponsorName" id="txtSponsorName" data-parsley-trigger="change" required></select>
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vSponsorName" onclick="StudyFieldWiseAuditTrail(this)"
+                                    data-toggle="modal" data-target="#divAuditTrial" titlename="Sponsor Name"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div id="divRemark">
+                                <div class="col-sm-2">
+                                    <label>Remarks: *</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="text" name="txtRemark" id="txtRemark" class="form-control"
+                                        placeholder="Remarks Here...">
+                                </div>
+                                <div class="col-sm-1">
+                                    <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vRemark" onclick="StudyFieldWiseAuditTrail(this)"
+                                        data-toggle="modal" data-target="#divAuditTrial" titlename="Remarks"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <div class="col-xs-12">
+                                    <button type="button" id="btnSaveStudyDetails" class="btn btn-success btn-ef btn-ef-3 btn-ef-3c" value="save" data-tooltip="tooltip" title="Save">
+                                        <i class="fa fa-arrow-right"></i>Save</button>
+                                    <button type="button" id="btnClearStudyDetails" value="Clear" class="btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" role="button" title="Clear">
+                                        <i class="fa fa-arrow-left"></i>Clear</button>
+                                    <button type="button" id="btnExitStudyDetails" value="Exit" class="btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" role="button" title="Clear">
+                                        <i class="fa fa-arrow-left"></i>Exit</button>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer footer-bottom">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal splash fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="UserAttachModel" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <span class="operation-mode" style="float: right" id="titleMode"></span>
+                        <h4 class="modal-title modaltitle operation-name text-left" id="title">User Attachment</h4>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <div class="mdfield" style="text-align: right">
+                        <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                    </div>
+                    <form name="form2" role="form" id="form2"></form>
+                    <form name="form1" role="form" id="form1" style="margin-top: 40px;">
+
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                            </div>
+                            <div class="col-sm-1">
+                                <label>User: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <select id="ddlUserMst" class="form-control" multiple="multiple"></select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <div class="col-xs-12">
+                                    <button type="button" id="btnSaveUserActivity" class="btn btn-success btn-ef btn-ef-3 btn-ef-3c" value="save" data-tooltip="tooltip" title="Save">
+                                        <i class="fa fa-arrow-right"></i>Save
+                                    </button>
+                                    <button type="button" id="btnExitUserActivity" value="Exit" class="btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" role="button" title="Clear">
+                                        <i class="fa fa-arrow-left"></i>Exit
+                                    </button>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer footer-bottom">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal splash fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="divAuditTrial" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="PopupClose()">&times;</button>
+                    <h4 class="modal-title modaltitle text-center">Audit Trail</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body" style="overflow-y: auto;">
+                        <table id="tblUserDetailsAuditTrial" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="modal fade" id="StudyRemarkModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Remark</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.TextArea("txtStudyRemark", "", new { @class = "form-control", @placeholder = "Remark", required = "required", @autocomplete = "off" })
+                </div>
+                <div class="modal-footer">
+                    <a data-toggle="modal" id="btnInActiveSave" data-tooltip="tooltip" title="Save">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave1">Save</span></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog">
+    </div>
+    
+    <script src="~/Scripts/PmsStudyMaster.js"></script>
+    
+    
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('#form1').parsley().subscribe('parsley:field:validate', function () {
+                if ($('#form1').parsley().isValid()) {
+                    $('#btnSaveUserDetails').prop('disabled', false);
+                } else {
+                    $('#btnSaveUserDetails').prop('disabled', true);
+                }
+            });
+        });
+
+
+    </script>
+     
+}

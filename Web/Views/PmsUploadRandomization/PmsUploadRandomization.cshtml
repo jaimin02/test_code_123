@@ -1,0 +1,268 @@
+﻿@{
+    ViewBag.Title = "Upload Randomization";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Upload Randomization
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-barcode"></i>Barcode</a></li>
+                <li><a href="#">Upload Randomization</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="box-header">
+                                <h5><span style="font-size: 12px; float: right">Fields with * are Mandatory</span></h5>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Project No *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" placeholder="Project No Here.." style="height: 26px;" class="form-control" id="DDLProjectNo">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Project Type *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlProjectType" style="height: 26px; padding: 3px 12px;">
+                                        <option value="0" selected="selected">Please Select Project Type</option>
+                                        @*<option value="1" >BABE</option>*@
+                                        @*<option value="2" >Clinical Trail</option>*@
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Randomization Type *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="dllRandomization" style="height: 26px; padding: 3px 12px;">
+                                        <option value="0" selected="selected">Please Select Randomization Type</option>
+                                        <option value="1" >Normal</option>
+                                        <option value="2" >Double Blinded</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Apply Balance On *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlApplyBalanceOn" style="height: 26px; padding: 3px 12px;">
+                                        <option value="0" selected="selected">Please Select Apply Balance On</option>
+                                        <option value="P" >Project</option>
+                                        <option value="S" >Site</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            @*<div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Balance Ratio *</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="text" placeholder="Randomization Ratio" class="form-control" id="txtRandomizationRatio" style="height: 26px" disabled="disabled">
+                                </div>
+                                <div class="col-sm-2">
+                                    <span id="spnRandomizationRatio" class="glyphicon glyphicon-plus" style="color:#6BB9FF" title="Add Randomization Ratio" onclick="RandomizationRatio()"></span>
+                                </div>
+                            </div>*@
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-4">
+                                  <label>  File Upload *</label>
+                                </div>
+                                <div class="col-sm-6 col-sm-offset-2">
+                                    <a href="../Content/Images/Csv_File_Format_CT.png" style="display: table;" target="_blank"><b><U>View CSV File Format</U></b></a>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="file" id="fileToUpload" name="file" accept=".csv" class="form-control" />  @*--disabled="disabled" *@
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Remarks  <span class="mandatory" id="remarkmandatory" style="display:none;">*</span></label>
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextArea("txtRemarks", "", new { @class = "form-control", @placeholder = "Remarks" })
+                                </div>
+                            </div>
+
+                           <div class="row">
+                                <div class="col-md-2 .col-md-offset-3 form-group"></div>
+                                <div class="col-md-3 .col-md-offset-3 form-group text-right"></div>
+                                <div class="col-md-3 .col-md-offset-3 form-group">
+                                    <table id="tblgallary">
+                                        <tbody id="tbodygallary"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 .col-md-offset-3 form-group"></div>
+                                <div class="col-md-2 .col-md-offset-3 form-group text-right"></div>
+
+                                <div class="col-md-3 .col-md-offset-3 form-group">
+                                    <a data-toggle="modal" id="btnSaveUploadRandomization" data-tooltip="tooltip" title="Upload" class="viewmode">
+                                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="fa fa-upload"></i><span id="spnbtnGO">Upload</span></i>
+                                    </a>
+
+                                    <a data-toggle="modal" id="btnClearUploadRandomization" data-tooltip="tooltip" title="Clear" onclick="clearControl();">
+                                        <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                                    </a>
+
+                                    <a data-toggle="modal" id="btnExitUploadRandomization" data-tooltip="tooltip" title="Exit">
+                                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+
+                        <div class="box-body">
+                            <table id="tblUploadRandomization" class="table table-bordered table-striped dataTable">
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+     <div class="modal fade" id="DataRandonizationView" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title modaltitle text-center ">
+                        <label id="lblRANDOMIZATIONDETAILSFOR">RANDOMIZATION DETAILS FOR</label>
+                         </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                    <div class="box-body">
+                        <table id="tblRandomizationView" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="modalRandomizationRatio" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Balance Ratio</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="divBalanceRatio" style="display:inline">
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <div class="col-sm-12">
+                                        <label>Treatment Type *</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <select class="form-control" id="ddlTreatmentType" style="padding: 3px 12px; height: 26px">
+                                            <option selected="selected" value="0">Please Select Treatment Type</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 form-group">
+                                    <div class="col-sm-12">
+                                        <label>Product Type *</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <select class="form-control" id="ddlProductType" style="padding: 3px 12px; height: 26px">
+                                            <option selected="selected" value="0">Please Select Product Type</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 form-group" style="display:block">
+                                    <div class="col-sm-12">
+                                        <label>Ratio *</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <input type="number" id="txtProductTypeRatio" placeholder="Product Type Ratio" class="form-control qtycontrol" min="1"  style="height: 26px"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 form-group text-center">
+                                    <div class="col-sm-12">
+                                        <label></label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <a title="Add" class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a bg-olive" 
+                                            onclick="addMoreRows()"><i class="fa fa-plus"></i><span>Add</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <table id="tblProductTypeRandomizationRatio" border="1" class="table table-bordered table-striped dataTable no-footer" style="width: 80%;display:none">
+                            <thead>
+                                <tr>
+                                    <td>Treatment Type</td>
+                                    <td>Product Type</td>
+                                    <td>Ratio</td>
+                                    <td class="hideremove">Remove</td>
+                                    <td class="hidetd">ProductType Value</td>
+                                    <td class="hidetd">ProductTypeID</td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyProductTypeRandomizationRatio">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <a data-toggle="modal" id="btnSaveRandomization" data-tooltip="tooltip" title="Save" style="display:none">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSaveQuantatiy">Save</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="tnpmsQuantatiyExit" data-tooltip="tooltip" title="Exit" data-dismiss="modal">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsUploadRandomization.js"></script>
+}
+

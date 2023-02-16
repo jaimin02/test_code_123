@@ -1,0 +1,443 @@
+﻿@{
+    ViewBag.Title = "Product Receipt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{ 
+    <input type="hidden" value="@ViewBag.hdnusername" id="hdnusername" />
+    <input type="hidden" value="@ViewBag.hdnuserid" id="hdnuserid" />
+    <input type="hidden" value="@ViewBag.hdnlogintime" id="hdnlogintime" />
+    <input type="hidden" value="@ViewBag.hdnscopevalues" id="hdnscopevalues" />
+    
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Study Product Receipt
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-files-o"></i>Master</a></li>
+                <li><a href="#">Study Product Receipt</a></li> 
+                @*<li class="active">Data tables</li>*@
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            @*<button type="button" id="btnAddUser" class="btn bg-olive margin" data-toggle="modal" data-target="#StorageLocationModel" onclick="AddStorageLocation()">+ Add Storage Location</button>*@
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body" style="overflow-x:hidden">
+                            <div class="row">
+                                 <div class="col-sm-3 form-group">
+                                    <label>Project No *</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    @*<select class="form-control" id="ProjectNo" style="padding: 3px 12px;height:26px" onchange="GetStorageName()">
+                                    </select>*@
+                                    <input type="text" id="ProjectNo" placeholder="Project No.." data-provide="typeahead" class="form-control" style="height:26px"/>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Storage Name *</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <select class="form-control" id="StorageName" style="padding: 3px 12px;height:26px">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label>Sponsor</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <select class="form-control" id="Sponsor" style="padding: 3px 12px;height:26px">
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Received From Location</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    @Html.TextBox("RecdFromLocation", "", new { @class = "form-control", @placeholder = "Recd. From Location", required = "required", @style = " height:26px; ",@autocomplete = "off" }) 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label>Transport Mode</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <select class="form-control" id="TransportMode" style="padding: 3px 12px;height:26px">
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Ref.No</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    @Html.TextBox("RefNo", "", new { @class = "form-control", @placeholder = "Reference No", required = "required", @style = " height:26px; " }) 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label>Shipment No</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    @Html.TextBox("ShipmentNo", "", new { @class = "form-control", @placeholder = "Shipment No", required = "required", @style = " height:26px; " }) 
+                                </div>
+                            </div>
+                            @*<hr>*@
+                            <div class="box">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label>Product</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <select class="form-control" id="Product" style="padding: 3px 12px;height:26px" onchange="SelectBatchNo()">
+                                        <option>Please Select Product</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Batch Type</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <select class="form-control" id="BatchType" style="padding: 3px 12px;height:26px">
+                                        <option value="0" selected="selected">Please Select Batch Type</option>
+                                        <option value="B">Batch</option>
+                                        <option value="L">Lot</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label>Batch/Lot/Lot No</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <select class="form-control select2" id="BatchLotNo" style="padding: 3px 12px;height:26px">
+                                        <option>Please Select Batch/Lot/Lot No</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Expiry Date</label>
+                                </div>
+
+                                <div class="col-sm-3 form-group">
+                                    @*@Html.TextBox("ExpirtyDate", "", new { @class = "form-control pull-right", @placeholder = "Expirty Date", required = "required", @style = " height:26px; " }) *@
+                                    <input type="text" class="form-control pull-right" id="ExpiryDate" placeholder="Expiry Date" style="height:26px">
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label>No. of Boxes</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    @Html.TextBox("NoofBoxes", "", new { @class = "form-control", @placeholder = "No of Boxes", required = "required", @style = " height:26px; " }) 
+                                </div>
+                                <div class="col-sm-3 form-group"> 
+                                    <label>No. of Qty/Boxes</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    @Html.TextBox("NoofQty", "", new { @class = "form-control", @placeholder = "No. of Qty/Boxes", required = "required", @style = " height:26px; " }) 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label>Received Qty</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    @Html.TextBox("RecdQty", "", new { @class = "form-control", @placeholder = "Recd. Quantity", required = "required", @style = " height:26px; " }) 
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>UOM</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <select class="form-control" id="UOM" style="padding: 3px 12px;height:26px">
+                                        <option value="0" selected="selected">--- Select ---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label>Compartment</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <select class="form-control" id="Compartment" style="padding: 3px 12px;height:26px">
+                                        <option value="0" selected="selected">Please Select Compartment</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Rack</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <select class="form-control" id="Rack" style="padding: 3px 12px;height:26px">
+                                        <option value="0" selected="selected">Please Select Rack</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label>StorageArea</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <select class="form-control" id="StorageArea" style="padding: 3px 12px;height:26px">
+                                        <option value="0" selected="selected">Please Select StorageArea</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 form-group text-center">
+                                    <button type="button" id="btnAddTempProduct" class="btn bg-olive margin" value="Add" onclick="AddTempPmsProductReceiptData()">Add</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                @*<div class="col-sm-3 form-group text-center">
+                                </div>*@
+                                <div class="col-sm-12 form-group text-center">
+                                    <table id="tblStudyProductReceiptAdd" border="1" class="table table-bordered table-striped dataTable no-footer" style="width:80%; margin-left: 10%">
+                                            <thead>
+                                            <tr>
+                                                <td >Product Name</td>
+                                                <td >Batch/Lot/Lot No</td>
+                                                <td >Expiry Date</td>
+                                                <td >UOM</td>
+                                                <td >Qty</td>
+                                                <td class="hidebatchtype">Batch Type</td>
+                                                <td class="hideNoofBoxes">NoofBoxes</td>
+                                                <td class="hidenoofQty">NoofQty</td>
+                                                <td class="hideproductname">productname</td>
+                                                <td class="hideuomname">uomname</td>
+                                                <td class="hidecompartment">compartment</td>
+                                                <td class="hiderack">rack</td>
+                                                <td class="hidefreezer">StorageArea</td>
+                                                <td class="hidevWorkSpaceID">workspaceid</td>
+                                                <td class="hidevGRNO">grno</td>
+                                                <td class="hideStorageLocationNo">storagelocationo</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyStudyProductReceiptAdd">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 form-group text-center">
+                                    <button type="button" id="btnSavePmsProductReceipt" class="btn bg-olive margin" value="save">Save</button>
+                                    <button type="button" id="btnClearPmsProductReceipt" class="btn bg-olive margin" value="save" onclick="clearData()">Clear</button>
+                                    <button type="button" id="btnExitPmsProductReceipt" class="btn bg-olive margin" value="save">Exit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>   
+    @*<div class="modal fade" id="StorageLocationModel" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title modaltitle" id="title">Add Storage Location</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                    <form role="form" class="form-horizontal" method="POST" id="testForm">
+                        <div class="row" id="divlocationno">
+                            <div class="col-sm-3 form-group">
+                                <label>Location No</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("LocationNo", "", new { @class = "form-control", @placeholder = "Location No", required = "required", @style = " height:26px; " }) 
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Remarks</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("Remarks", "", new { @class = "form-control", @placeholder = "Remarks", required = "required", @style = " height:26px; " }) 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 form-group">
+                                <label>Location Name</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("StorageName", "", new { @class = "form-control", @placeholder = "Storage Name", required = "required", @style = " height:26px; " }) 
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Location Type</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <select class="form-control" id="ddlType" style="padding: 3px 12px;height:26px">
+                                    <option value="0">--- Select ---</option>
+                                    <option value="C">Central(C)</option>
+                                    <option value="D">Distribution Center(D)</option>
+                                    <option value="S">Site(S)</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Location ID</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("LocationID", "", new { @class = "form-control", @placeholder = "Location ID", required = "required", @style = " height:26px; " }) 
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Project No</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("ProjectNo", "", new { @class = "form-control", @placeholder = "Project No", required = "required", @style = " height:26px; " })
+                            </div>
+                             <div class="col-sm-3 form-group">
+                                <label>Address 1</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("Address1", "", new { @class = "form-control", @placeholder = "Address 1", required = "required", @style = " height:26px; " })
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Address 2</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("Address2", "", new { @class = "form-control", @placeholder = "Address 2", required = "required", @style = " height:26px; " })
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>City</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("City", "", new { @class = "form-control", @placeholder = "City", required = "required", @style = " height:26px; " })
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Country</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("Country", "", new { @class = "form-control", @placeholder = "Country", required = "required", @style = " height:26px; " })
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>PinZip Code</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("PINZIPCode", "", new { @class = "form-control", @placeholder = "PINZIP Code", required = "required", @style = " height:26px; " })
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Contact Person</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("ContactPerson", "", new { @class = "form-control", @placeholder = "Contact Person", required = "required", @style = " height:26px; " })
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Pharmacist</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("Pharmacist", "", new { @class = "form-control", @placeholder = "Pharmacist", required = "required", @style = " height:26px; " })
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Location Desc</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("LocationDesc", "", new { @class = "form-control", @placeholder = "Location Desc", required = "required", @style = " height:26px; " })
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Condition Cntrl</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label><input type="radio" name="optradio" checked="checked" id="strgConditionYes">Yes</label>
+                                <label><input type="radio" name="optradio" id="strgConditionNo">No</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Min Temp</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("MinTemp", "", new { @class = "form-control", @placeholder = "Min Temp", required = "required", @style = " height:26px; " })
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Max Temp</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("MaxTemp", "", new { @class = "form-control", @placeholder = "Max Temp", required = "required", @style = " height:26px; " })
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Min Humidity</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("MinHumidity", "", new { @class = "form-control", @placeholder = "Min Humidity", required = "required", @style = " height:26px; " })
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Max Humidity</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                @Html.TextBox("MaxHumidity", "", new { @class = "form-control", @placeholder = "Max Humidity", required = "required", @style = " height:26px; " })
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnaddPmsStorageLocation" class="btn bg-navy margin" value="save">Submit</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>*@
+    @*<div class="modal fade" id="AuditTrial" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title modaltitle">Audit Trail</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                        <div class="box-body">
+                            <table id="tblPmsStorageAuditTrial" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Location Name</th>
+                                        <th>Project No</th>
+                                        <th>Address 1</th>
+                                        <th>Location Desc</th>
+                                        <th>Modify On</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="TbodyStorageListAuditTrail">
+                                </tbody>
+                            </table>
+                        </div>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <script src="/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+    <script src="~/Scripts/PmsProductReceipt.js"></script>
+}

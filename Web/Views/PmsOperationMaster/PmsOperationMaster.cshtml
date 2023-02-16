@@ -1,0 +1,194 @@
+﻿@{
+    ViewBag.Title = "Operation Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .ui-tooltip {
+        display: none !important;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                Operation Master
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-tasks"></i>Master</a></li>
+                <li><a href="#">Operation Mater</a></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <span class="Inactive">Inactive Entries</span>
+                            <a id="btnAddOperation" data-toggle="modal" data-target="#OperationDetailsModel" data-options="splash-2 splash-ef-15"
+                               class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a pull-right"><i class="fa fa-plus"></i><span>Add</span></a>
+                        </div>
+                        <div class="box-body">
+                            <table id="tblOperationDetailsData" class="table table-striped table-bordered" cellspacing="0" cellpadding="0" border="0" width="100%"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal splash fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="OperationDetailsModel" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <span class="operation-mode" style="float: right" id="titleMode"></span>
+                        <h4 class="modal-title modaltitle operation-name text-left" id="title">Operation Master</h4>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <div class="mdfield" style="text-align: right">
+                        <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                    </div>
+                    <form name="form2" role="form" id="form2"></form>
+
+                    <form name="form1" role="form" id="form1" style="margin-top: 40px;">
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label>Operation Name: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtOpearationName" id="txtOpearationName" class="form-control"
+                                       placeholder="Operation Name Here..."
+                                       data-parsley-trigger="change"
+                                       maxlength="100" autocomplete="off">
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vOperationName" onclick="OperationFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="Operation Name"></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Operation Path: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtOperationPath" id="txtOperationPath" class="form-control"
+                                       placeholder="Operation Path Here..."
+                                       data-parsley-trigger="change"
+                                       maxlength="100" autocomplete="off">
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vOperationPath" onclick="OperationFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="Operation Path"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label>Parent Operation: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <select class="form-control" id="ddlParent" name="ddlParent" data-parsley-trigger="change" required></select>
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vOperationCode" onclick="OperationFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="Parent Operation Name"
+                                      masterfieldname="vOperationName" mastertablename="OperationMst"></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Sequence No: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="number" name="txtSequenceNo" id="txtSequenceNo" class="form-control"
+                                       placeholder="Sequence Number Here..."
+                                       data-parsley-trigger="change"
+                                       max="32767"
+                                       min="1">
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="iSeqNo" onclick="OperationFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="Sequence Number"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label>Operation Code: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtOpetationCode" id="txtOpetationCode" class="form-control"
+                                       placeholder="Operation Code Here..."
+                                       data-parsley-trigger="change"
+                                       maxlength="100" autocomplete="off">
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vOperationCode" onclick="OperationFieldWiseAuditTrail(this)"
+                                      data-toggle="modal" data-target="#divAuditTrial" titlename="Operation Code"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <div class="col-xs-12">
+                                    <button type="button" id="btnSaveOperationDetails" class="btn btn-success btn-ef btn-ef-3 btn-ef-3c" value="save" data-tooltip="tooltip" disabled="disabled"
+                                            title="Save">
+                                        <i class="fa fa-arrow-right"></i>Save
+                                    </button>
+                                    <button type="button" id="btnClearOperationDetails" value="Clear" class="btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" role="button" title="Clear">
+                                        <i class="fa fa-arrow-left"></i>Clear
+                                    </button>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer footer-bottom">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal splash fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="divAuditTrial" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title modaltitle text-center">Audit Trail</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body">
+                        <table id="tblOperationDetailsAuditTrial" class="table table-bordered table-striped"></table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/OperationMaster.js"></script>
+    <script>
+        $(window).load(function () {
+            $('#form1').parsley().subscribe('parsley:field:validate', function () {
+                if ($('#form1').parsley().isValid()) {
+                    $('#btnSaveOperationDetails').prop('disabled', false);
+                } else {
+                    $('#btnSaveOperationDetails').prop('disabled', true);
+                }
+            });
+
+            $('#form1Submit').on('click', function () {
+                $('#form1').submit();
+            });
+            $("a").mouseover(function () {
+                $('[rel=tooltip]').tooltip({ trigger: "hover" });
+            });
+
+        });
+
+    </script>
+}

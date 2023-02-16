@@ -1,0 +1,336 @@
+﻿@{
+    ViewBag.Title = "Storage Location";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{ 
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Storage Location</h1>
+
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-tasks"></i>Master</a></li>
+                <li><a href="#">Storage Location</a></li>
+
+            </ol>
+
+        </section>
+         
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                                <span><canvas id="myCanvas" width="12" height="12" class="highlight"></canvas></span>
+                                <span class="InActive">Inactive Entries</span>
+                            <div class="row">
+                                <button type="button" id="btnAddUser" class="btn bg-olive margin viewmode" data-toggle="modal" 
+                                    data-target="#StorageLocationModel" onclick="AddStorageLocation()" 
+                                    title="Add Storage Location" data-backdrop="false">+ Add Storage Location</button>
+                                @*<button type="button" id="btnInActiveLocation" class="btn bg-olive margin" data-toggle="modal" title="InActiveLocation" style="display: none">InActive Location</button>*@
+                            </div>
+                            <div class="row" style="display: none">
+                                <select class="form-control search-box" id="ddlLocationMst">
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            @*<div class="row" id="tblPmsStorageLocationtable">*@
+                            <table id="tblPmsStorageLocation" class="table table-bordered table-striped" cellspacing="1" width="100%">
+                            </table>
+                            @*</div>*@
+                            @*<div class="row" id="tblPmsStorageLocationInActivetable" style="display:none">
+                                <table id="tblPmsStorageLocationInActive" class="table table-bordered table-striped" cellspacing="1" width="100%">
+                                </table>
+                            </div>*@
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>   
+    <div class="modal fade" id="StorageLocationModel" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <span class="operation-mode" id="titleMode"></span>
+                        <h4 class="modal-title modaltitle operation-name" id="title">Storage Location</h4>
+                    </div>
+                    <div>
+                        <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                    <form role="form" class="form-horizontal" method="POST" id="testForm">
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Location Name *</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("StorageName", "", new { @class = "form-control EntryControl", @placeholder = "Location Name", @style = " height:26px; ", @autocomplete = "off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vStorageLocationName" data-backdrop="false" onclick="AuditTrail(this)" data-toggle="modal" data-target="#AuditTrial" titlename="Location Name"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Location Type *</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="ddlType" style="padding: 3px 12px; height: 26px">
+                                    <option value="0" selected="selected">Please Select Location Type</option>
+                                   @* <option value="C">Central(C)</option>
+                                    <option value="D">Distribution Center(D)</option>
+                                    <option value="S">Site(S)</option>*@
+                                    <option value="L">Locker</option>
+                                    <option value="R">Racks</option>
+                                    <option value="C">compactor</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_cStorageLocationType" data-backdrop="false" onclick="AuditTrail(this)" data-toggle="modal" data-target="#AuditTrial" titlename="Location Type"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Min Temp</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("MinTemp", "", new { @class = "form-control", @placeholder = "Min Temp", @style = " height:26px; ", @autocomplete = "off"})
+                                
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vStorageLocMinTemp" data-backdrop="false" onclick="AuditTrail(this)" data-toggle="modal" data-target="#AuditTrial" titlename="Min Temp"></span>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Max Temp</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("MaxTemp", "", new { @class = "form-control", @placeholder = "Max Temp", @style = " height:26px; ", @autocomplete = "off" })
+                                
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vStorageLocMaxTemp" data-backdrop="false" onclick="AuditTrail(this)" data-toggle="modal" data-target="#AuditTrial" titlename="Max Temp"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Min Humidity</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("MinHumidity", "", new { @class = "form-control", @placeholder = "Min Humidity", @style = " height:26px; ", @onkeypress = "restrictMinus(event);" , @onpaste="return false", @autocomplete = "off"})
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vStorageLocMinHunidity" onclick="AuditTrail(this)" data-toggle="modal" data-target="#AuditTrial" titlename="Min Humidity"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Max Humidity</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("MaxHumidity", "", new { @class = "form-control", @placeholder = "Max Humidity", @style = " height:26px; ",@onkeypress = "restrictMinus(event);" ,@onpaste="return false", @autocomplete = "off"})
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vStorageLocMaxHunidity" data-backdrop="false" onclick="AuditTrail(this)" data-toggle="modal" data-target="#AuditTrial" titlename="Max Humidity"></span>
+                            </div>
+                        </div>
+
+                        <div id="divlocationno">
+                            <div class="col-sm-4 form-group hide">
+                                <div class="col-sm-3 form-group">
+                                    <label>Location No</label>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    @Html.TextBox("LocationNo", "", new { @class = "form-control", @placeholder = "Location No", @style = " height:26px; ", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Remarks *</label>
+                                </div>
+                                <div class="col-sm-12 ">
+                                    @Html.TextArea("Remarks", "", new { @class = "form-control", @placeholder = "Remarks", @autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer footer-bottom">
+                    @*<button type="button" id="btnaddPmsStorageLocation" class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a " value="save" title="Save">Submit</button>
+                    <button type="button" id="btnClearPmsStorageLocation" class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Clear" title="Clear">Clear</button>
+                    <button type="button" id="btnExitPmsStorageLocation" class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a " value="Exit" title="Exit">Exit</button>*@
+
+                    <a data-toggle="modal" id="btnaddPmsStorageLocation" data-tooltip="tooltip" title="Save">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnPmsStorageLocation">Save</span></i>
+                     </a>
+
+                     <a data-toggle="modal" id="btnClearPmsStorageLocation" data-tooltip="tooltip" title="Clear" >
+                        <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                        <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                     </a>
+
+                     <a data-toggle="modal" id="btnExitPmsStorageLocation" data-tooltip="tooltip" title="Exit" >
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                        <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                     </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div id="loader" class="modal"></div>
+    </div>
+    
+    <div class="modal fade" id="AuditTrial" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title modaltitle text-center">Audit Trail</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                    <div class="box-body">
+                        <table id="tblPmsStorageAuditTrial" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+@*added by simki*@
+    <div class="modal fade" id="StorageLctnUserAccessRights" role="dialog">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center" id="UserRightsModalLbl">User Access Rights</h4>
+                    @*<button type="button" id="btnAddRights" class="btn bg-olive margin" data-toggle="modal">+ Add UserRights</button>*@
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-3 form-group">
+                            <h4 class="modal-title">Storage Location Name:</h4>
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <h5 class="modal-title" id="LblLocNo"></h5>
+                        </div>
+                        <div class="col-sm-6 form-group text-right">
+                            <button type="button" id="btnAddRights" class="btn bg-olive margin" data-toggle="modal" title="Add UserRights">+ Add UserRights</button>
+                        </div>
+                    </div>
+                    <div style="overflow: auto;">
+                        <table id="tblUserRights" style="width: 100%" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                </div>
+
+                <div style="visibility: hidden; /*margin-left: 5%*/" id="rightstable">
+                    <div class="col-sm-5 col-xs-12">
+                        <div class="col-sm-12 form-group ">
+                            <label>Select User :</label>
+                        </div>
+
+                        <div class="col-sm-12 form-group ">
+                            <select class="form-control" id="DDLUserList">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 col-xs-12">
+                        <div class="col-sm-12 form-group">
+                            <label>Access : </label>
+                        </div>
+                        <div class="col-sm-12 form-group">
+                            <label>
+                                <input type="checkbox" name="optradio" id="ReadAccess">
+                                Read &nbsp;</label>
+                            <label>
+                                <input type="checkbox" name="optradio2" id="WriteAccess">
+                                Write</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5 col-xs-12">
+                        <div class="col-sm-12 form-group">
+                            <label>InActiveDate : </label>
+                        </div>
+                        <div class="col-sm-12 form-group">
+                            @Html.TextBox("InActiveDate", "", new { @class = "form-control", @placeholder = "Inactive Date..", @style = " height:26px; " })
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="col-sm-12 text-center form-group">
+                            <input type="button" id="BtnSaveRights" class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Save" title="Save" data-tooltip="tooltip" />
+                            <input type="button" id="BtnCleaRights" class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a " value="Clear" title="Clear" data-tooltip="tooltip" />
+                            <input type="button" id="BtnCancel" class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Cancel" title="Cancel" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Remarks</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.TextArea("txtReason", "", new { @class = "form-control", @placeholder = "Remarks", @autocomplete = "off" })
+                </div>
+                <div class="modal-footer">
+                    <a data-toggle="modal" id="btnInActiveSave" data-tooltip="tooltip" title="Save">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave1">Save</span></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script> 
+
+    @*<script src="../Scripts/General.js"></script>*@    
+    
+    <script src="../Scripts/PmsStorageLocation.js"></script>    
+    
+}
+

@@ -1,0 +1,205 @@
+﻿@{
+    ViewBag.Title = "PmsScopeMaster";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .multiselect {
+        width: 295px;
+    }
+
+    #ddlScope {
+        margin-top: -40px;
+    }
+
+    .ui-tooltip {
+        display: none !important;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Scope Master
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-tasks"></i>Master</a></li>
+                <li><a href="#">Scope Mater</a></li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                        </div>
+                        <div class="box-body">
+                            <div class="row form-group">
+                                <div class="col-sm-2">
+                                    <label>Scope Name : *</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="txtScopeName" value="" />
+                                    <select id="ddlScope" class="form-control" style="visibility: hidden"></select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vScopeName" onclick="AuditTrail(this)" data-toggle="modal" data-target="#SpanAuditTrial" titlename="Scope Name"></span>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-2">
+                                    <label>Scope Values : </label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select id="ddlProjectMst" class="form-control" multiple="multiple"></select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vScopeValuesText" onclick="AuditTrail(this)" data-toggle="modal" data-target="#SpanAuditTrial" titlename="Scope Value"></span>
+                                </div>
+                            </div>
+                            <div class="row form-group col-md-11" style="float: right;">
+                                <a id="BtnSave" data-options="splash-2 splash-ef-15"
+                                    class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a "><i class="fa fa-plus"></i><span>Save</span></a>
+                                @*&nbsp;&nbsp;*@
+
+                                <a id="BtnEdit" data-options="splash-2 splash-ef-15"
+                                    class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a "><i class="fa fa-plus"></i><span>Edit</span></a>                          
+
+                                <a id="BtnExit" data-options="splash-2 splash-ef-15"
+                                    class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a"><i class="fa fa-plus"></i><span>Exit</span></a>
+                                
+                                <a id="BtnClear" data-options="splash-2 splash-ef-15"
+                                    class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a "><i class="fa fa-plus"></i><span>Clear</span></a>
+                                &nbsp;&nbsp;
+                            </div>
+
+                            <table id="tblScopeData" class="table table-bordered table-striped dataTable">
+                            </table>
+                            <div class="row" style="display: none" id="divRemarkScope">
+                                <div class="col-sm-2 .col-md-offset-1 form-group"></div>
+                                <div class="col-md-3 .col-md-offset-3 form-group text-right">
+                                    <label>Remarks: *</label>
+                                </div>
+                                <div class="col-md-3 .col-md-offset-3 form-group ">
+                                    @Html.TextArea("txtRemarks", "", new { @class = "form-control", @placeholder = "Remarks" })
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+
+                            <div class="modal fade" id="ScopeInctive" role="dialog">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="Close" data-dismiss="modal" id="btnInActiveClose">&times;</button>
+                                            <h4 class="modal-title">Remarks</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            @Html.TextArea("txtReason", "", new { @class = "form-control", @placeholder = "Remarks", @autocomplete = "off" })
+                                        </div>
+                                        <div class="modal-footer">
+                                            @*<button type="button" class="btn bg-olive" id="btnInActiveSave">Save</button>
+                                            <button type="button" class="btn bg-olive" @*data-dismiss="modal" id="btnInActiveClose">Close</button>*@
+
+                                            <a data-toggle="modal" id="btnInActiveSave" data-tooltip="tooltip" title="Save">
+                                                <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave1">Save</span></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*<div class="modal fade" id="ScopeAudit" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div>
+                                                <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                                                <span class="operation-mode" id="titleMode">Mode:-Add</span>
+                                                <h4 class="modal-title modaltitle operation-name" id="title">Scope Master</h4>
+
+                                            </div>
+                                            <div>
+                                                <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- form start -->
+                                            <form role="form" class="form-horizontal" method="POST" id="testForm">
+
+                                                <div class="col-sm-4 form-group">
+                                                    <div class="col-sm-12">
+                                                        <label>Scope Name *</label>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" placeholder="Scope Name" class="form-control" id="txtScopeAudit" autocomplete="off">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vOperationName" onclick="AuditTrail(this)" data-toggle="modal" data-target="#SpanAuditTrial" titlename="Scope Name"></span>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-4 form-group">
+                                                    <div class="col-sm-12">
+                                                        <label>Scope Values *</label>
+                                                    </div>
+                                                    
+                                                    <div class="col-sm-10">
+                                                        <select class="form-control" id="DDLScopeAudit">
+                                                            <option value="0" selected="selected">Please Scope Name</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vReasonDesc" onclick="AuditTrail(this)" data-toggle="modal" data-target="#SpanAuditTrial" titlename="Scope Value"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                </div>
+                                            </form>
+                                            <!-- /.box-body -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="loader" class="modal"></div>
+                            </div>*@
+
+                            <div class="modal fade" id="SpanAuditTrial" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title modaltitle text-center">Audit Trail</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- form start -->
+                                            <div class="box-body">
+                                                <table id="tblScopeAuditTrial" class="table table-bordered table-striped">
+                                                </table>
+                                            </div>
+                                            <!-- /.box-body -->
+                                        </div>
+                                        <div class="modal-footer">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="~/Scripts/PmsScopeMaster.js"></script>
+
+}

@@ -1,0 +1,202 @@
+﻿@*@model IEnumerable<PMSDemo.Models.Mdl_PmsPeriod>*@
+@model Pharmacy.Models.Mdl_PmsPeriod
+
+@{
+    ViewBag.Title = "PmsPeriodlist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("AddPmsPeriod", "PmsPeriod", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>PMS Period List
+       
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+                <li><a href="#">Tables</a></li>
+                <li class="active">Data tables</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">PMS Period List</h3>
+                            <button type="button" id="btnAddUser" class="btn bg-olive margin" data-toggle="modal" data-target="#myModal">+ Add Pms Period</button>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>SrNo.</th>
+                                        <th>PmsPeriodName</th>
+                                        <th>PeriodStartDate</th>
+                                        <th>PeriodEndDate</th>
+                                        <th>PeriodEvaluationStartDate</th>
+                                        <th>PeriodEvaluationEndDate</th>
+                                        <th>ModifyOn</th>
+                                        <th>ModifyBy</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.PmsPeriodlist)
+                                    {
+                                        <tr>
+                                            <td></td>
+                                            <td>@item.vPmsPeriodName</td>
+                                            <td>@item.dPeriodStartDate.ToShortDateString()</td>
+                                            <td>@item.dPeriodEndDate.ToShortDateString()</td>
+                                            <td>@item.dPeriodEvaluationStartDate.ToShortDateString()</td>
+                                            <td>@item.dPeriodEvaluationEndDate.ToShortDateString()</td>
+                                            <td>@item.dModifyOn.ToShortDateString()</td>
+                                            <td>@item.vModifyByname</td>
+                                            <td><a href="/PmsPeriod/Status_User?Id=@item.nPmsPeriodId">Active</a></td>
+                                            <td><a href="/PmsPeriod/PmsPeriod?Id=@item.nPmsPeriodId" onclick="return confirm('Are you sure you want to delete record?');"><i class="fa fa-fw fa-trash-o"></i></a>
+                                                <a data-toggle="modal" data-target="#myModal" attrid="@item.nPmsPeriodId" class="btnedit" style="cursor:pointer;"><i class="fa fa-fw fa-edit"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>SrNo.</th>
+                                        <th>PmsPeriodName</th>
+                                        <th>PeriodStartDate</th>
+                                        <th>PeriodEndDate</th>
+                                        <th>PeriodEvaluationStartDate</th>
+                                        <th>PeriodEvaluationEndDate</th>
+                                        <th>ModifyOn</th>
+                                        <th>ModifyBy</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+  
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title modaltitle">Add Pms Period</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                    <form role="form" class="form-horizontal" method="POST" id="testForm" action="PmsPeriod/AddPmsPeriod">
+                         <div class="form-group" style="display:none;">
+                            <label for="exampleInputEmail1">PeriodName</label>
+
+                            @Html.TextBoxFor(model => model.nPmsPeriodId, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">PeriodName</label>
+
+                            @Html.TextBoxFor(model => model.vPmsPeriodName, new { @class = "form-control", required = "required" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">PeriodStartDate</label>
+
+                            @Html.TextBoxFor(model => model.dPeriodStartDate, new { @class = "form-control datepicker", required = "required" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">PeriodEndDate</label>
+
+                            @Html.TextBoxFor(model => model.dPeriodEndDate, new { @class = "form-control datepicker", required = "required" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">PeriodEvaluationStartDate</label>
+
+                            @Html.TextBoxFor(model => model.dPeriodEvaluationStartDate, new { @class = "form-control datepicker", required = "required" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">PeriodEvaluationEndDate</label>
+
+                            @Html.TextBoxFor(model => model.dPeriodEvaluationEndDate, new { @class = "form-control datepicker", required = "required" })
+                        </div>
+                        @*<div class="form-group">
+                            <label for="exampleInputRole">Role</label>
+                            @Html.DropDownListFor(model => model.role, new SelectList(
+                  new List<Object>{ 
+                       new { value = "SuperAdmin" , text = "SuperAdmin"  },
+                       new { value = "Admin" , text = "Admin" }, 
+                       new { value = "User" , text = "User"} }, "value", "text", 2), new { @class = "form-control select2 select2-hidden-accessible" })
+
+                        </div>
+                        <div class="form-group">
+                            <label for="examplefileupload">Image Upload</label>
+                           
+                              @Html.TextBoxFor(m => m.Image_file, new { type = "file" })
+                            
+                        </div>*@
+                    </form>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="submit" class="btn bg-navy margin">Submit</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <script src="/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $('.btnedit').on('click', function () {
+                $.ajax({
+                    dataType: "json",
+                    url: '@Url.Action("Edit_PmsPeriod", "PmsPeriod")',
+                    data: { "Id": $(this).attr("attrid") },
+                    success: function (result) {
+                        var vPmsPeriodName = result.vPmsPeriodName
+                        var nPmsPeriodId = result.nPmsPeriodId
+                        var dPeriodStartDate = result.dPeriodStartDate
+                        var dPeriodEndDate = result.dPeriodEndDate
+                        var dPeriodEvaluationStartDate = result.dPeriodEvaluationStartDate
+                        var dPeriodEvaluationEndDate = result.dPeriodEvaluationEndDate
+                        $("#vPmsPeriodName").val(vPmsPeriodName);
+                        $("#nPmsPeriodId").val(nPmsPeriodId);
+                        $("#dPeriodStartDate").val($.datepicker.formatDate('dd/mm/yy', new Date(parseInt(dPeriodStartDate.substr(6)))));
+                        $("#dPeriodEndDate").val($.datepicker.formatDate('dd/mm/yy', new Date(parseInt(dPeriodEndDate.substr(6)))));
+                        $("#dPeriodEvaluationStartDate").val($.datepicker.formatDate('dd/mm/yy', new Date(parseInt(dPeriodEvaluationStartDate.substr(6)))));
+                        $("#dPeriodEvaluationEndDate").val($.datepicker.formatDate('dd/mm/yy', new Date(parseInt(dPeriodEvaluationEndDate.substr(6)))));
+                        $(".modaltitle").text("Update PmsPeriod");
+                        $('form').attr('action', '/PmsPeriod/update_Pmsperiod')
+                        //$("#Id").attr("readonly", true)
+                    }
+                });
+
+
+            })
+            $('.datepicker').datepicker({ format: 'dd/mm/yyyy', autoclose: true });
+            $("#myModal input").val("");
+        });
+
+    </script> 
+    
+   
+}
+
+

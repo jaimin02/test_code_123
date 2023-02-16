@@ -1,0 +1,386 @@
+﻿@{
+    ViewBag.Title = "Code Breaking / Unblind Process";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Code Breaking / Unblind Process</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-medkit"></i>Kit</a></li>
+                <li><a href="#">Code Breaking / Unblind Process</a></li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <span>
+                                        <canvas id="myCanvas" width="12" height="12" class="hightlightUnblindedKit"></canvas>
+                                    </span>
+                                    <span class="InActive">Indicate Unblinded Kit</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        <h3 class="box-title">Project No</h3>
+                                    </div>
+                                    <div class="col-lg-4 col-md-10 col-sm-10 col-xs-10">
+                                        <input type="text" id="txtProjectNodashboard" placeholder="Project No.." data-provide="typeahead" class="form-control" />
+                                    </div>
+                                    <div class="col-lg-4 col-lg-offset-0 col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-10 resizepd btn-group" >
+                                        <button type="button" class="btn bg-olive dropbtn dropdown-toggle btn-rounded  btn-ef btn btn-primary" id="divexport"
+                                            data-toggle="dropdown" aria-expanded="false" style="border-radius: 4px;display:none">
+                                            Export <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="../PmsCodeUnblindProcess/ExportToExcel"><i class="fa fa-file-excel-o"></i>Excel </a></li>
+                                            <li><a href="../PmsCodeUnblindProcess/ExportToPDF"><i class="fa fa-file-pdf-o"></i>PDF</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box-body" id="divCodeUnblindProcessData" style="display:none">
+                            <table id="tblPmsCodeUnblindProcessData" class="table table-bordered table-striped" cellspacing="1" width="100%">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="ModalCodeUnblindProcess" role="dialog">
+            <div class="modal-dialog ">
+                <div class="modal-content modal-content-AlertPromt">
+                    <div class="modal-header">
+                        <div class="codeunblind">
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name text-center" id="title">Code Unblinding Process</h4>
+                            	@*<ul class="breadcrumb1">
+    		<li class="completed"><a href="javascript:void(0);">about</a></li>
+			<li class="active"><a href="javascript:void(0);">business</a></li>
+			<li><a href="javascript:void(0);">gallery</a></li>
+		</ul>*@
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Project *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Project No" class="form-control" id="txtProjectNo" style="height: 26px" disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Select Visit *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlVisit" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select Visit</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Subject ID*</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Subject ID" class="form-control" id="txtSubjectID" style="height: 26px" disabled="disabled">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnSavePmsProceed" data-tooltip="tooltip" title="Proceed">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnCodeUnBlindProceed">Proceed</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnExitPmsStudySetUp" data-tooltip="tooltip" title="Exit">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="loader" class="modal"></div> 
+        </div>
+
+        <div class="modal fade" id="ModalCodeUnblindProcessConfirm" role="dialog">
+            <div class="modal-dialog ">
+                <div class="modal-content modal-content-AlertPromt">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name text-center">Code Unblinding Process</h4>
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Randomization No *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Project No" class="form-control" id="txtRandomizationNo" style="height: 26px" disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Kit/Product No *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Project No" class="form-control" id="txtKitNo" style="height: 26px" disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Remarks *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextArea("txtRemark", "", new { @class = "form-control", @placeholder = "Remarks", @autocomplete = "off",@maxlength="500" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnPMSCodeUnblindOK" data-tooltip="tooltip" title="Save">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnOK">OK</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnPMSCodeUnblindExit" data-tooltip="tooltip" title="Exit" data-dismiss="modal">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="loader1" class="modal"></div> 
+        </div>
+
+        <div class="modal fade" id="ModalESignAuth" role="dialog">
+            <div class="modal-dialog" style="width:35%;margin:30px auto">
+                <div class="modal-content modal-content-AlertPromt">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal" id="btnCloseESign">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name" style="text-align:center" id="titleESign"></h4>
+                        </div>
+                        <div>
+                            @*<h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>*@
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="ESignData">
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-4">
+                                        <label>User</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="txtUserName" style="height: 26px" disabled="disabled">
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-4">
+                                        <label>Date & Time</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="txtDateTime" style="height: 26px" disabled="disabled">
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-4">
+                                        <label>Password *</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control" id="txtPassword" style="height: 26px" oncopy="return false" onpaste="return false" placeholder="Password" required="required">
+                                        @*<input class="login__input pass" id="txtpassword" name="vLoginPass" oncopy="return false" onpaste="return false" placeholder="Password" required="required" type="password">*@
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <div class="col-sm-12" style="text-align:center">
+                                        <label>I hereby confirm signing of this record electronically. </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div id="CodeUnblindData" style="display:none">
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <div class="col-sm-12" style="text-align:center">
+                                        <label>
+                                            You Have Successfully Completed Unblind Process !
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-4">
+                                        <label>Product Type</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="txtProductType" style="height: 26px" disabled="disabled">
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-4">
+                                        <label>Drug Name</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="txtDrugName" style="height: 26px" disabled="disabled">
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-4">
+                                        <label>Batch/Lot No</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="txtBatchLotNo" style="height: 26px" disabled="disabled">
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
+
+                    <div class="modal-footer footer-bottom">
+                    <div class="row">
+                        <a data-toggle="modal" id="btnESingAuthOK" data-tooltip="tooltip" title="Save">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnESignAuthOK">OK</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnESingAuthExit" data-tooltip="tooltip" title="Exit" data-dismiss="modal">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="CodeUnblindDetails" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="Close" data-dismiss="modal" aria-hidden="true" id="btnClose2" title="Close">×</button>
+                        <h4 class="modal-title text-center" id="myModalLabel2">Unblinded Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div style="overflow: auto;">
+                            <table id="tblCodeUnblindDetail" class="table table-bordered dataTable no-footer dataTable thead tr td" style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Kit/Product No</th>
+                                        <th>Project No</th>
+                                        <th>Last Dispense Visit</th>
+                                        <th>Unblinded Visit</th>
+                                        <th>Unblinded By</th>
+                                        <th>Unblinded Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyCodeUnblindDetail">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="CodeUnblindProductDetail" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal" aria-hidden="true" title="Close" onclick="UpdateKitDispensingDtl();">×</button>
+                    <h4 class="modal-title text-center">You Have Successfully Completed Unblind Process !</h4>
+                </div>
+                <div class="modal-body">
+                        
+
+
+                    <div style="overflow: auto;">
+                        <table id="tblCodeUnblindProductDetail" border="1" class="table table-bordered dataTable no-footer dataTable thead tr td" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Product Type</th>
+                                    <th>Product Name</th>
+                                    <th>Batch/Lot/Lot No</th>
+                                    <th>Doses</th>
+                                    <th>Randomization No</th>
+                                    <th>Randomization Type</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyCodeUnblindProductDetail"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer footer-bottom">
+                    <div class="row">
+                        <a data-toggle="modal" id="btnESingAuthClose" data-tooltip="tooltip" title="Close" style="display:block" onclick="UpdateKitDispensingDtl();">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Close</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    </div>
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsCodeUnblindProcess.js"></script>
+    <input type="hidden" id="hdnDispenseType" />
+}

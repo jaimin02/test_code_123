@@ -1,0 +1,744 @@
+﻿@{
+    ViewBag.Title = "PmsRandomization";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Randomization/Dispensing Visit</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-medkit"></i>Form</a></li>
+                <li><a href="#">Randomization/Dispensing Visit</a></li>
+            </ol>
+        </section>
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            .clsmarginleft {
+                margin-left: -20px;
+            }
+
+            .nopadding {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            /*FieldSet*/
+            fieldset {
+                border: 1px solid #ddd !important;
+                margin: 0;
+                min-width: 0;
+                padding: 10px;
+                position: relative;
+                border-radius: 4px;
+                background-color: #f5f5f5;
+                padding-left: 10px !important;
+            }
+
+            legend {
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 0px;
+                width: 35%;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 5px 5px 5px 10px;
+                background-color: #ffffff;
+            }
+            /*--------------*/
+
+            /*HR Tag*/
+            div.hr-or {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                border: 0;
+                border-top: 1px solid #ddd;
+                text-align: center;
+                height: 0px;
+                line-height: 0px;
+            }
+
+                div.hr-or:before {
+                    content: 'OR';
+                    background-color: #f5f5f5;
+                }
+
+            div.hr {
+                margin-top: 0px;
+                margin-bottom: 20px;
+                border: 0;
+                border-top: 1px solid #ddd;
+                text-align: center;
+                height: 0px;
+                line-height: 0px;
+            }
+
+            .hr-title {
+                background-color: #f5f5f5;
+            }
+
+            .fade.in {
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+            /*HR Tag*/
+        </style>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-body">
+
+
+                            <fieldset id="fdSubjectVisit">
+                                @*<legend>Subject Visit</legend>*@
+                                <div class="box-header">
+                                    <h5><span style="font-size: 12px; float: right">Fields with * are Mandatory</span></h5>
+                                </div>
+
+                                <div class="col-sm-3 form-group">
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <fieldset>
+                                        <div class="row form-group">
+                                            <div class="col-sm-4">
+                                                <label>Site No *</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <input type="text" placeholder="Site No Here.." style="height: 26px;" class="form-control" id="ddlProjectNo" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <br />
+
+                                    <div id="fdSubjectDetail">
+                                        <fieldset style="background-color:lightgrey">
+                                            @*<legend></legend>*@
+                                            <div class="row form-group">
+                                                <div class="col-sm-4">
+                                                    <label>Initials *</label>
+                                                </div>
+                                                <div class="col-sm-8" style="margin-bottom: 13px;">
+                                                    @Html.TextBox("Initials", "", new { @class = "form-control EntryControl", @placeholder = "Initials", @id = "txtInitials", required = "required", @style = "height:26px; text-transform:uppercase;", @maxlength = 3, @autocomplete = "off", @onkeypress = "return onlyAlphabate(event)", onpaste = "return false" })
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col-sm-4">
+                                                    <label>Date of Birth *</label>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <select class="form-control" id="ddlDate" style="height: 26px; padding: 3px 12px;">
+                                                        <option value="0" selected="selected">DD</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2 nopadding">
+                                                    <select class="form-control" id="ddlMonth" style="height: 26px; padding: 3px 12px;">
+                                                        <option value="0" selected="selected">MMM</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <select class="form-control" id="ddlYear" style="height: 26px; padding: 3px 12px;">
+                                                        <option value="0" selected="selected">YYYY</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                        </fieldset>
+
+                                        <br />
+                                        <div class="row form-group" id="divHr">
+                                            <div class="col-sm-12">
+                                                @*<div class='hr'>
+                                                        <span class='hr-title'>OR</span>
+                                                    </div>*@
+                                                <div class='hr-or'></div>
+                                            </div>
+                                        </div>
+
+                                        <fieldset style="background-color:lightgrey" id="divSubjectNo">
+                                            <div class="row form-group">
+                                                <div class="col-sm-4">
+                                                    <label>Patient Number *</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBox("SubjectNo", "", new { @class = "form-control EntryControl", @placeholder = "Patient Number", @id = "txtSubjectNo", @autocomplete = "off", required = "required", @style = " height:26px; " })
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset style="background-color:lightgrey;display: none;" id="dvSubjectList">
+                                            <div class="row form-group">
+                                                <div class="col-sm-4">
+                                                    <label>Patient Number *</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control" id="ddlSubjectNo" style="height: 26px; padding: 3px 12px;">
+                                                        <option value="0" selected="selected">0</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <br />
+                                        <div class="col-sm-12" align="center" id="btnListGO">
+                                            <a data-toggle="modal" id="btnGo" data-tooltip="tooltip" title="Save">
+                                                <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnGo">GO</span>
+                                                </i>
+                                            </a>
+
+                                            <a data-toggle="modal" id="btnGoClear" data-tooltip="tooltip" title="Clear">
+                                                <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-refresh"></i><span>Clear</span>
+                                                </i>
+                                            </a>
+
+                                            <a data-toggle="modal" id="btnGoExit" data-tooltip="tooltip" title="Exit">
+                                                <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span>
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <fieldset id="fdEnrollment" style="display: none;">
+
+                                        <div class="row form-group" id="divPatientRegistrationDate">  
+
+                                            <div class="col-sm-6">
+                                                <label>Patient Registration Date</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                @Html.TextBox("txtPatientRegistrationDate", "", new { @class = "form-control", @placeholder = "Patient Registration Date", @id = "txtPatientRegistrationDate", @style = " height:26px; ", @autocomplete = "off", @onpaste = "return false", @onkeydown = "return false" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group" id="divScreeningDate">
+                                            <div class="col-sm-6">
+                                                <label>Patient ID</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                @Html.TextBox("txtPatientId", "", new { @class = "form-control", @placeholder = "Patient ID", @id = "txtPatientId", @style = " height:26px; ", @autocomplete = "off" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-sm-6">
+                                                <label>Treatment Arm</label>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <select class="form-control headercontrol" id="ddlTreatmentArm" style="padding: 3px 12px; height: 26px">
+                                                    <option selected="selected" value="0">Please Select Treatment Arm</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-sm-6">
+                                                <label>Product/Kit</label>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <select class="form-control headercontrol" id="ddlStudyProduct" style="padding: 3px 12px; height: 26px">
+                                                    <option selected="selected" value="0">Please Select Product/Kit</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group" id="divProductQuantity" style="display:none">
+                                            <div class="col-sm-6">
+                                                <label>Quantity</label>
+                                            </div>
+                                            <div class="col-sm-5">
+                                             @Html.TextBox("txtProductQuantity", "", new { @class = "form-control", @placeholder = "Product Quantity", @id = "txtProductQuantity", @style = " height:26px; ", @autocomplete = "off" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group" id="divAvailableKit" style="display:none">
+                                            <div class="col-sm-6">
+                                                <label>Kit</label>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <select class="form-control headercontrol" id="ddlAvailableKit" style="padding: 3px 12px; height: 26px">
+                                                    <option selected="selected" value="0">Please Select Kit</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12" align="center" id="btnListSaveAndContinue">
+                                            <a data-toggle="modal" id="btnSaveAndContinue" data-tooltip="tooltip" title="SaveAndContinue">
+                                                <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSaveAndContinue">Submit</span>
+                                                </i>
+                                            </a>
+
+
+                                            <a data-toggle="modal" id="btnEnrollmentClear" data-tooltip="tooltip" title="Clear">
+                                                <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-refresh"></i><span>Clear</span>
+                                                </i>
+                                            </a>
+
+                                            <a data-toggle="modal" id="btnEnrollmentExit" data-tooltip="tooltip" title="Exit">
+                                                <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span>
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </fieldset>
+
+                                    <br />
+                                    <fieldset id="fdRandomization" style="display: none;">
+                                        <legend id="legRandomization">Randomization Details</legend>
+
+                                        <div class="row form-group" style="display: none;">
+                                            <div class="col-sm-6">
+                                                <label>Randomization No</label>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                @Html.TextBox("txtRandomizationNo", "", new { @class = "form-control", @placeholder = "Randomization No", @id = "txtRandomizationNo", @style = " height:26px; ", @autocomplete = "off", @required = "required", disabled = "true" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-sm-6">
+                                                <label>Visit No.</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                @Html.TextBox("txtVisitName", "", new { @class = "form-control", @placeholder = "Visit No.", @id = "txtVisitName", @style = " height:26px; ", @autocomplete = "off", @required = "required", disabled = "true" })
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group" id="divRandomizationDate">
+                                            <div class="col-sm-6">
+                                                <label id="lblRandomizationDateText">Randomization Date</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                @Html.TextBox("txtRandomizationDate", "", new { @class = "form-control", @placeholder = "Randomization Date", @id = "txtRandomizationDate", @style = " height:26px; ", @autocomplete = "off", @onpaste = "return false", @onkeydown = "return false", disabled = "true" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12" align="center">
+                                            <a data-toggle="modal" id="btnContinue" data-tooltip="tooltip" title="Continue">
+                                                <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-floppy-saved"></i><span>Continue</span>
+                                                </i>
+                                            </a>
+
+                                            <a data-toggle="modal" id="btnEditVisit" data-tooltip="tooltip" title="Edit Visit" class="cls-hidden" onclick="GetPriviousVisitData(); return false;">
+                                                <i class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a bg-olive">
+                                                    <i class="glyphicon glyphicon-edit"></i><span id="spanEdit">Edit Visit</span>
+                                                </i>
+                                            </a>
+
+                                            <a data-toggle="modal" id="btnCancelVisit" data-tooltip="tooltip" title="Cancel Visit" class="cls-hidden" onclick="ShowRemarks();">
+                                                <i class="btn btn-tumblr btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-repeat"></i><span id="spanCancel">Cancel Visit</span>
+                                                </i>
+                                            </a>
+
+                                            @*<a data-toggle="modal" id="btnViewAuditTrail" data-tooltip="tooltip" title="Audit" class="viewmode cls-hidden cls-hidden-primary">*@
+                                            <a data-toggle="modal" id="btnViewAuditTrail" data-tooltip="tooltip" title="Audit" class="viewmode">
+                                                <i class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="fa fa-eye"></i><span>Audit</span>
+                                                </i>
+                                            </a>
+
+                                            <a data-toggle="modal" id="btnSubmitClear" data-tooltip="tooltip" title="Clear">
+                                                <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-refresh"></i><span>Clear</span>
+                                                </i>
+                                            </a>
+
+                                            <a data-toggle="modal" id="btnSubmitExit" data-tooltip="tooltip" title="Exit">
+                                                <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                                    <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span>
+                                                </i>
+                                            </a>
+                                        </div>
+
+
+                                    </fieldset>
+
+                                   
+                                </div>
+
+                                <div class="col-sm-3 form-group">
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="box-body">
+                            <table id="tblPmsKitDispensing" class="table table-bordered table-striped"></table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal fade" id="divConfirm" role="dialog">
+        <div class="modal-dialog  modal-sm" style="width: 36%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title modaltitle text-center " id="titleKitConfirm">Please confirm the entered details are correct?</h4>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label>Site No</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="txtConSiteNo" style="height: 26px" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label>Patient Number</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="txtConSubjectNo" style="height: 26px" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label>Visit No</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="txtConVisitNo" style="height: 26px" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label id="lblConVisitDate">Visit Date</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="txtConVisitDate" style="height: 26px" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label>Patient Registration Date</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="ConfirmtxtPatientRegistrationDate" style="height: 26px" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label>Patient ID</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="ConfirmtxtPatientId" style="height: 26px" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label>Treatment Arm</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="ConfirmtxtTreatmentArm" style="height: 26px" disabled="disabled">
+                                </div>
+                            </div>
+
+                            
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label>Product/Kit</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <textarea name="comment" class="form-control" id="ConfirmtxtProductKit" style="height:auto" disabled="disabled"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="row form-group" id="dvConfirmtxtProductQuantity">
+                                <div class="col-sm-6">
+                                    <label>Quantity</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="ConfirmtxtProductQuantity" style="height: 26px" disabled="disabled">
+                                </div>
+                            </div>
+
+
+                            <div class="row form-group" id="dvConfirmtxtAvailableKit">
+                                <div class="col-sm-6">
+                                    <label>Kit</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="ConfirmtxtAvailableKit" style="height: 26px" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row" style="text-align: center">
+                        <a data-toggle="modal" id="btnSubmit" data-tooltip="tooltip" title="Confirm">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSubmit">Confirm</span>
+                            </i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnConfirmCancel" data-tooltip="tooltip" title="Close" data-dismiss="modal">
+                            @*data-dismiss="modal"*@
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Cancel</span>
+                            </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="tblViewKit" role="dialog">
+        <div class="modal-dialog  modal-sm" style="width: 43%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="Close" data-dismiss="modal" id="btnClosePoppupWindow">&times;</button>
+                        <span class="operation-mode" id="titleModeKit"></span>
+                        <h4 class="modal-title modaltitle text-center " id="titleKit">Kit Details</h4>
+                    </div>
+                </div>
+                <div class="box-body">
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label id="lblDetails"></label>
+                        </div>
+                        <div class="col-sm-12 form-group">
+                            <table id="tblViewKitDtl" class="table table-bordered table-striped"></table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-3 text-right">
+                                <label>User&nbsp;</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="txtUserName" style="height: 26px" disabled="disabled">
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="display: none">
+                        <div class="col-sm-12 form-group">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-4 text-right">
+                                <label>Date & Time&nbsp;</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="txtDateTime" style="height: 26px" disabled="disabled">
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-3 text-right">
+                                <label>Password*</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" id="txtPassword" style="height: 26px" oncopy="return false" onpaste="return false" placeholder="Password" required="required">
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <div class="col-sm-12" style="text-align: center">
+                                <label>I hereby confirm signing of this record electronically. </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="row" style="text-align: center">
+                        <a data-toggle="modal" id="btnESingAuthOK" data-tooltip="tooltip" title="Save">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnKitDetailsOK">OK</span>
+                            </i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnCancel" data-tooltip="tooltip" title="Close" data-dismiss="modal">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Close</span>
+                            </i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnESingAuthExit" data-tooltip="tooltip" title="Exit" onclick="ConfirmAlertBox(ModuleName);" style="display: none;">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span>
+                            </i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="divResponse" role="dialog">
+        <div class="modal-dialog  modal-sm" style="width: 43%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <span class="operation-mode" id="titleModeKit"></span>
+                        <h4 class="modal-title modaltitle text-center " id="titleKit">Successful Response</h4>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label id="lblResponseTitle" style="display: none;">
+                                Patient Screening Successful
+                            </label>
+                        </div>
+                        <div class="col-sm-12 form-group">
+                            <table id="tblResponseDtl" class="table table-bordered table-striped" border="1"></table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row" style="text-align: center">
+                        <a data-toggle="modal" id="btnResponsePrint" data-tooltip="tooltip" title="Print">
+                            <i class="btn bg-olive btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-print"></i><span id="spnPrint">Print</span>
+                            </i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnResponseCancel" data-tooltip="tooltip" title="Close" data-dismiss="modal">
+                            @*data-dismiss="modal"*@
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Close</span>
+                            </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="modal fade" id="divtblAudit" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="Close btnCloseScreeningAudit" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title modaltitle text-center">Audit Trail</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- form start -->
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @*<div class="col-sm-1"></div>*@
+                                    <div class="col-sm-1"><label>Site No</label></div>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control" id="txtAuditSiteNo" style="height: 26px" disabled="disabled">
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-2" style="padding-left: 40px;"><label>Patient Number</label></div>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control" id="txtAuditPatientNumber" style="height: 26px" disabled="disabled">
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-1">
+                                        <button type="button" class="btn bg-olive dropbtn dropdown-toggle btn-rounded  btn-ef btn btn-primary" id="divexport"
+                                                data-toggle="dropdown" aria-expanded="false" style="border-radius: 4px;">
+                                            Export <span class="caret"></span>
+                                        </button>
+                                        <ul id="ulCT" class="dropdown-menu" role="menu">
+                                            <li><a onclick="ExportToExcelPdf('Excel');"><i class="fa fa-file-excel-o"></i>Excel</a></li>
+                                            <li><a onclick="ExportToExcelPdf('PDF');"><i class="fa fa-file-pdf-o"></i>PDF</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="tblAuditTrial" class="table table-bordered table-striped"></table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="divRemarks" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal" id="btnRemarksClose">&times;</button>
+                    <h4 class="modal-title">Reason For Cancel Visit</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.TextArea("txtRemarks", "", new { @class = "form-control", @placeholder = "Reason For Cancel Visit", required = "required", @autocomplete = "off" })
+                </div>
+                <div class="modal-footer">
+                    <a data-toggle="modal" id="btnRemarksSave" data-tooltip="tooltip" title="Save">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave1">Save</span>
+                        </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="divRemarksForContinueVisit" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal" id="btnRemarksContinueVisitClose">&times;</button>
+                    <h4 class="modal-title">Reason To Continue Visit</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.TextArea("txtContinueVisitRemarks", "", new { @class = "form-control", @placeholder = "Reason To Continue Visit", required = "required", @autocomplete = "off" })
+                </div>
+                <div class="modal-footer">
+                    <a data-toggle="modal" id="btnRemarksContinueVisitSave" data-tooltip="tooltip" title="Save">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave2">Save</span>
+                        </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade AlertPopup" id="AlertContinuePopup" role="dialog"></div>
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    <div class="modal fade AlertMessagePopup" id="AlertMessagePopup" role="dialog"></div>
+        <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+        <script src="~/Scripts/PmsRandomization.js"></script>
+        <input type="hidden" id="hdnRandomizationNo" />
+        <input type="hidden" id="hdnMySubjectNo" />
+        <input type="hidden" id="hdnBirthDate" />
+        <input type="hidden" id="hdnPatientRegistrationDate" />
+        <input type="hidden" id="hdnInitials" />
+        <input type="hidden" id="hdnTreatementArm" />
+    }

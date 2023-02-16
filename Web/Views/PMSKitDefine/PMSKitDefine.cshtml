@@ -1,0 +1,236 @@
+﻿@*@model Pharmacy.Models.PmsCommon*@
+@{
+    ViewBag.Title = "Kit Type";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+
+<style>
+    fieldset.scheduler-border {
+        border: 1px groove #ddd !important;
+        padding: 0 1.4em 1.4em 1.4em !important;
+        margin: 0 0 1.5em 2.5em !important;
+        -webkit-box-shadow:  0px 0px 0px 0px #000;
+        box-shadow:  0px 0px 0px 0px #000;
+        width:20%;
+        height:75px;
+    }
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width:auto;
+        padding:0 10px;
+        border-bottom:none;
+    }
+</style>
+
+@using (Html.BeginForm())
+{ 
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Kit Type</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-medkit"></i>Kit</a></li>
+                <li><a href="#">Kit Type</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        <h3 class="box-title">Project No</h3>
+                                    </div>
+                                    <div class="col-lg-4 col-md-10 col-sm-10 col-xs-10">
+                                        <input type="text" id="ddlProjectNo" placeholder="Project No.." data-provide="typeahead" class="form-control" />
+                                    </div>
+
+                                    <div class="col-lg-4 col-lg-offset-0 col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-10 resizepd btn-group">
+                                        <button type="button" class="btn bg-olive dropbtn dropdown-toggle btn-rounded  btn-ef btn btn-primary" id="ExportButton"
+                                            data-toggle="dropdown" aria-expanded="false" style="border-radius: 4px; display: none">
+                                            Export<span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="../PMSKitDefine/ExportToExcel"><i class="fa fa-file-excel-o"></i>Excel </a></li>
+                                            <li><a href="../PMSKitDefine/ExportToPDF"><i class="fa fa-file-pdf-o"></i>PDF</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-lg-2 col-lg-offset-0 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-10 resizepd">
+                                        <button type="button" id="btnAddKitDefine" class="btn bg-olive" title="Add Kit Type" onclick="AddKitDefine();">+ Add Kit Type</button>
+                                        @*data-toggle="modal" data-target="#KitDefineModel"*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tblKitDefineData" class="table table-bordered table-striped">
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="KitDefineModel" role="dialog">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <span class="operation-mode" id="titleMode"></span>
+                            <h4 class="modal-title modaltitle operation-name" id="title">Kit Type</h4>
+                        </div>
+                        <div>
+                            <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                        </div>
+                    </div>
+
+                    <div class="modal-body" style="height:400px;overflow:auto">
+                        
+                        
+                        <div class="row">
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border">Treatment</legend>
+                                <div class="control-group">
+                                    <div class="controls" style="margin-top:-12px">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="optradio" checked="checked" id="rdRandomization">Randomization
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="optradio" id="rdOther">Other
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            @*<div class="col-sm-4 form-group">
+                                <fieldset>
+                                    <legend title="TreatmentType" style="border:1px solid #e5e5e5 !important">
+                                        <a data-toggle="collapse" data-target="#divfieldset" href="#">Activity Log Filter Criteria</a>
+                                    </legend>
+                                        <div id="divfieldset" class="row collapse in">
+                                        
+                                    </div>
+                                </fieldset>
+                                
+                            </div>*@
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Project *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" placeholder="Project No" class="form-control" id="txtProjectNo" style="height: 26px" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div id="treatmenttypediv">
+                            @*    <div class="col-sm-4 form-group">
+                                    <div class="col-sm-12">
+                                        <label>Treatment Type *</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <select class="form-control" id="ddlTreatmentType" style="height: 26px;padding:2px 6px;"></select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 form-group">
+                                    <div class="col-sm-12">
+                                        <label>Product Type *</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <select class="form-control" id="ddlProductType" style="height: 26px;padding:2px 6px;"></select>
+                                    </div>
+                                </div>*@
+                            </div>
+
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Dosed Qty *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                      @Html.TextBox("txtDosedQty", "", new { @class = "form-control qtycontrol", @placeholder = "Quantity", required = "required", @style = " height:26px; ", @autocomplete = "off" ,@min=1 ,  @type = "number", @disabled = "disabled" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Applicable For Visit *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlApplicableForVisit" style="padding: 3px 12px; height: 26px" multiple="multiple">
+                                        <option selected="selected" value="0">Please Select Applicable Visit</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <a id="btnAddTempKitDefine" title="Add" class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a bg-olive margin" onclick="AddTempData();"><i class="fa fa-plus"></i><span>Add</span></a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center" style="overflow: auto;">
+                                <table id="tblKitDefineTemp" border="1" class="table table-bordered table-striped dataTable no-footer" style="width: 80%; display: none; margin-left: 10%">
+                                    <thead>
+                                        <tr>
+                                            <th>Kit Description</th>
+                                            <th>Treatment Type</th>
+                                            <th>Kit Type</th>
+                                            <th>Qty</th>
+                                            <th>Applicable Visit</th>
+                                            <th class="trDelete">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyKitDefineTemp">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnSavePmsKitDefine" data-tooltip="tooltip" title="Save" style="display: none">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnKitDefine">Save</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnClearPmsKitDefine" data-tooltip="tooltip" title="Clear" onclick="clearData()">
+                            <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnExitPmsKitDefine" data-tooltip="tooltip" title="Exit">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            @*<div id="loader" class="modal"></div> *@
+        </div>
+    </div>
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsKitDefine.js"></script>
+}

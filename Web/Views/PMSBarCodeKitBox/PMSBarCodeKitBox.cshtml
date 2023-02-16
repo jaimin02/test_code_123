@@ -1,0 +1,242 @@
+﻿@{
+    ViewBag.Title = "Product Label Creation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{ 
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Product Label Creation</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-barcode"></i>Barcode</a></li>
+                <li><a href="#">Product Label Creation</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        <h3 class="box-title">Project No</h3>
+                                    </div>
+                                    <div class="col-lg-4 col-md-10 col-sm-10 col-xs-10">
+                                        <input type="text" id="txtProjectNoDashboard" placeholder="Project No" data-provide="typeahead" class="form-control" />
+                                    </div>
+                                    <div class="col-lg-4 col-lg-offset-0 col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-10 resizepd btn-group">
+                                        <button type="button" class="btn bg-olive dropbtn dropdown-toggle btn-rounded  btn-ef btn btn-primary" id="divexport"
+                                            data-toggle="dropdown" aria-expanded="false" style="border-radius: 4px; display: none">
+                                            Export <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="../PmsProductBatch/ExportToExcel"><i class="fa fa-file-excel-o"></i>Excel </a></li>
+                                            <li><a href="../PmsProductBatch/ExportToPDF"><i class="fa fa-file-pdf-o"></i>PDF</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-lg-2 col-lg-offset-0 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-10 resizepd">
+                                        <button type="button" id="btnAddProductlabel" class="btn bg-olive viewmode" data-toggle="modal" data-target="#ProductLabelModal"
+                                            title="Add Product Label">
+                                            + Add Product Label</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box-body">
+                            <table id="tblPMSStudyProductLabelData" class="table table-bordered table-striped" cellspacing="1" width="100%">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="ProductLabelModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <span class="operation-mode" id="titleMode">Mode:- Add</span>
+                            <h4 class="modal-title modaltitle operation-name" id="title">Product Label</h4>
+                        </div>
+                        <div>
+                            <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                        </div>
+
+                    </div>
+                    <div class="modal-body" style="height: 430px; overflow-y: auto">
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Project No</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" id="txtProjectNo" placeholder="Project No.." data-provide="typeahead" class="form-control" style="height: 26px"  disabled="disabled"/>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Product Type *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlProductType" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Product Type</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Product Name *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlProductName" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Product Name</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Batch/Lot/Lot No *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlBatchLotNo" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Batch/Lot/Lot No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group" id="divTabletPerLabel">
+                                <div class="col-sm-12">
+                                    <label>No of Tablet Per Label *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" id="txtNoofTablet" placeholder="No of Tablet" data-provide="typeahead" class="form-control" style="height: 26px"/>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>No of Label *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" id="txtNoofLabel" placeholder="No of Tablet" data-provide="typeahead" class="form-control" style="height: 26px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <a id="btnAddTempProductLabel" onclick="fnAddTempProductLabel()"
+                                class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a bg-olive"><i class="fa fa-plus"></i><span>Add</span></a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <table id="tblPMSProductLabelTemp" class="table table-bordered table-striped dataTable no-footer" cellspacing="1" width="100%" style="display:none">
+                                    <thead id="theadPMSPRoductLabelTemp">
+                                        <tr>
+                                            <th>Product Type</th>
+                                            <th>Product Name</th>
+                                            <th>Batch/Lot/Lot No</th>
+                                            <th>No of Tablet Per Label</th>
+                                            <th>No of Label</th>
+                                            <th class="hidetd">ProductTypeID</th>
+                                            <th class="hidetd">ProductID</th>
+                                            <th class="hidetd">BatchLotID</th>
+                                            <th id="trRemove">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyPMSPRoductLabelTemp"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnSavePMSProductLabel" data-tooltip="tooltip" title="Save" style="display:none">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnPmsProductbatch">Save</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnClearPMSProductLabel" data-tooltip="tooltip" title="Clear">
+                            <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnExitPMSProductLabel" data-tooltip="tooltip" title="Exit" onclick="ExitModule();">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ModalLabelCreationData" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name text-center">Study Product Label Details</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body" style="height: 430px; overflow-y: auto">
+                        <table id="tblPMSStudyProductLabelCreationData" class="table table-bordered table-striped" cellspacing="1" width="100%">
+                        </table>
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnExitPMSStudyProductLabelData" data-tooltip="tooltip" title="Exit" onclick="ExitModule();">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ModalLabelSiteWiseData" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title modaltitle operation-name text-center">Site Wise Label Details</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body" style="height: 430px; overflow-y: auto">
+                        <table id="tblPMSStudyProductLabelSiteWiseData" class="table table-bordered table-striped" style="width:100%">
+                        </table>
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnExitSiteWiseData" data-tooltip="tooltip" title="Exit" onclick="ExitModule();">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    </div>
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsBarCodeKitBox.js"></script>
+    <input type="hidden" value="@ViewBag.hdnClientName" id="hdnClientName" />
+}

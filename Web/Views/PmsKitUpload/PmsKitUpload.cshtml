@@ -1,0 +1,249 @@
+﻿@{
+    ViewBag.Title = "Kit Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .btn-group {
+        width: 335px;
+    }
+
+    .multiselect-container {
+        width: 335px !important;
+    }
+
+    .caret {
+        float: right;
+        margin-top: 10px;
+    }
+
+    .multiselect {
+        text-align: left;
+    }
+</style>
+
+
+@using (Html.BeginForm())
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Kit Upload
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-medkit"></i>Kit</a></li>
+                <li><a href="#">Kit Upload</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="box-header">
+                                <h5><span style="font-size: 12px; float: right">Fields with * are Mandatory</span></h5>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Project No *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" placeholder="Project No Here.." style="height: 26px;" class="form-control" id="DDLProjectNo">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Kit Indication *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlTransferIndi" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Kit Indication</option>
+                                        <option value="K">Kit</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Product Type *</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="ddlProductType" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Product Type</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group" style="height:30px;">
+                                <div class="col-sm-12">
+                                    <label>Kit *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlkit" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Kit product</option>
+                                    </select>
+                                    <p id="productNameNote" style="color: red; display: none">Note: Only selected product name should be present in file.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Product *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlProduct" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Product</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Batch/Lot/Lot No *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlBatchLot" style="padding: 3px 12px; height: 26px">
+                                        <option selected value="0">Please Select Batch/Lot/Lot No</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Storage Area *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="ddlStorageArea" style="padding: 3px 12px; height: 26px" multiple="multiple">
+                                        <option selected="selected" value="0">Please Select Storage Area</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-4">
+                                    <label>File Upload *</label>
+                                </div>
+                                <div class="col-sm-6 col-sm-offset-2">
+                                    <a href="../Content/Images/KitUploadCSV.Png" style="display: table;" target="_blank"><b><u>View CSV File Format</u></b></a>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="file" id="fileToUpload" name="file" accept=".csv" class="form-control" />
+                                    @*--disabled="disabled" *@
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Remarks *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextArea("txtRemarks", "", new { @class = "form-control", @placeholder = "Remarks", @autocomplete="off" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 .col-md-offset-3 form-group"></div>
+                                <div class="col-md-3 .col-md-offset-3 form-group text-right"></div>
+                                <div class="col-md-3 .col-md-offset-3 form-group">
+                                    <table id="tblgallary">
+                                        <tbody id="tbodygallary"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 .col-md-offset-3 form-group"></div>
+                                <div class="col-md-2 .col-md-offset-3 form-group text-right"></div>
+
+                                <div class="col-md-3 .col-md-offset-3 form-group">
+                                    <a data-toggle="modal" id="btnSaveKitUpload" data-tooltip="tooltip" title="Upload" class="viewmode">
+                                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="fa fa-upload"></i><span id="spnbtnGO">Upload</span></i>
+                                    </a>
+
+                                    <a data-toggle="modal" id="btnClearKitUpload" data-tooltip="tooltip" title="Clear" onclick="clearControl();">
+                                        <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                                    </a>
+
+                                    <a data-toggle="modal" id="btnExitKitUpload" data-tooltip="tooltip" title="Exit">
+                                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+
+                        <div class="box-body">
+                            <table id="tblPmsKitTypeDefineDtl" class="table table-bordered table-striped">
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="modal fade" id="KitSiteDetails" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title modaltitle operation-name" style="margin-left: 40%">Site Wise Stock Details</h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <span>
+                        <canvas id="myCanvas" width="12" height="12" class="hightlightUnblindedKit"></canvas>
+                    </span>
+                    <span class="InActive">Current Stock is Less Then Minimum Stock</span>
+                    <table id="tblSiteDetails" class="table table-bordered table-striped">
+                    </table>
+                </div>
+
+                <div class="modal-footer footer-bottom">
+                    <a data-toggle="modal" id="btnExitSiteDetails" data-tooltip="tooltip" title="Exit" onclick="ConfirmAlertBox(ModuleName);">
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="KitCreationDetails" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title modaltitle operation-name" style="margin-left: 40%">Kit Creation Details</h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <table id="tblKitCreationDetails" class="table table-bordered table-striped">
+                    </table>
+                </div>
+                <div class="modal-footer footer-bottom">
+                    <a data-toggle="modal" id="btnExitPmsKitCreationDetails" data-tooltip="tooltip" title="Exit" onclick="ConfirmAlertBox(ModuleName);">
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsKitUpload.js"></script>
+}

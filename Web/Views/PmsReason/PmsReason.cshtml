@@ -1,0 +1,208 @@
+﻿@{
+    ViewBag.Title = "Reason Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+@using (Html.BeginForm())
+{ 
+  
+    <input type="hidden" value="@ViewBag.hdnusername" id="hdnusername" />
+    <input type="hidden" value="@ViewBag.hdnuserid" id="hdnuserid" />
+    <input type="hidden" value="@ViewBag.hdnlogintime" id="hdnlogintime" />
+    <input type="hidden" value="@ViewBag.hdnscopevalues" id="hdnscopevalues" />
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Reason
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-tasks"></i>Master</a></li>
+                <li><a href="#">Reason</a></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <span>
+                                <canvas id="myCanvas" width="12" height="12" class="highlight"></canvas>
+                            </span>
+                            <span class="InActive">Inactive Entries</span>
+                            <div class="row">
+                                <a class="btn bg-olive margin" href="../PmsReason/ExportToExcel">Export to Excel&nbsp&nbsp&nbsp<i class="fa fa-file-excel-o"></i></a>
+                                <button type="button" id="btnAddReason" class="btn bg-olive margin viewmode" data-toggle="modal" data-target="#ReasonModel" title="Add Reason " data-tooltip="tooltip">+ Add Reason</button>
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+
+                            <table id="tblReasonMaster" class="table table-bordered table-striped dataTable">
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main content -->
+
+    </div>
+    
+    <div class="modal fade" id="ReasonModel" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <span class="operation-mode" id="titleMode">Mode:-Add</span>
+                        <h4 class="modal-title modaltitle operation-name" id="title">Reason</h4>
+                        
+                    </div>
+                    <div>
+                        <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                    <form role="form" class="form-horizontal" method="POST" id="testForm">
+
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Operation *</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="DDLOperation">
+                                    <option value="0" selected="selected">Please Select Operation Type</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vOperationName" onclick="AuditTrail(this)" data-toggle="modal" data-target="#ReasonAuditTrial" titlename="Operation"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Reason *</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="Reason" class="form-control" id="txtReasonDesc" autocomplete="off">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vReasonDesc" onclick="AuditTrail(this)" data-toggle="modal" data-target="#ReasonAuditTrial" titlename="Reason"></span>
+                            </div>
+                        </div>
+
+
+                        <div id="DivReasonNo">
+                            <div class="col-sm-4 form-group hide">
+                                <div class="col-sm-3 form-group" style="display: none">
+                                    <label>Reason No * :</label>
+                                </div>
+                                <div class="col-sm-3 form-group" style="display: none">
+                                    <input type="text" placeholder="Reason No Here.." class="form-control" id="txtReasonNo" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label for="LblRemarks">Remarks * :</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <textarea autocomplete="off" class="form-control" cols="20" id="txtRemark" name="Remarks" placeholder="Remarks"  rows="2" maxlength="500"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        </div>
+                    </form>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer footer-bottom">
+                    @*<button type="button" id="btnSave" class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Save" title="Save">Save</button>
+                    <button type="button" id="btnClear" class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Clear" title="Clear">Clear</button>
+                    <button type="button" id="btnExit" class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Exit" title="Exit">Exit</button>*@
+
+                   <a data-toggle="modal" id="btnSave" data-tooltip="tooltip" title="Save ">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave">Save</span></i>
+                    </a>
+
+                    <a data-toggle="modal" id="btnClear" data-tooltip="tooltip" title="Clear">
+                        <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                    </a>
+
+                    <a data-toggle="modal" id="btnExit" data-tooltip="tooltip" title="Exit">
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div id="loader" class="modal"></div>
+    </div>
+  
+    <div class="modal fade" id="ReasonAuditTrial" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title modaltitle text-center">Audit Trail</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                    <div class="box-body">
+                        <table id="tblReasonAuditTrial" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+       
+    <div class="modal fade" id="ReasonInctive" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Remarks</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.TextArea("txtReason", "", new { @class = "form-control", @placeholder = "Remarks", @autocomplete = "off", @maxlength = "500" })
+                </div>
+                <div class="modal-footer">
+                    <a data-toggle="modal" id="btnInActiveSave" data-tooltip="tooltip" title="Save">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave1">Save</span></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog">
+    </div>
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    
+    <script src="~/Scripts/Validation.js"></script>
+    <script src="~/Scripts/PmsReason.js"></script>
+}

@@ -1,0 +1,187 @@
+﻿@{
+    ViewBag.Title = "Product Dispatch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+<link href="~/Content/themes/css/CustomStyle.css" rel="stylesheet" /> *@
+
+<style type="text/css">
+    .ui-datepicker {
+        background:#fff;
+        border:1px solid #ccc;
+        padding:5px;
+        z-index:10;
+    }
+    .ui-datepicker-calendar {
+    width:200px;
+    }
+    .ui-datepicker-next {
+        float:right;
+    }
+</style>
+
+
+@using (Html.BeginForm())
+{ 
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Product Dispatch</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dropbox"></i>Products</a></li>
+                <li><a href="#">Product Dispatch</a></li>
+            </ol>
+        </section>
+            <style>
+                /*.box-header {
+                    padding : 0px;
+                }*/
+            </style>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                         <div class="box-header">
+                            <div>
+                                <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                            </div>
+                        </div>
+                         <div class="box-body" style="overflow-x: hidden">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>From Protocol No *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <input type="text" id="DDLProjectNoFrom" placeholder="Protocol No.." data-provide="typeahead" class="form-control" style="height: 26px" autocomplete="off"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>To Protocol No *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            @*<input type="text" id="DDLProjectNoTo" placeholder="Project No.." data-provide="typeahead" class="form-control" style="height: 26px" />*@
+                                            <select class="form-control" id="DDLProjectNoTo" style="padding: 3px 12px; height: 26px">
+                                                <option value="0" selected="selected">Please Select Protocol No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>PI Name *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <input type="text" id="PIName" placeholder="Parent Site No.." data-provide="typeahead" class="form-control" autocomplete="off" />
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>Reason For Dispatch *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <select class="form-control" id="ddlDocumentType" style="padding: 3px 12px; height: 26px">
+                                                <option value="0" selected="selected">Please Select Reason</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                @*</div>
+                                <div class="row">*@
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>Send To</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <select class="form-control" id="ddlLocation" style="padding: 3px 12px; height: 26px">
+                                                <option value="0" selected="selected">Please Select Send To</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 form-group">
+                                        <div class="col-sm-12">
+                                            <label>Product Indication *</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <select class="form-control" id="ddlTransferIndi" style="padding: 3px 12px; height: 26px">
+                                                <option value="0" selected="selected">Please Select Product Indication</option>
+                                                <option value="P">Product</option>
+                                                <option value="K">Kit</option>
+                                                <option value="L">Labeled Product</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-4 form-group" style="display:none">
+                                        <div class="col-sm-12">
+                                            <label>Date From</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <input type="text" id="txtDateFrom" placeholder="Date From.." class="form-control" style="height: 26px" name="txtDateFrom" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 form-group" style="display:none">
+                                        <div class="col-sm-12">
+                                            <label>Date To</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <input type="text" id="txtDateTo" placeholder="Date To.." class="form-control" style="height: 26px" name="txtDateTo" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <br />
+
+                                <div class="row">
+                                <div class="col-sm-12 form-group text-center">
+                                    <input type="button" id="btnPmsProductDispatchView" class="btn bg-olive" value="View" />
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tblPmsProductDispatchData" class="table table-bordered table-striped" cellspacing="1" width="100%">
+                            </table>
+                            <div class="col-sm-12 form-group text-center">
+                                @*<button type="button" id="btnSavePmsProductDispatch" class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="save" style="display:none">Save</button>
+                                <button type="button" id="btnClearPmsProductDispatch" class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Clear">Clear</button>
+                                <button type="button" id="btnExitPmsProductDispatch" class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Exit">Exit</button>*@
+
+                                <a data-toggle="modal" id="btnSavePmsProductDispatch" data-tooltip="tooltip" title="Save" style="display: none" class="viewmode">
+                                    <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                    <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSaveQualityCheck">Save</span></i>
+                                </a>
+
+                                <a data-toggle="modal" id="btnClearPmsProductDispatch" data-tooltip="tooltip" title="Clear">
+                                    <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                    <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                                </a>
+
+                                <a data-toggle="modal" id="btnExitPmsProductDispatch" data-tooltip="tooltip" title="Exit">
+                                    <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                    <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                                </a>
+                            </div>
+
+                            
+                        </div>
+                        <!-- /.box-body -->
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    
+    @*<script src="/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js"></script>*@
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsProductDispatch.js"></script>
+}

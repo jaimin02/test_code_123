@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Patient Randomization";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Patient Randomization</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-medkit"></i>Kit</a></li>
+                <li><a href="#">Patient Randomization</a></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <label>Project Name / Project No *</label>
+                                </div>
+                                <div class="col-lg-4 col-md-10 col-sm-10 col-xs-10">
+                                    <input type="text" id="txtProjectNodashboard" placeholder="Project No" class="form-control" />
+                                </div>
+                                <div class="col-lg-4 col-lg-offset-0 col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-10 resizepd btn-group">
+                                    <button type="button" class="btn bg-olive dropbtn dropdown-toggle btn-rounded  btn-ef btn btn-primary" id="ExportButton"
+                                        data-toggle="dropdown" aria-expanded="false" style="border-radius: 4px;display:none">
+                                        Export<span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="../PmsPatientRandomization/ExportToExcel"><i class="fa fa-file-excel-o"></i>Excel </a></li>
+                                        <li><a href="../PmsPatientRandomization/ExportToPDF"><i class="fa fa-file-pdf-o"></i>PDF</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-2 col-lg-offset-0 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-10 resizepd">
+                                    @*<button type="button" id="btnAddKitCreation" class="btn bg-olive" title="Add Kit" onclick="AddKitCreation()">+ Add Kit</button>*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tblPmsPatientRandomization" class="table table-bordered table-striped">
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsPatientRandomization.js"></script>
+}

@@ -1,0 +1,1584 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QEdge_TrainingValid" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=90.0.0.30;Initial Catalog=QEdge_TrainingValid;User ID=developer" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="QEdge_TrainingValidConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CompanyMst" Member="CompanyMsts">
+    <Type Name="CompanyMst">
+      <Column Name="nCompanyNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vCompanyCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vCompanyName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vPFNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nGroupCode" Type="System.Decimal" DbType="Decimal(10,0)" CanBeNull="true" />
+      <Column Name="vCompanyEmail" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DesignationMst" Member="DesignationMsts">
+    <Type Name="DesignationMst">
+      <Column Name="nDesignationNo" Type="System.Decimal" DbType="Decimal(10,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vDesignationCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nDivisionNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vDesignationName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="vColumnName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="iLevelId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nCompanyNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsUseSTPOfLowestLevel" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="vDesignationDesc" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="cIsSelfTrainingApprovalReq" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DivisionMst" Member="DivisionMsts">
+    <Type Name="DivisionMst">
+      <Column Name="nDivisionNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nCompanyNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vDivisionCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vDivisionName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="vUserCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="TimesheetStartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vLocationNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExMsgConfigDtl" Member="ExMsgConfigDtls">
+    <Type Name="ExMsgConfigDtl">
+      <Column Name="nExMsgConfigDtlNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nExMsgConfigHdrNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cReceiverType" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nReceiverNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nReceiveForNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dCreatedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Association Name="ExMsgConfigHdr_ExMsgConfigDtl" Member="ExMsgConfigHdr" ThisKey="nExMsgConfigHdrNo" OtherKey="nExMsgConfigHdrNo" Type="ExMsgConfigHdr" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExMsgConfigHdr" Member="ExMsgConfigHdrs">
+    <Type Name="ExMsgConfigHdr">
+      <Column Name="nExMsgConfigHdrNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="vDescription" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="cIsEventually" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nDivisionNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nMsgSendOn" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dStartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dFireTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nInterval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vMsgTypeNo" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="nExMsgNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dCreatedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vClassName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="ExMsgConfigHdr_ExMsgConfigDtl" Member="ExMsgConfigDtls" ThisKey="nExMsgConfigHdrNo" OtherKey="nExMsgConfigHdrNo" Type="ExMsgConfigDtl" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExMsgDeviceConfig" Member="ExMsgDeviceConfigs">
+    <Type Name="ExMsgDeviceConfig">
+      <Column Name="nExMsgDeviceConfigNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vSMSUserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vSMSPassword" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vSMSSenderId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vSMSCDMAHdr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vMailUserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vMailPassword" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vMailSMTPIP" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vMailSMTPPortNo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="vMailSenderAdd" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dCreatedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cReplicaflag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nCompanyNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExMsgInfo" Member="ExMsgInfos">
+    <Type Name="ExMsgInfo">
+      <Column Name="nExMsgNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vTblName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nTblRIDNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nEmpNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vContactID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vSubject" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="vBody" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="nSendMsgType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nExMsgTypeNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cIsForceFully" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="dCreatedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dSentTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vExMsgID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cReplicaflag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nDivisionNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vAttachment" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="nCreatedUserNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vOSType" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="vDeviceCode" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExMsgMailTemplate" Member="ExMsgMailTemplates">
+    <Type Name="ExMsgMailTemplate">
+      <Column Name="EmailId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmailBody" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nCreateBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Hr_classMst" Member="Hr_classMsts">
+    <Type Name="Hr_classMst">
+      <Column Name="nClassNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vClassCode" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="vClassName" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="nAmount" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HR_CostCenter" Member="HR_CostCenters">
+    <Type Name="HR_CostCenter">
+      <Column Name="nCostCenterNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vCostCenterCode" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="vCostCenterName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.hr_countrymst" Member="hr_countrymsts">
+    <Type Name="hr_countrymst">
+      <Column Name="nCountryNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vCountryCode" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="vCountryName" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HR_EmployeeEducationDetails" Member="HR_EmployeeEducationDetails">
+    <Type Name="HR_EmployeeEducationDetail">
+      <Column Name="nEmpEducationDtlNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vDegreeName" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="vColledgeInstituteName" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="iPassingYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nPercentage" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="cGrade" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vSpecialization" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HR_EmployeeExperienceDetails" Member="HR_EmployeeExperienceDetails">
+    <Type Name="HR_EmployeeExperienceDetail">
+      <Column Name="nEmpExperienceDtlNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vCompanyName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vDesignation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vResponsibilities" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="vReferencePerson" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nReferencePersonContactNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vReasonForLeaving" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HR_EmployeeFamilyDetails" Member="HR_EmployeeFamilyDetails">
+    <Type Name="HR_EmployeeFamilyDetail">
+      <Column Name="nEmpFamilyDtlNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vDependentName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vRelation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iAge" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cMaritalStatus" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dBirthDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vBloodGroup" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="cIsIncludeInGMC" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HR_EmployeeFinancialDetails" Member="HR_EmployeeFinancialDetails">
+    <Type Name="HR_EmployeeFinancialDetail">
+      <Column Name="nFinancialNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nPanNo" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="nPFNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vBankName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="nBankAccountNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nSalaryAccountNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nLoanAccountNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nAdvanceAccountNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nPFAccountNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vSalaryBase" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="vESICSerialNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vESICAccountNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nCostCenterNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vREIMPaymentType" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vREIMBankCode" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vREIMBankName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HR_EmployeeHealthDetails" Member="HR_EmployeeHealthDetails">
+    <Type Name="HR_EmployeeHealthDetail">
+      <Column Name="nEmpHealthDtlNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vBloodGroup" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="vSkinDisease" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="vAnyOtherDisease" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="cOphthalmicTest" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vLeftEyeNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vRightEyeNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="vReport" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HR_EmployeeOtherDocumentDetails" Member="HR_EmployeeOtherDocumentDetails">
+    <Type Name="HR_EmployeeOtherDocumentDetail">
+      <Column Name="nEmpDocDtlNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vDocumentName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vDocumentPath" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HR_EmployeePersonalDetails" Member="HR_EmployeePersonalDetails">
+    <Type Name="HR_EmployeePersonalDetail">
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="vEmployeeCode" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmployeeName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="vFirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vMiddleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vLastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MaleFemale" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="dBirthDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dDOJ" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="vPermenantAddress" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="vPermenantAddress1" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="vPermenantAddress2" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="vPermenantCity" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vPermenantState" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nPermenantZip" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nPermenantPhone" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vPresentAddress" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="vPresentAddress1" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="vPresentAddress2" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="vPresentCity" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vPresentState" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nPresentZip" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nPresentPhone" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nFax" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nMobile" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vEmail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nBaseSalary" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vEmployeeType" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="nClassNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nCountryNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nTimeZoneNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nPermenantStateNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nPresentStateNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dAnniversarydate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nLocationNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vOfficialEmail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cIsFandFDone" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dDOResining" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dDORelieving" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vReasonforLeaving" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="vMarritalStatus" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="vOtherDocument" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cIsVisible" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vImagePath" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="iProbationPeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dConfirmationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="iRevisionPeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dRevisionDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dRetirementDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vReligion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="iOfficeExt" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vPassportNo" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vPersonalEmail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iNoticePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cEmployeeSign" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dEmployeeSignDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cHRSign" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dHRSignDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nHRSignBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HR_EmployeePositionMst" Member="HR_EmployeePositionMsts">
+    <Type Name="HR_EmployeePositionMst">
+      <Column Name="nEmployeePositionNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nDivisionNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nDesignationNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nLocationNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nFunctionalReportingToNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nAdministrativeReportingToNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dFromDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nCompanyNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nEmployeeGradeNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Hr_EmployeePositionMst_BackUp_20140910" Member="Hr_EmployeePositionMst_BackUp_20140910s">
+    <Type Name="Hr_EmployeePositionMst_BackUp_20140910">
+      <Column Name="nEmployeePositionNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nDivisionNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nDesignationNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nLocationNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nFunctionalReportingToNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nAdministrativeReportingToNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dFromDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nCompanyNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nEmployeeGradeNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.hr_grademst" Member="hr_grademsts">
+    <Type Name="hr_grademst">
+      <Column Name="nEmployeeGradeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vEmployeeGradeCode" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmployeeGradeName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="nDesignationNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nDivisionNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nScaleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nLeaveGroupNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nFixedcomponentNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="vGmcAmount" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HR_TimeZoneMst" Member="HR_TimeZoneMsts">
+    <Type Name="HR_TimeZoneMst">
+      <Column Name="nTimeZoneNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vTimeZone" Type="System.String" DbType="VarChar(350) NOT NULL" CanBeNull="false" />
+      <Column Name="vDSTFrom" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="vDSTTo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="nTimeDifference" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vCountryFlag" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OnLine_AuditInfo" Member="OnLine_AuditInfos">
+    <Type Name="OnLine_AuditInfo">
+      <Column Name="vTblName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vColumnName" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="vOldValue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="vNewValue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="vRIDColumnName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nRIDNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vUserCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Online_OperationMst" Member="Online_OperationMsts">
+    <Type Name="Online_OperationMst">
+      <Column Name="nTranNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nCompanyNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vTransactionType" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="vTransactionText" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="vNavigationURL" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="nParentTranNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cStockAcct" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cCRDR" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vNavigationURL2" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="iSeqNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vUserCode" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vCanWorkInHistory" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Online_RoleMst" Member="Online_RoleMsts">
+    <Type Name="Online_RoleMst">
+      <Column Name="nRoleNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nCompanyNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vRoleCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="vRoleDesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="vAction" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vLocationNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Online_RoleOperationMatrix" Member="Online_RoleOperationMatrixes">
+    <Type Name="Online_RoleOperationMatrix">
+      <Column Name="nRID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nCompanyNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nRoleNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nTranNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="cAuthorizedFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Online_UserMst" Member="Online_UserMsts">
+    <Type Name="Online_UserMst">
+      <Column Name="nCompanyNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vDivisionNo" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nRoleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nScopeNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vUserCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="vUserName" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="vPassword" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="cUserType" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vDomainUserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vLocationNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vUserScope" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PlaceMst" Member="PlaceMsts">
+    <Type Name="PlaceMst">
+      <Column Name="nCityNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nCompanyNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vCityCode" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vCityName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="nStateNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vStateName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="nZoneNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vZoneName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="cMajorCity" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StateMst" Member="StateMsts">
+    <Type Name="StateMst">
+      <Column Name="nStateNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nCompanyNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vStateCode" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vStateName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="nZoneNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_PMSUser" Member="TBL_PMSUsers">
+    <Type Name="TBL_PMSUser">
+      <Column Name="UserId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Roles" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbletemp" Member="tbletemps">
+    <Type Name="tbletemp">
+      <Column Name="empno" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="modno" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="iscomplete" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.temp1234" Member="temp1234s">
+    <Type Name="temp1234">
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmployeeCode" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmployeeName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tmp123" Member="tmp123s">
+    <Type Name="tmp123">
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmployeeName" Type="System.String" DbType="VarChar(178) NOT NULL" CanBeNull="false" />
+      <Column Name="vDivisionName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nDivisionNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vJobCode" Type="System.String" DbType="VarChar(519)" CanBeNull="true" />
+      <Column Name="vModuleName" Type="System.String" DbType="VarChar(1001)" CanBeNull="true" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="ModuleCount" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dActiveFromdate" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="dActiveTodate" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="dFromDate" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="dToDate" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="Jobcode" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_AssessmentAnswerDtl" Member="TR_AssessmentAnswerDtls">
+    <Type Name="TR_AssessmentAnswerDtl">
+      <Column Name="nAssessmentAnswerId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="iAssessmentQuestionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vAssessmentAnswer" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dGeneratedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="iSequelNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cIsReleased" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vAccessorSIgn" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_AssessmentComponentMaster" Member="Tr_AssessmentComponentMasters">
+    <Type Name="Tr_AssessmentComponentMaster">
+      <Column Name="nComponentNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vComponentId" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="vComponentName" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="vComponentType" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_AssessmentDetails" Member="Tr_AssessmentDetails">
+    <Type Name="Tr_AssessmentDetail">
+      <Column Name="nAssessmentNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nAssessmentId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nJobcodeNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nRatingNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="nAssessBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dAssessOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vGenRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vTrainingRecom" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cAssessmentFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_AssessmentQuestionMst" Member="TR_AssessmentQuestionMsts">
+    <Type Name="TR_AssessmentQuestionMst">
+      <Column Name="iAssessmentQuestionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vAssessmentQuestionDesc" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vAssessmentQuestionType" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_AssessmentQuestionMst20151016" Member="TR_AssessmentQuestionMst20151016s">
+    <Type Name="TR_AssessmentQuestionMst20151016">
+      <Column Name="iAssessmentQuestionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vAssessmentQuestionDesc" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vAssessmentQuestionType" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_AssessOnMaster" Member="Tr_AssessOnMasters">
+    <Type Name="Tr_AssessOnMaster">
+      <Column Name="nAssessOnNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vAssessOnType" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_DocumentTypeMst" Member="TR_DocumentTypeMsts">
+    <Type Name="TR_DocumentTypeMst">
+      <Column Name="nDocumentTypeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vDocumentTypeName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_EmployeeJobCodeMatrix" Member="TR_EmployeeJobCodeMatrixes">
+    <Type Name="TR_EmployeeJobCodeMatrix">
+      <Column Name="nEmpJobCodeId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nJobCodeId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dActiveFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActiveToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cIsResponsibleJobCode" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nCreatedBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nLocationNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_EmployeeSkillKnowledgeMatrix" Member="Tr_EmployeeSkillKnowledgeMatrixes">
+    <Type Name="Tr_EmployeeSkillKnowledgeMatrix">
+      <Column Name="nEmpSkillKnowledgeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nSkillKnowledgeId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dActiveFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActiveToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_FAQDocumentsDtl" Member="TR_FAQDocumentsDtls">
+    <Type Name="TR_FAQDocumentsDtl">
+      <Column Name="nFAQQueDocDtlNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nFAQQueNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vFAQQueDocName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="vFAQQueDocURL" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyon" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_FAQMaster" Member="TR_FAQMasters">
+    <Type Name="TR_FAQMaster">
+      <Column Name="nFAQQueNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vOperationNo" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="vFAQQueName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="vFAQAnsName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserno" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyon" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="iSeqNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_JobCodeMst" Member="TR_JobCodeMsts">
+    <Type Name="TR_JobCodeMst">
+      <Column Name="nJobCodeId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vJobCode" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="vJobCodeDescription" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vModuleNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="nDivisionNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dActiveFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActiveToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vResponsibleJobCode" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="nResponsibleJobCodeId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cIsResponsibleJobCode" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nCreatedBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nLocationNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vJobFunction" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsFunctionInduction" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_Jobcodemst_20150321" Member="Tr_Jobcodemst_20150321s">
+    <Type Name="Tr_Jobcodemst_20150321">
+      <Column Name="nJobCodeId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vJobCode" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="vJobCodeDescription" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vModuleNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="nDivisionNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dActiveFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActiveToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vResponsibleJobCode" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="nResponsibleJobCodeId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cIsResponsibleJobCode" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nCreatedBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nLocationNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vJobFunction" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsFunctionInduction" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_JobCodeMstApprovalDtl" Member="TR_JobCodeMstApprovalDtls">
+    <Type Name="TR_JobCodeMstApprovalDtl">
+      <Column Name="nApprovalDtl" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nJobCodeId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vJobCode" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vJobCodeDescription" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vModuleOrEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="nDivisionNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nLocationNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vResponsibleJobCode" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="nResponsibleJobCodeId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cIsResponsibleJobCode" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nCreatedBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vJobFunction" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsFunctionInduction" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vReason" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cIsApprove" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nApprovedBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dApprovedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vAddedModuleOrEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vRemovedModuleOrEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cApprovalFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nEmpJobCodeId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_ModuleDocumentDtl" Member="TR_ModuleDocumentDtls">
+    <Type Name="TR_ModuleDocumentDtl">
+      <Column Name="nDocumentNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vDocumentName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="vDocumentURL" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="cActive" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_ModuleDocumentDtl08Aug2013" Member="TR_ModuleDocumentDtl08Aug2013s">
+    <Type Name="TR_ModuleDocumentDtl08Aug2013">
+      <Column Name="nDocumentNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vDocumentName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="vDocumentURL" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="cActive" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_ModuleDocumentDtlOld" Member="TR_ModuleDocumentDtlOlds">
+    <Type Name="TR_ModuleDocumentDtlOld">
+      <Column Name="nDocumentNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vDocumentName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="vDocumentURL" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="cActive" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_ModuleMst" Member="TR_ModuleMsts">
+    <Type Name="TR_ModuleMst">
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nModuleTypeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vModuleCode" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="vModuleName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="vVersion" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="dEffectiveFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dEffectiveToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nReferenceModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cIsScheduled" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsRevisied" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nTrainingRepeatOnNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vCreatorName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="vLocationNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vDivisionNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dCreatedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nCreatorNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vTraininghours" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Association Name="TR_ModuleMst_Tr_SOPTrainingMatrix" Member="Tr_SOPTrainingMatrixes" ThisKey="nModuleNo" OtherKey="nModuleNo" Type="Tr_SOPTrainingMatrix" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_ModuleMst08Aug2013" Member="TR_ModuleMst08Aug2013s">
+    <Type Name="TR_ModuleMst08Aug2013">
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nModuleTypeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vModuleCode" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="vModuleName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="vVersion" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="dEffectiveFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dEffectiveToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nReferenceModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cIsScheduled" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsRevisied" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nTrainingRepeatOnNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vCreatorName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_ModuleMstOld" Member="TR_ModuleMstOlds">
+    <Type Name="TR_ModuleMstOld">
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nModuleTypeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vModuleCode" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="vModuleName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="vVersion" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="dEffectiveFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dEffectiveToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nReferenceModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cIsScheduled" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsRevisied" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nTrainingRepeatOnNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vCreatorName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_ModuleQuestionDtl" Member="TR_ModuleQuestionDtls">
+    <Type Name="TR_ModuleQuestionDtl">
+      <Column Name="nQuestionNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vQuestionDesc" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vQuestionURL" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="cQuestionType" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="iNoOfOptions" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vAnswerOptTxt1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vAnswerOptTxt2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vAnswerOptTxt3" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vAnswerOptTxt4" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vAnswerOptTxt5" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vAnswer" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" />
+      <Column Name="iMarks" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cIsEndrosmentQuest" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="cLanguageFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsPriorityQuestion" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_ModuleQuestionDtl09Auh2013" Member="TR_ModuleQuestionDtl09Auh2013s">
+    <Type Name="TR_ModuleQuestionDtl09Auh2013">
+      <Column Name="nQuestionNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vQuestionDesc" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vQuestionURL" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="cQuestionType" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="iNoOfOptions" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vAnswerOptTxt1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vAnswerOptTxt2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vAnswerOptTxt3" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vAnswerOptTxt4" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vAnswerOptTxt5" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vAnswer" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" />
+      <Column Name="iMarks" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cIsEndrosmentQuest" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_ModuleTypeMst" Member="TR_ModuleTypeMsts">
+    <Type Name="TR_ModuleTypeMst">
+      <Column Name="nModuleTypeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vModuleTypeCode" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="vModuleTypeName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="cIsRevisable" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_OtherTrainingTypeMst" Member="TR_OtherTrainingTypeMsts">
+    <Type Name="TR_OtherTrainingTypeMst">
+      <Column Name="nOtherTrainingTypeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vOtherTrainingType" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_ParameterListMaster" Member="TR_ParameterListMasters">
+    <Type Name="TR_ParameterListMaster">
+      <Column Name="nParameterNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vUniqueParameter" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="nPastDays" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nFutureDays" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vImportantNote" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dDate" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_PasswordHistory" Member="TR_PasswordHistories">
+    <Type Name="TR_PasswordHistory">
+      <Column Name="iUserID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="iSrNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vPassword" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dChangedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="iModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_PasswordPolicyMst" Member="TR_PasswordPolicyMsts">
+    <Type Name="TR_PasswordPolicyMst">
+      <Column Name="nPolicyNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vPolicyDesc" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="vValue" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="iModifyBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_QuestionPaperDocumentDtl" Member="TR_QuestionPaperDocumentDtls">
+    <Type Name="TR_QuestionPaperDocumentDtl">
+      <Column Name="nQuestionPaperDocumentDtlNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vQuestionPaperName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vQuestionPaperUrl" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyon" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_QUIZLANGUAGE" Member="TR_QUIZLANGUAGEs">
+    <Type Name="TR_QUIZLANGUAGE">
+      <Column Name="id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vLanguage" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cLanguageCode" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_QuizRightsMaster" Member="Tr_QuizRightsMasters">
+    <Type Name="Tr_QuizRightsMaster">
+      <Column Name="nQuizLockRightsID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_RatingTypeMaster" Member="Tr_RatingTypeMasters">
+    <Type Name="Tr_RatingTypeMaster">
+      <Column Name="nRatingTypeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vDoRatingFor" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="vRatingStyle" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_RoleOperationDataMatrix" Member="TR_RoleOperationDataMatrixes">
+    <Type Name="TR_RoleOperationDataMatrix">
+      <Column Name="nRoleOperationDataId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vRoleOperationName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="nRoleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vOperationDataId" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_SaveAttendanceAndFinish" Member="TR_SaveAttendanceAndFinishes">
+    <Type Name="TR_SaveAttendanceAndFinish">
+      <Column Name="nAttendanceFinishNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nTrainingEventNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vTrainerName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cAttendanceOrFinish" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dActualFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActualToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cEvaluationFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vLateRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dLateRemarks" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_SaveAttendanceAndFinish_Temp" Member="TR_SaveAttendanceAndFinish_Temps">
+    <Type Name="TR_SaveAttendanceAndFinish_Temp">
+      <Column Name="nAttendanceFinishNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nTrainingEventNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vTrainerName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cAttendanceOrFinish" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dActualFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActualToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_SaveAttendanceAndFinish_Temp1" Member="TR_SaveAttendanceAndFinish_Temp1s">
+    <Type Name="TR_SaveAttendanceAndFinish_Temp1">
+      <Column Name="nAttendanceFinishNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nTrainingEventNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vTrainerName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cAttendanceOrFinish" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dActualFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActualToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_SaveIndividualAttendance" Member="Tr_SaveIndividualAttendances">
+    <Type Name="Tr_SaveIndividualAttendance">
+      <Column Name="nAttendanceNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nTrainingEventNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dAttendanceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cPresentAbsent" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_SkillKnowledge" Member="Tr_SkillKnowledges">
+    <Type Name="Tr_SkillKnowledge">
+      <Column Name="nSkillKnowledgeId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vSkillKnowledgeCode" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="vSkillKnowledgeDescription" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="vSkillKnowledge" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="nDivisionNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dActiveFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActiveToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_SkillKnowledgeMaster" Member="Tr_SkillKnowledgeMasters">
+    <Type Name="Tr_SkillKnowledgeMaster">
+      <Column Name="nSkillKnowledgeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vSkillKnowledgeCode" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="vSkillKnowledgeDesc" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vSkillKnowledgeName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_SOPTrainingMatrix" Member="Tr_SOPTrainingMatrixes">
+    <Type Name="Tr_SOPTrainingMatrix">
+      <Column Name="nMatrixNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nTrainingEventNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cIsDocAttach" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsQuizRequired" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="iTotalQuestion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iQuizTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nRefrenceEventNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vDocumentNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="TR_ModuleMst_Tr_SOPTrainingMatrix" Member="TR_ModuleMst" ThisKey="nModuleNo" OtherKey="nModuleNo" Type="TR_ModuleMst" IsForeignKey="true" />
+      <Association Name="TR_TrainingEvent_Tr_SOPTrainingMatrix" Member="TR_TrainingEvent" ThisKey="nTrainingEventNo" OtherKey="nTrainingEventNo" Type="TR_TrainingEvent" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_TempModuleMst" Member="Tr_TempModuleMsts">
+    <Type Name="Tr_TempModuleMst">
+      <Column Name="Serial" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Department" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[SOP Number]" Member="SOP_Number" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[SOP Title]" Member="SOP_Title" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Date Effective from]" Member="Date_Effective_from" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="[Status of SOP]" Member="Status_of_SOP" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="vLocationNo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_TrainerCoordinatorDetails" Member="Tr_TrainerCoordinatorDetails">
+    <Type Name="Tr_TrainerCoordinatorDetail">
+      <Column Name="nTrainerNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nLocationNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nDepartmentNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dActiveFrom" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActiveTo" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cIsTrainerOrCoordinator" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nAuthorizedBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dAuthorizedDate" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_TrainerDtl" Member="TR_TrainerDtls">
+    <Type Name="TR_TrainerDtl">
+      <Column Name="nTrainerDtlNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nDivisionNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModiFyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyon" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_TrainingCertificate" Member="TR_TrainingCertificates">
+    <Type Name="TR_TrainingCertificate">
+      <Column Name="nTrainingCertificateNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nTrainingTemplateNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nTrainingEventNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="iSequelNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vPdfFilePath" Type="System.String" DbType="VarChar(2000) NOT NULL" CanBeNull="false" />
+      <Column Name="vDocumentName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="vDocumentType" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dUpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cAssessmentFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cUploadtype" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_TrainingEvent" Member="TR_TrainingEvents">
+    <Type Name="TR_TrainingEvent">
+      <Column Name="nTrainingEventNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nSequelNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vJobcode" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vApproxTime" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="iTrainingTypeNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vTrainingPlace" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vEventHandleBy" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="vEventHandleByNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="vTrainerNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="nTrainerNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vTrainerName" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="vEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vGuestNo" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="nEventDoneBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nApprovedBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cIsEndrosmentReq" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dQuizeStartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dQuizeEndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vQuestionNo" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="iTotalMarks" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cIsTrainingDone" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsCombineQuiz" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vAttendedTrainees" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="vTrainingDoneFor" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="vEmailSentTo" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dActualFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActualToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vOtherTrainingType" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cTranType" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cProposedOrApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vDocumentName" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vDocumentURL" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="cTrainerApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cHODApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vApproverNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="nLocationNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cScheduleType" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vActualTime" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="cRescheduleFrom" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsVerified" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nVerifiedBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dVerifiedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cIsVerbalQuizReq" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nScheduleReasonType" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dActualTrainingTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cLanguageFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsFeedBackReq" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Association Name="TR_TrainingEvent_Tr_SOPTrainingMatrix" Member="Tr_SOPTrainingMatrixes" ThisKey="nTrainingEventNo" OtherKey="nTrainingEventNo" Type="Tr_SOPTrainingMatrix" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_TrainingEvent_Temp" Member="Tr_TrainingEvent_Temps">
+    <Type Name="Tr_TrainingEvent_Temp">
+      <Column Name="nTrainingEventNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nSequelNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="iTemplateNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vApproxTime" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="iTrainingTypeNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vTrainingPlace" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vEventHandleBy" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="vEventHandleByNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="vTrainerNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="nTrainerNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vTrainerName" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="vEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vGuestNo" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="nEventDoneBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nApprovedBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cIsQuizRequired" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsEndrosmentReq" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dQuizeStartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dQuizeEndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vQuestionNo" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="iTotalQuestion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iTotalMarks" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iQuizTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cIsTrainingDone" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsCombineQuiz" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vAttendedTrainees" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="vTrainingDoneFor" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="vEmailSentTo" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dActualFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActualToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vOtherTrainingType" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cTranType" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cProposedOrApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vDocumentName" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vDocumentURL" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="cTrainerApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cHODApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vApproverNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cIsDocAttach" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nLocationNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_TrainingEvent_Temp1" Member="Tr_TrainingEvent_Temp1s">
+    <Type Name="Tr_TrainingEvent_Temp1">
+      <Column Name="nTrainingEventNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nSequelNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="iTemplateNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vApproxTime" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="iTrainingTypeNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vTrainingPlace" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vEventHandleBy" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="vEventHandleByNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="vTrainerNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="nTrainerNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vTrainerName" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="vEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vGuestNo" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="nEventDoneBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nApprovedBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cIsQuizRequired" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsEndrosmentReq" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dQuizeStartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dQuizeEndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vQuestionNo" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="iTotalQuestion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iTotalMarks" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iQuizTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cIsTrainingDone" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsCombineQuiz" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vAttendedTrainees" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="vTrainingDoneFor" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="vEmailSentTo" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dActualFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActualToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vOtherTrainingType" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cTranType" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cProposedOrApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vDocumentName" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vDocumentURL" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="cTrainerApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cHODApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vApproverNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cIsDocAttach" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nLocationNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tr_TRainingEvent20140225" Member="Tr_TRainingEvent20140225s">
+    <Type Name="Tr_TRainingEvent20140225">
+      <Column Name="nTrainingEventNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nSequelNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="iTemplateNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vApproxTime" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="iTrainingTypeNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vTrainingPlace" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vEventHandleBy" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="vEventHandleByNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="vTrainerNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="nTrainerNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="vTrainerName" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="vEmployeeNo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vGuestNo" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="nEventDoneBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nApprovedBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cIsQuizRequired" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsEndrosmentReq" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dQuizeStartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dQuizeEndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vQuestionNo" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="iTotalQuestion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iTotalMarks" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iQuizTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cIsTrainingDone" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsCombineQuiz" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vAttendedTrainees" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="vTrainingDoneFor" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="vEmailSentTo" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="vRemarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dActualFromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dActualToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vOtherTrainingType" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cTranType" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cProposedOrApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vDocumentName" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="vDocumentURL" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="cTrainerApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cHODApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vApproverNo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cIsDocAttach" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nLocationNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_TrainingRepeatOn" Member="TR_TrainingRepeatOns">
+    <Type Name="TR_TrainingRepeatOn">
+      <Column Name="nTrainingRepeatNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vDuration" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="nDays" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_TrainingTemplateMst" Member="TR_TrainingTemplateMsts">
+    <Type Name="TR_TrainingTemplateMst">
+      <Column Name="nTrainingTemplateNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vTrainingTemplateCode" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="vTrainingTemplateName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="vLocationNo" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="vModuleNo" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="nDivisionNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_TrainingTypeMst" Member="TR_TrainingTypeMsts">
+    <Type Name="TR_TrainingTypeMst">
+      <Column Name="nTrainingTypeID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nTrainingTypeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vTrainingType" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_UserAnswerDtl" Member="TR_UserAnswerDtls">
+    <Type Name="TR_UserAnswerDtl">
+      <Column Name="nUserAnswerDtlNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nUserAnswerHdrNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nQuestionId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="iMark" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="iAnswer" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vAnswerText" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="iMarkGained" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsEndorsementQuest" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_UserAnswerHdr" Member="TR_UserAnswerHdrs">
+    <Type Name="TR_UserAnswerHdr">
+      <Column Name="nUserAnswerHdrNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nEmployeeNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nModuleNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="nTrainingEventNo" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="iTotalAttemptedQuestions" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iTotalMarks" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="iTotalMarksGained" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="iTotalTimeTaken" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cIsSessionAttended" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cReadAndUnderstood" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsQuizDone" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsEventDone" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cIsEndorsmentType" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dReadAndUnderstoodDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="iSequenceNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cCorrectionflag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cCorrectiongivenBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cCorrectiontaken" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_UserLoginDetails" Member="TR_UserLoginDetails">
+    <Type Name="TR_UserLoginDetail">
+      <Column Name="iUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dLoginDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dLastActivityDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="vIPAddress" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vUTCHourDiff" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_UserLoginFailureDetails" Member="TR_UserLoginFailureDetails">
+    <Type Name="TR_UserLoginFailureDetail">
+      <Column Name="nSrNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vUserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dLastFailedLogin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nAttemptCount" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cBlockedFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="vIPAddress" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_UserLoginHistory" Member="TR_UserLoginHistories">
+    <Type Name="TR_UserLoginHistory">
+      <Column Name="nUserLoginHistoryNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="iUserId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="cLOFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="dInOutDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="iModifyBy" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vIPAddress" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_UserTypeMaster" Member="TR_UserTypeMasters">
+    <Type Name="TR_UserTypeMaster">
+      <Column Name="nUserTypeNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cUserTypeCode" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="vUserType" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="cActiveFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZipCodes" Member="ZipCodes">
+    <Type Name="ZipCode">
+      <Column Name="ZipCode" Member="ZipCode1" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="countrycode" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="postalcode" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="placename" Type="System.String" DbType="VarChar(180)" CanBeNull="true" />
+      <Column Name="latitude" Type="System.Decimal" DbType="Decimal(8,4)" CanBeNull="true" />
+      <Column Name="longitude" Type="System.Decimal" DbType="Decimal(8,4)" CanBeNull="true" />
+      <Column Name="accuracy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZoneMst" Member="ZoneMsts">
+    <Type Name="ZoneMst">
+      <Column Name="nZoneNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nCompanyNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vZoneCode" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vZoneName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="nUserNo" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TR_PMSPeriodMst" Member="TR_PMSPeriodMsts">
+    <Type Name="TR_PMSPeriodMst">
+      <Column Name="nPmsPeriodId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vPmsPeriodName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dPeriodStartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dPeriodEndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dPeriodEvaluationStartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dPeriodEvaluationEndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cIsactive" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="dModifyOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.InsertUpdate_PmsPeriodMst" Method="InsertUpdate_PmsPeriodMst">
+    <Parameter Name="nPmsPeriodId" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="vPmsPeriodName" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="dPeriodStartDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="dPeriodEndDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="dPeriodEvaluationStartDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="dPeriodEvaluationEndDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="cIsactive" Type="System.Char" DbType="Char(1)" />
+    <Parameter Name="cReplicaFlag" Type="System.Char" DbType="Char(1)" />
+    <Parameter Name="nModifyBy" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="DataOpMode" Parameter="dataOpMode" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

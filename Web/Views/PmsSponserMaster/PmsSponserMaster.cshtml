@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "Sponser Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+@using (Html.BeginForm())
+{
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Sponser Master
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-tasks"></i>Master</a></li>
+                <li><a href="#">Sponser Master</a></li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <span>
+                                <canvas id="myCanvas" width="12" height="12" class="highlight"></canvas>
+                            </span>
+                            <span class="Inactive">Inactive Entries</span>
+                            <div class="row">
+                                @*<a id="btnAddOperation" data-toggle="modal" data-target="#SponserDetailsModel" data-options="splash-2 splash-ef-15"
+                                   class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a pull-right"><i class="fa fa-plus"></i><span>Add</span></a>*@
+                                <button type="button" id="btnAddOperation" class="btn bg-olive margin viewmode" data-toggle="modal" data-target="#SponserDetailsModel" title="Add Sponser" data-tooltip="tooltip">+ Add Sponser</button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="tblSponserDetailsData" class="table table-striped table-bordered" cellspacing="0" cellpadding="0" border="0" width="100%"></table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="modal splash fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="SponserDetailsModel" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <span class="operation-mode" style="float: right" id="titleMode"></span>
+                        <h4 class="modal-title modaltitle operation-name text-left" id="title">Sponser Master</h4>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <div class="mdfield" style="text-align: right">
+                        <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                    </div>
+                    <form name="form2" role="form" id="form2"></form>
+
+                    <form name="form1" role="form" id="form1" style="margin-top: 40px;">
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label>Sponser Code: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtSponserCode" id="txtSponserCode" class="form-control"
+                                    placeholder="Sponser Code Here..."
+                                    data-parsley-trigger="change"
+                                    maxlength="100" autocomplete="off">
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vSponserCode" onclick="SponserFieldWiseAuditTrail(this)"
+                                    data-toggle="modal" data-target="#divAuditTrial" titlename="Sponser Code"></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Sponser Name: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtSponserName" id="txtSponserName" class="form-control"
+                                    placeholder="Sponser Name Here..."
+                                    data-parsley-trigger="change" autocomplete="off">
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vSponserName" onclick="SponserFieldWiseAuditTrail(this)"
+                                    data-toggle="modal" data-target="#divAuditTrial" titlename="Sponser Name"></span>
+                            </div>
+                        </div>
+
+                        <div id="divRemarks" style="display: none;">
+                            <div class="col-sm-2">
+                                <label>Remarks: *</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtRemarks" id="txtRemarks" class="form-control"
+                                    placeholder="Remarks Here...">
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="vRemark" onclick="SiteFieldWiseAuditTrail(this)"
+                                    data-toggle="modal" data-target="#divAuditTrial" titlename="Remarks"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <div class="col-xs-12">
+                                    <button type="button" id="btnSaveSponserDetails" class="btn btn-success btn-ef btn-ef-3 btn-ef-3c" value="save" data-tooltip="tooltip"
+                                        title="Save">
+                                        <i class="fa fa-arrow-right"></i>Save
+                                    </button>
+                                    <button type="button" id="btnClearSponserDetails" value="Clear" class="btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" role="button" title="Clear">
+                                        <i class="fa fa-arrow-left"></i>Clear
+                                    </button>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer footer-bottom">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal splash fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="divAuditTrial" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="PopupClose()">&times;</button>
+                    <h4 class="modal-title modaltitle text-center">Audit Trail</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body" style="overflow-y: auto; height: 430px">
+                        <table id="tblSponserDetailsAuditTrial" class="table table-bordered table-striped"></table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog">
+    </div>
+    <script src="~/Scripts/PmsSponserMaster.js"></script>
+    <script>
+
+        $(window).load(function () {
+            $('#form1').parsley().subscribe('parsley:field:validate', function () {
+                if ($('#form1').parsley().isValid()) {
+                    $('#btnSaveOperationDetails').prop('disabled', false);
+                } else {
+                    $('#btnSaveOperationDetails').prop('disabled', true);
+                }
+            });
+        });
+
+    </script>
+}
+
+

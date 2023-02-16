@@ -1,0 +1,446 @@
+﻿@{
+    ViewBag.Title = "Product Inter Transfer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+
+<style>
+    .modal-dialog{
+    overflow-y: initial !important
+}
+#Interstoragetransferpopup{
+    height: 500px;
+    overflow-y: auto;
+}  
+
+table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    #idHeader {
+        font-size: large;
+        background-color: #A2D9CE;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+     
+</style>
+
+@using (Html.BeginForm())
+{ 
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Product Inter Transfer</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dropbox"></i>Products</a></li>
+                <li><a href="#">Product Inter Transfer</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        <h3 class="box-title">Project No</h3>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-10 col-sm-10 col-xs-10">
+                                        <input type="text" id="ddlProjectNodashboard" placeholder="Project No.." data-provide="typeahead" class="form-control" autocomplete="off" />
+                                    </div>
+                                    @* -------------Anjali Prajapati---------------*@
+                                    @*<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 resizepd">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="View Document" id="spn_vdocument" onclick="viewProjectDocument(this)" data-toggle="modal" data-target="#ViewDocument" titlename="View Document"></span>
+                            </div>*@
+                                   @* ---------------------------------------------*@
+                                    <div class="col-lg-3 col-lg-offset-0 col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-10 resizepd btn-group">
+                                        <button type="button" class="btn bg-olive dropbtn dropdown-toggle btn-rounded  btn-ef btn btn-primary" id="divexport"
+                                            data-toggle="dropdown" aria-expanded="false" style="border-radius: 4px">
+                                            Export <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="../PmsProductInterStorageTransfer/ExportToExcel"><i class="fa fa-file-excel-o"></i>Excel </a></li>
+                                            <li><a href="../PmsProductInterStorageTransfer/ExportToPDF"><i class="fa fa-file-pdf-o"></i>PDF</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-lg-2 col-lg-offset-0 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-10 resizepd">
+                                        <button type="button" id="btnAddProductInterStorageTransfer" class="btn bg-olive viewmode" data-toggle="modal" data-target="#ProductInterStorageTransferModel" title="Add Product Batch">+ Add Product Inter Transfer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tblPmsProductInterStorageTransferData" class="table table-bordered table-striped">
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="ProductInterStorageTransferModel" role="dialog">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <span class="operation-mode" id="titleMode"></span>
+                            <h4 class="modal-title modaltitle operation-name" id="title">Product Inter Transfer</h4>
+                        </div>
+                        <div>
+                            <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                        </div>
+                    </div>
+                    <div class="modal-body" id="Interstoragetransferpopup">
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Project *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="ProjectNo Here.." class="form-control" id="ProjectNo" data-provide="typeahead" style="height: 26px">
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>From Storage</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="FromStorage" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select From Storage</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>To Storage</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ToStorage" style="padding: 3px 12px; height: 26px">
+                                  <option selected="selected" value="0">Please Select To Storage</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Product Type *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control headercontrol" id="ddlProductType" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select Product Type</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Product Indication *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control headercontrol" id="ddlTransferIndi" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select Product Indication</option>
+                                    <option value="P">Product</option>
+                                    <option value="K">Kit</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="box pull-left"></div>
+                        <div id="divProduct" style="display: none">
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Product *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control" id="Product" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Product</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Batch/Lot/Lot No *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control select2" id="BatchLotNo" style="padding: 3px 12px; height: 26px">
+                                        <option selected="selected" value="0">Please Select Batch/Lot/Lot No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Quantity *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextBox("Quantity", "", new { @class = "form-control qtycontrol", @placeholder = "Quantity", @style = " height:26px; ", @autocomplete = "off", @type = "number", @min = "1" })
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="col-sm-4 form-group" style="display: none" id="divUnit">
+                            <div class="col-sm-12">
+                                <label>Unit *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control select2" id="ddlUnit" style="padding: 3px 12px; height: 26px">
+                                    <option value="0">Please Select Unit</option>
+                                    <option value="%">%</option>
+                                    <option value="Deg. F">Deg. F</option>
+                                    <option value="Nos.">Nos.</option>
+                                    <option value="ml">ml</option>
+                                    <option value="kg">kg</option>
+                                    <option value="gm">gm</option>
+                                    <option value="Tablet">Tablet</option>
+                                    <option value="Capsule">Capsule</option>
+                                    <option value="Bottle">Bottle</option>
+                                    @*<option value="Deg. Cel">Deg. Cel</option>
+                                    <option value="%RH">%RH</option>
+                                    <option value="RPM">RPM</option>
+                                    <option value="RCF">RCF</option>*@
+                                    <option value="PFS">PFS</option>
+                                    <option value="Syringe">Syringe</option>
+                                    <option value="vials">vials</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="divKit" style="display: none">
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Kit *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control select2" id="ddlKit" style="padding: 3px 12px; height: 26px" multiple="multiple"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+                        <div class="col-sm-4 form-group">
+
+
+                            <div class="col-sm-12">
+                                <label>Reason *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control select2" id="Reason" style="padding: 3px 12px; height: 26px">
+                                    <option value="0" selected="selected">Please Select Reason</option>
+                                </select>
+                            </div>
+                        </div>
+
+                         <div class="col-sm-4 form-group" id="divOther" style="display:none">
+                            <div class="col-sm-12">
+                                <label>Other Reason *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextBox("txtOther", "", new { @class = "form-control", @placeholder = "Other", @style = " height:26px;",@autocomplete = "off" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Storage Area *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select id="StorageArea" multiple="multiple">
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Type of Storage*</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control select2" id="ddlSelectStorage" style="padding: 3px 12px; height: 26px">
+                                    <option value="0">Select type of storage</option>
+                                    <option value="Bin">Bin</option>
+                                    <option value="Pallet">Pallet</option>
+                                    <option value="Crate">Crate</option>
+                                    <option value="Locker">Locker</option>
+                                    <option value="Container">Container</option>
+                                    <option value="Shelf">Shelf</option>
+                                    <option value="Box">Box</option>
+                                    <option value="Boxes">Boxes</option>
+                                    <option value="Rack">Rack</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-4 form-group" id="divStorage" style="display:none">
+                            <div class="col-sm-12">
+                                <label id="lblstorage">No Bin/Pallet/Crate/Locker/Container/Shelf/Box/Boxes/Rack *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                @Html.TextBox("txtNoOfContainers", "", new { @class = "form-control qtycontrol", @placeholder = "No Bin/Pallet/Crate/Locker/Container/Shelf/Box/Boxes/Rack", @style = " height:26px;", @type = "number", @min = "0",@autocomplete = "off" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <a id="btnAddTempProduct" title="Add" class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a bg-olive margin">
+                                    <i class="fa fa-plus"></i><span>Add</span></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center" style="overflow: auto;">
+                                <table id="tblProductInterStorageTransferAdd" border="1" class="table table-bordered table-striped dataTable no-footer" style="width: 80%; margin-left: 10%; display: none">
+                                    <thead>
+                                        <tr>
+                                            <th class="hideproduct">Product Name</th>
+                                            <th class="hideproduct">Batch/Lot/Lot No</th>
+                                            <th class="hideproduct">Qty</th>
+                                            @*<th class="hidekit">Kit No</th>*@
+                                            <th>Reason</th>
+                                            <th class="hidetd">Reason No</th>
+                                            <th class="hidetd">ProductID</th>
+                                            <th class="hidetd">StorageAreaID</th>
+                                            <th class="hidetd">BatchLotNo</th>                                            
+                                            <th class="hideproduct">From Storage</th>
+                                            <th class="hideproduct">To Storage</th>
+                                            <th class="trDelete">Delete</th>
+                                            <th class="hidetd">NoOfContainers</th>
+                                            <th class="hidetd">Unit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyProductInterStorageTransferAdd">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer footer-bottom">
+                        @*<button type="button" id="btnSavePmsProductInterStorageTransfer" class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="save" style="display: none">Save</button>
+                        <button type="button" id="btnClearPmsProductInterStorageTransfer" class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Clear" onclick="clearData()">Clear</button>
+                        <button type="button" id="btnExitPmsProductInterStorageTransfer" class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Exit">Exit</button>*@
+
+                        <a data-toggle="modal" id="btnSavePmsProductInterStorageTransfer" data-tooltip="tooltip" title="Save" style="display: none">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSaveProductInterStorageTransfer">Save</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnClearPmsProductInterStorageTransfer" data-tooltip="tooltip" title="Clear" onclick="clearData()">
+                            <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnExitPmsProductInterStorageTransfer" data-tooltip="tooltip" title="Exit">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="loader" class="modal"></div>
+        </div>
+    </div>
+    @*------Anjali Prajapati-------*@
+    <div class="modal fade" id="ViewDocument" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal" aria-hidden="true" id="btnClose3" title="Close">×</button>
+                    <span class="close" id="spanmode3"></span>
+                    <h4 class="modal-title text-center" id="myModalLabel3">View Document</h4>
+                </div>
+                <div class="modal-body" id="mbody" style="overflow-y: auto; max-height: calc(100vh - 200px);">
+                    <table id="myTable" style="border: medium">
+                        <thead>
+                            <tr>
+                                <th id="idHeader">File Name</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* -------------------------------*@
+    <div class="modal fade" id="ViewAuthenticate" role="dialog">
+        <div class="modal-dialog" style="width: 400px">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Authenticate</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12">
+                        <label>Remarks *</label>
+                    </div>
+                    <div class="col-sm-12">
+                        @Html.TextArea("txtRemark", "", new { @class = "form-control", @placeholder = "Remarks", required = "required", @autocomplete = "off" })
+                    </div>
+                    <div class="col-sm-12">
+                        <label>Password *</label>
+                    </div>
+                    <div class="col-sm-12">
+                        @Html.Password("txtPassword", "", new { @class = "form-control", @placeholder = "Password", required = "required", @autocomplete = "off" })
+                    </div>
+
+                    @*<input type="hidden" id="hdnStageName" />*@
+
+                    <div class="col-sm-12">
+                        <hr style="margin-bottom: 10px" />
+                    </div>
+
+                    <div class="col-sm-12" style="margin-bottom: 20px">
+                        I hereby confirm signing of this record electronically.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a data-toggle="modal" id="btnOk" data-tooltip="tooltip" title="Approve" onclick="QaReviewApproved()">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="fa fa-check"></i><span id="spnSaveRemarks">Approve</span>
+                        </i>
+                    </a>
+
+                    <a data-toggle="modal" id="btnReject" data-tooltip="tooltip" title="Reject" onclick="QaReviewReject()">
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="fa fa-ban"></i><span>Reject</span>
+                        </i>
+                    </a>
+
+                    @*     <a data-toggle="modal" id="btnOk" data-tooltip="tooltip" title="Ok">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSaveRemarks">Ok</span></i>
+                        </a>*@
+
+                    <a data-toggle="modal" id="btnCancel" data-tooltip="tooltip" title="Close" data-dismiss="modal">
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Close</span>
+                        </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    <input type="hidden" id="hdnPassword" value="@ViewBag.vLoginPass" />
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsProductInterStorageTransfer.js"></script>
+}

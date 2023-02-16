@@ -1,0 +1,298 @@
+﻿@{
+    ViewBag.Title = "Transporter List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Transporter
+            </h1>
+
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-tasks"></i>Master</a></li>
+                <li><a href="#">Transport</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <span><canvas id="myCanvas" width="12" height="12" class="highlight"></canvas></span>
+                            <span class="InActive">Inactive Entries</span>
+                            <div class="row">
+                                <button type="button" id="btnAddUser" class="btn bg-olive margin viewmode" data-toggle="modal" data-target="#TransporterModel" onclick="AddTransporter()" title="Add Transporter">+ Add Transporter</button>
+                                <a class="btn bg-olive margin" href="../PmsTransporterMaster/ExportToExcel/hdnworkspaceid">Export to Excel&nbsp&nbsp&nbsp&nbsp<i class="fa fa-file-excel-o"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tblPmsTransporter" class="table table-bordered table-striped">
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>   
+    <div class="modal fade" id="TransporterModel" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <span style="font-size: 21px; float: right" id="titleMode"></span>
+                        <h4 class="modal-title modaltitle" id="title">Transporter</h4>
+                    </div>
+                    <div>
+                        <h5><span style="font-size: 15px; float: right">Fields with * are Mandatory</span></h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                    <form role="form" class="form-horizontal" method="POST" id="testForm">
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Transporter Name *</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("txtTransporterName", "", new { @class = "form-control", @placeholder = "Transporter Name", @style = " height:26px;", @autocomplete="off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" id="spn_vTransporterName" onclick="AuditTrail(this)" data-toggle="modal" data-target="#TransporterAuditTrial" titlename="Transporter Name"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Transport Type</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("txtTransportType", "", new { @class = "form-control", @placeholder = "Transport Type", @style = " height:26px;", @autocomplete="off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vTransportType" onclick="AuditTrail(this)" data-toggle="modal" data-target="#TransporterAuditTrial" titlename="Transport Type"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Office Address 1</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("txtOfficeAddress1", "", new { @class = "form-control", @placeholder = "Office Address 1", @style = " height:26px;", @autocomplete="off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vOfficeAddr1" onclick="AuditTrail(this)" data-toggle="modal" data-target="#TransporterAuditTrial" titlename="Office Address1"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Office Address 2</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("txtOfficeAddress2", "", new { @class = "form-control", @placeholder = "Office Address 2", @style = " height:26px;", @autocomplete="off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vOfficeAddr2" onclick="AuditTrail(this)" data-toggle="modal" data-target="#TransporterAuditTrial" titlename="Office Address2"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Office Place</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("txtOfficePlace", "", new { @class = "form-control", @placeholder = "Office Place", @style = " height:26px;", @autocomplete="off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vOfficePlace" onclick="AuditTrail(this)" data-toggle="modal" data-target="#TransporterAuditTrial" titlename="Office Place"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Pin Code</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("txtPinCode", "", new { @class = "form-control", @placeholder = "Pin Code", @style = " height:26px;", @autocomplete="off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vPinCode" onclick="AuditTrail(this)" data-toggle="modal" data-target="#TransporterAuditTrial" titlename="Pin Code"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Office Phone Number</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("txtOfficePhone", "", new { @class = "form-control", @placeholder = "Office Phone", @style = " height:26px;", @autocomplete="off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vOfficePhone" onclick="AuditTrail(this)" data-toggle="modal" data-target="#TransporterAuditTrial" titlename="Office Phone"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Mobile Number</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("txtMobileNumber", "", new { @class = "form-control", @placeholder = "Mobile Number", @style = " height:26px;", @autocomplete="off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vMobilePhone" onclick="AuditTrail(this)" data-toggle="modal" data-target="#TransporterAuditTrial" titlename="Mobile Phone"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Fax Number</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("txtFaxNumber", "", new { @class = "form-control", @placeholder = "Fax Number", @style = " height:26px;", @autocomplete="off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vFaxPhone" onclick="AuditTrail(this)" data-toggle="modal" data-target="#TransporterAuditTrial" titlename="Fax Phone"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Email ID</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("txtEmailID", "", new { @class = "form-control", @placeholder = "Email ID", @style = " height:26px;", @autocomplete="off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vEmailId" onclick="AuditTrail(this)" data-toggle="modal" data-target="#TransporterAuditTrial" titlename="Email Id"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Permit Number</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("txtPermitNumber", "", new { @class = "form-control", @placeholder = "Permit Number", @style = " height:26px;", @autocomplete="off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vPermitNo" onclick="AuditTrail(this)" data-toggle="modal" data-target="#TransporterAuditTrial" titlename="Permit No"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Contact Person</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.TextBox("txtContactPerson", "", new { @class = "form-control", @placeholder = "Contact Person", @style = " height:26px;", @autocomplete="off" })
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="fa fa-fw fa-file-text-o AuditControl" title="Audit Trail" id="spn_vContactPerson" onclick="AuditTrail(this)" data-toggle="modal" data-target="#TransporterAuditTrial" titlename="Contact Person"></span>
+                            </div>
+                        </div>
+
+                        <div id="hidediv" style="display: none">
+                            <div class="col-sm-4 form-group">
+                                <div class="col-sm-12">
+                                    <label>Remarks *</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    @Html.TextArea("txtRemarks", "", new { @class = "form-control", @placeholder = "Remarks",@maxlength="500", @autocomplete="off" })
+                                    <input type="hidden" id="transportid">
+                                    <input type="hidden" id="transportcode">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer footer-bottom">
+                    @*<button type="button" id="btnaddPmsTransporter" class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Save" title="Save" data-tooltip="tooltip">Save</button>
+                    <button type="button" id="btnClearPmsTransporter" class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Clear" title="Clear" data-tooltip="tooltip">Clear</button>
+                    <button type="button" id="btnExitPmsTransporter" class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a" value="Exit" title="Exit" data-tooltip="tooltip">Exit</button>*@
+
+                     <a data-toggle="modal" id="btnaddPmsTransporter" data-tooltip="tooltip" title="Save">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave"></span></i>
+                     </a>
+
+                     <a data-toggle="modal" id="btnClearPmsTransporter" data-tooltip="tooltip" title="Clear" >
+                        <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                        <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                     </a>
+
+                     <a data-toggle="modal" id="btnExitPmsTransporter" data-tooltip="tooltip" title="Exit" >
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                        <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                     </a>
+                </div>
+            </div>
+        </div>
+        <div id="loader" class="modal"></div>
+    </div>
+    <div class="modal fade" id="TransporterAuditTrial" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title modaltitle text-center">Audit Trail</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                    <div class="box-body">
+                        <table id="tblPmsTransporterAuditTrial" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="TransporterInActive" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Remarks</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.TextArea("txtReason", "", new { @class = "form-control", @placeholder = "Remarks", @autocomplete = "off", @maxlength="500" })
+                </div>
+                <div class="modal-footer">
+                    @*<button type="button" class="btn bg-olive" id="btnInActiveSave">Save</button>
+                    <button type="button" class="btn bg-olive" data-dismiss="modal">Close</button>*@
+                    <a data-toggle="modal" id="btnInActiveSave" data-tooltip="tooltip" title="Save">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                        <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave1">Save</span></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog">
+    </div>
+    
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script> 
+
+    <script src="~/Scripts/PmsTransporter.js"></script>
+}

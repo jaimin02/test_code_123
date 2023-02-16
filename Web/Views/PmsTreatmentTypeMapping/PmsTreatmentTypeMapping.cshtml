@@ -1,0 +1,387 @@
+﻿]@{
+    ViewBag.Title = "Activity Visit Mapping";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1 id="h1_id">Activity Visit Mapping</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-barcode"></i>Barcode</a></li>
+            <li><a href="#" id="titleid">Activity Visit Mapping</a></li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        @* <div class="form-group">*@
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <h3 class="box-title">Project No</h3>
+                            </div>
+                            <div class="col-lg-4 col-md-10 col-sm-10 col-xs-10">
+                                <input type="text" id="txtProjectNoDashboard" placeholder="Project No.." class="form-control" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <h3 class="box-title">Mapping </h3>
+                            </div>
+                            <div class="col-lg-2 col-md-5 col-sm-5 col-xs-5">
+                                <label class="radio-inline" style="display:none">
+                                    <input type="radio" name="optradio" id="rdTreatment">Treatment
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio" id="rdKit" checked="checked">Activity Visit
+                                </label>
+                                @* <label class="radio-inline">
+                                        <input type="radio" name="optradio" id="rdCombinational">Combinational Drug
+                                    </label>*@
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+                                <button type="button" id="btnKitTypeMapping" class="btn bg-olive viewmode" data-toggle="modal" style="display: none"
+                                        data-target="#KitTypeModel" title="Kit Type Mapping">
+                                    Activity Visit Mapping
+                                </button>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+                                <button type="button" id="btnCombinationalTypeMapping" class="btn bg-olive viewmode" data-toggle="modal" style="display: none"
+                                        title="Combinational Type Mapping">
+                                    Combinational Type Mapping
+                                </button>
+                            </div>
+                        </div>
+                        @*</div>*@
+                    </div>
+
+                    <!-- /.box-header -->
+                    <div id="divtreatment" style="display: none">
+                        <div class="box-body">
+
+                            <table id="tblPmsTreatmentTypeMapping" class="table table-bordered table-striped"></table>
+
+                            @*<div id="divKit" style="display:none">
+                                    <table id="tblPMSKitTypeMapping" class="table table-bordered table-striped">
+                                    </table>
+                                </div>*@
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="box-footer text-center">
+                            <a data-toggle="modal" id="btnSavePmsTreatmentType" data-tooltip="tooltip" title="Save" style="display: none">
+                                <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                    <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSaveQualityCheck">Save</span>
+                                </i>
+                            </a>
+
+                            <a data-toggle="modal" id="btnExitPmsTreatmentType" data-tooltip="tooltip" title="Exit">
+                                <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                    <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span>
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="divKit" style="display: none">
+                        <div class="box-body">
+                            <table id="tblPMSKitTypeMapping" class="table table-bordered table-striped"></table>
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="box-footer text-center">
+                            <a data-toggle="modal" id="btnExitKitTypeMapping" data-tooltip="tooltip" title="Exit">
+                                <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                                    <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span>
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Remark</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.TextArea("txtRemark", "", new { @class = "form-control", @placeholder = "Remarks", required = "required", @autocomplete = "off" })
+                </div>
+                <div class="modal-footer">
+                    <a data-toggle="modal" id="btnDelete" data-tooltip="tooltip" title="Delete Treatment Type">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSave1">Save</span>
+                        </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade AlertMessagePopup" id="AlertMessagePopup" role="dialog"></div>
+    <div class="modal fade" id="KitTypeModel" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <span class="operation-mode" id="titleMode">Mode:- Add</span>
+                        <h4 class="modal-title modaltitle operation-name" id="title">Activity Visit Mapping</h4>
+                    </div>
+                    <div>
+                        <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                    </div>
+                </div>
+                <div class="modal-body scrollingtemp" style="height: 430px; overflow-y: auto">
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Visit Name *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select id="ddlVisitName" class="form-control">
+                                    <option value="0" selected="selected">Please Select Visit</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group" id="divToProjectNo">
+                            <div class="col-sm-12">
+                                <label>Activity *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select id="ddlActivity" multiple="multiple" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group" id="divNonDispensingVisit">
+                            <div class="col-sm-12">
+                                <label>@*Is Non Dispensing Visit*@</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="checkbox" id="chkNonDispensingVisit">
+                                <label style="font-size: small" id="lblNonDispensingVisit">Is Non Dispensing Visit</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box pull-left">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 form-group text-center">
+                            @*<button type="submit" id="btnAddTempProductReturn" class="btn bg-olive" value="Add">Add</button>*@
+
+                            <a id="btnAddKitMapping" title="Add" class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a bg-olive margin" onclick="AddTempDataKitMapping()">
+                                <i class="fa fa-plus"></i><span>Add</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 form-group text-center" style="overflow: auto; height: 200px;">
+                            <table id="tblKitMappingTemp" border="1" class="table table-bordered dataTable no-footer dataTable thead tr td" style="width: 100%; display: none">
+                                <thead>
+                                    <tr>
+                                        <td>Visit Name</td>
+                                        <td>Activity Name</td>
+                                        <td>Is Non Dispensing Visit</td>
+                                        <td>Remove</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyKitMappingTemp"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer footer-bottom">
+                    <a data-toggle="modal" id="btnSaveKitMapping" data-tooltip="tooltip" title="Save" style="display: none">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span>Save</span>
+                        </i>
+                    </a>
+
+                    <a data-toggle="modal" id="btnClearKitMapping" data-tooltip="tooltip" title="Clear" onclick="clearData()">
+                        <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-refresh"></i><span>Clear</span>
+                        </i>
+                    </a>
+
+                    <a data-toggle="modal" id="btnExitKitMapping" data-tooltip="tooltip" title="Exit">
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span>
+                        </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="loader" class="modal"></div>
+    </div>
+
+    <div class="modal fade" id="CombinationalTypeModel" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <span class="operation-mode" id="titleMode">Mode:- Add</span>
+                        <h4 class="modal-title modaltitle operation-name" id="title">Combinational Mapping</h4>
+                    </div>
+                    <div>
+                        <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                    </div>
+                </div>
+                <div class="modal-body scrollingtemp" style="height: 430px; overflow-y: auto">
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Project No*</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Project No Here.." style="padding: 3px 12px; height: 26px" class="form-control" id="DDLProjectNo" data-provide="typeahead" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Product Type *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="DDLProductType" style="padding: 3px 12px; height: 26px">
+                                    <option value="0">Please Select Product Type</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Kit Batch/Lot/Lot No *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Please Enter Kit Batch/Lot/Lot No " style="padding: 3px 12px; height: 26px" class="form-control" id="txtKitNo">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Product *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="DDLProduct" style="padding: 3px 12px; height: 26px">
+                                    <option value="0">Please Select Product</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Batch/Lot/Lot No *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlBatchLotNo" style="padding: 3px 12px; height: 26px">
+                                    <option value="0">Please Select Batch/Lot/Lot No</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="box pull-left">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 form-group text-center">
+                            @*<button type="submit" id="btnAddTempProductReturn" class="btn bg-olive" value="Add">Add</button>*@
+
+                            <a id="btnGo" title="Add" class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a bg-olive margin" onclick="AddTempDataCombinationalMapping()">
+                                <i class="fa fa-plus"></i><span>Add</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 form-group text-center" style="overflow: auto; height: 200px;">
+                            <table id="tblCombinationalMappingTemp" border="1" class="table table-bordered dataTable no-footer dataTable thead tr td" style="width: 100%; display: none">
+                                <thead>
+                                    <tr>
+                                        <td>Project Name</td>
+                                        <td>Product Type</td>
+                                        <td>Kit Batch/Lot/Lot No</td>
+                                        <td>Product Name</td>
+                                        <td>Batch/Lot/Lot No</td>
+                                        <td>Total Quantity</td>
+                                        <td>Quantity</td>
+                                        <td>Delete</td>
+                                        <td class="hide">ProductTypeId</td>
+                                        <td class="hide">ProductId</td>
+                                        <td class="hide">BatchNo</td>
+                                        <td>Edit</td>
+                                        <td>AuditTrail</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyCombinationalMappingTemp"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer footer-bottom">
+                    <a data-toggle="modal" id="btnSaveCombinationalMapping" data-tooltip="tooltip" title="Save" style="display: none">
+                        <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span>Save</span>
+                        </i>
+                    </a>
+
+                    <a data-toggle="modal" id="btnClearCombinationalMapping" data-tooltip="tooltip" title="Clear">
+                        <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-refresh"></i><span>Clear</span>
+                        </i>
+                    </a>
+
+                    <a data-toggle="modal" id="btnExitCombinationalMapping" data-tooltip="tooltip" title="Exit">
+                        <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span>
+                        </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="loader" class="modal"></div>
+    </div>
+
+    <div class="modal fade" id="ComboAuditTrial" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title modaltitle text-center">Audit Trail</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- form start -->
+                    <div class="box-body">
+                        <table id="tblCombinationalAuditTrial" class="table table-bordered table-striped"></table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+</div>
+
+<script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+<script src="~/Scripts/PmsTreatmentTypeMapping.js"></script>

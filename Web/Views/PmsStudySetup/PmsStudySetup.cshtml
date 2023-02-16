@@ -1,0 +1,347 @@
+﻿@{
+    ViewBag.Title = "Study Setup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Styles/StyleBlue.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{ 
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Study Setup</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-medkit"></i>Kit</a></li>
+                <li><a href="#">Study Setup</a></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        <h3 class="box-title">Project No</h3>
+                                    </div>
+                                    <div class="col-lg-4 col-md-10 col-sm-10 col-xs-10">
+                                        <input type="text" id="txtProjectNoDashboard" placeholder="Project No.." data-provide="typeahead" class="form-control" />
+                                    </div>
+
+                                    <div class="col-lg-4 col-lg-offset-0 col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-10 resizepd btn-group">
+                                        <button type="button" class="btn bg-olive dropbtn dropdown-toggle btn-rounded  btn-ef btn btn-primary" id="ExportButton"
+                                            data-toggle="dropdown" aria-expanded="false" style="border-radius: 4px;display:none">
+                                            Export<span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="../PmsStudySetup/ExportToExcel"><i class="fa fa-file-excel-o"></i>Excel </a></li>
+                                            <li><a href="../PmsStudySetup/ExportToPDF"><i class="fa fa-file-pdf-o"></i>PDF</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-lg-2 col-lg-offset-0 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-10 resizepd">
+                                        <button type="button" id="btnAddStudySetup" class="btn bg-olive" title="Add Study Setup" onclick="AddStudySetUp();">+ Add Study Setup</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="tblPmsStudySetupData" class="table table-bordered table-striped">
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="StudySetUpModel" role="dialog">
+            <div class="modal-dialog ">
+                <div class="modal-content modal-content-AlertPromt">
+                    <div class="modal-header">
+                        <div>
+                            <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                            <span class="operation-mode" id="titleMode"></span>
+                            <h4 class="modal-title modaltitle operation-name" id="title">Study Setup</h4>
+                        </div>
+                        <div>
+                            <h5><span class="fields-mandatory">Fields with * are Mandatory</span></h5>
+                        </div>
+                    </div>
+
+                    <div class="modal-body" style="height:400px;overflow:auto">
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Project *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Project No" class="form-control" id="txtProjectNo" style="height: 26px" disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Apply Balance On *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlApplyBalanceOn" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select Apply Balance</option>
+                                    <option value="P">Project</option>
+                                    <option value="S">Site</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Balance Ratio *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Randomization Ratio" class="form-control" id="txtRandomizationRatio" style="height: 26px" disabled="disabled">
+                                <input type="hidden" id="hdnFormulationType" />
+                            </div>
+                            @*<div class="col-sm-2">
+                                <span id="spnRandomizationRatio" class="glyphicon glyphicon-plus" style="color:#6BB9FF" title="Add Randomization Ratio" 
+                                     onclick="RandomizationRatio()"></span>
+                            </div>*@
+                        </div>
+
+                        
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Project Type</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Project Type" class="form-control" id="txtProjectType" style="height: 26px;" disabled="disabled">
+                                <input type="hidden" id="hdnProjectTypeCode" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Submission</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Submission" class="form-control" id="txtSubmission" style="height: 26px" disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Drug Name</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Drug Name" class="form-control" id="txtDrugName" style="height: 26px" disabled="disabled">
+                                <input type="hidden" id="hdnDrugCode" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Near Expiry Days *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="number" placeholder="Near Expiry Days" class="form-control qtycontrol" id="txtExpiryDays" style="height: 26px" min="1">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Dose Type *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlDoseType" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select Dose Type</option>
+                                    <option value="S">Single Dose</option>
+                                    <option value="M">Multi Dose</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Randomization Type *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlRandomizationType" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select Randomization Type</option>
+                                    <option value="I">IWRS</option>
+                                    <option value="M">Manually</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Project Manager *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlPMName" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select Project Manager</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Special Instruction</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Special Instruction" class="form-control" id="txtInstruction" style="height: 26px">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Route Of Administration</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Route of Administration" class="form-control" id="txtRouteAdmin" style="height: 26px">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Remarks *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" cols="20" id="txtRemarks" name="txtRemarks" placeholder="Remarks" required="required" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center">
+                                <a id="btnAddTempStudySetup" title="Add" class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a bg-olive margin" onclick="AddTempData();"><i class="fa fa-plus"></i><span>Add</span></a>
+                            </div> 
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group text-center" style="overflow: auto;">
+                                <table id="tblStudySetUpTemp" border="1" class="table table-bordered table-striped dataTable no-footer" 
+                                        style="display: none;">
+                                    <thead>
+                                        <tr>
+                                            <th>Project No</th>
+                                            <th>Randomization Ratio</th>
+                                            <th>Apply Balance On</th>
+                                            <th>Project Type</th>
+                                            <th>Submission</th>
+                                            <th>Drug Name</th>
+                                            <th>Near Expiry Days</th>
+                                            <th>Dose Type</th>
+                                            <th>Randomization Type</th>
+                                            <th>Project Manager</th>
+                                            <th>Special Instruction</th>
+                                            <th>Route of Administration</th>
+                                            <th>Remarks</th>
+                                            <th class="hidetd">ApplyBalanceOn</th>
+                                            <th class="hidetd">dosetypevalue</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyStudySetUpTemp">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer footer-bottom">
+                        <a data-toggle="modal" id="btnSavePmsStudySetUp" data-tooltip="tooltip" title="Save" style="display: none">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnStudySetUp">Save</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnClearPmsStudySetUp" data-tooltip="tooltip" title="Clear">
+                            <i class="btn btn-danger btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-refresh"></i><span>Clear</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="btnExitPmsStudySetUp" data-tooltip="tooltip" title="Exit">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div id="loader" class="modal"></div> 
+        </div>
+
+        <div class="modal fade" id="modalRandomizationRatio" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="Close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Randomization Ratio</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Product Type *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="ddlProductType" style="padding: 3px 12px; height: 26px">
+                                    <option selected="selected" value="0">Please Select Product Type</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label>Ratio *</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="number" id="txtProductTypeRatio" placeholder="Product Type Ratio" class="form-control qtycontrol" min="1"  style="height: 26px"/>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-12">
+                                <label></label>
+                            </div>
+                            <div class="col-sm-12">
+                                <a title="Add" class="btn btn-primary btn-rounded btn-ef btn-ef-5 btn-ef-5a bg-olive" 
+                                    onclick="addMoreRows()"><i class="fa fa-plus"></i><span>Add</span></a>
+                            </div>
+                        </div>
+                        
+                        <table id="tblProductTypeRandomizationRatio" border="1" class="table table-bordered table-striped dataTable no-footer" style="width: 80%;display:none">
+                            <thead>
+                                <tr>
+                                    <td>Product Type</td>
+                                    <td>Ratio</td>
+                                    <td>Remove</td>
+                                    <td class="hidetd">ProductType Value</td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyProductTypeRandomizationRatio">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <a data-toggle="modal" id="btnSaveRandomization" data-tooltip="tooltip" title="Save" style="display:none">
+                            <i class="btn btn-success btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-saved"></i><span id="spnSaveQuantatiy">Save</span></i>
+                        </a>
+
+                        <a data-toggle="modal" id="tnpmsQuantatiyExit" data-tooltip="tooltip" title="Exit" data-dismiss="modal">
+                            <i class="btn btn-warning btn-rounded btn-ef btn-ef-5 btn-ef-5a">
+                            <i class="glyphicon glyphicon-floppy-remove"></i><span>Exit</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade AlertPopup" id="AlertPopup" role="dialog"></div>
+    
+    <script src="@Url.Content("~/Content/themes/plugins/jQuery/jQuery-2.2.0.min.js")"></script>
+    <script src="~/Scripts/PmsStudySetup.js"></script>
+}
